@@ -5,7 +5,7 @@
 
 // export const PropertyLocations = () => {
 
-//     const APIKey = "AIzaSyAOOul3NMA8auyFgtWcWUCuDsSthTlqLKM"
+//     process.env.REACT_APP_GOOGLEAPIKEY
 
 //     const [locations, setLocations] = useState([])
 

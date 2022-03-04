@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 
 
 const id = ["919771f94d285faa"]
-const key='AIzaSyAOOul3NMA8auyFgtWcWUCuDsSthTlqLKM' 
+const key= process.env.REACT_APP_GOOGLEAPIKEY
 const lib = ["places"]
 
 
