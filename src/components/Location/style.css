@@ -27,9 +27,13 @@ padding-left: 10px;
 }
 
 #floating-panel {
-width: 440px;
+width: 40px;
 }
 
 #place-id {
 width: 250px;
+}
+
+.marker{
+    color: blue;
 }

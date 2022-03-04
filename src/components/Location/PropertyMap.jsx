@@ -4,19 +4,33 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 
 
+const id = ["919771f94d285faa"]
+const key='AIzaSyAOOul3NMA8auyFgtWcWUCuDsSthTlqLKM' 
+const lib = ["places"]
 
-export const MapContainer = () => {
+
+
+
+export const PropertyMap = () => {
     const [locations, setLocations] = useState([])
     const [selected, setSelected] =useState({})
-    
+    //view will keep the view of the map the same after closing the popup window on a property
+    const [view, setView] = useState(
+        {
+            lat: 36.16049743877696, 
+            lng: -86.78448535520621
+    })
+
+
     const onSelect = (item) => {
         setSelected(item)
+        setView(item.location)
         }
    
 
     useEffect(
         () => {
-            return fetch("http://localhost:8088/testLocations")
+            return fetch("http://localhost:8088/locations")
             .then(res => res.json())
             .then(
                 (response) => {
@@ -30,33 +44,36 @@ export const MapContainer = () => {
     const mapStyles = {        
     height: "100vh",
     width: "100%"};
-    const defaultCenter = {
-    lat: 36.16049743877696, lng: -86.78448535520621
-    }
+    
+ 
+
     
     
-    
+
     return (
-        <LoadScript>
+        <LoadScript googleMapsApiKey={key} libraries = {lib} mapIds = {id}>
             
-            map.setMapTypeId('hybrid');
-            googleMapsApiKey='AIzaSyAOOul3NMA8auyFgtWcWUCuDsSthTlqLKM' 
+            
         <GoogleMap
             mapContainerStyle={mapStyles}
             zoom={13}
-            mapTypeId="satellite"
             tilt={45}
-            center={defaultCenter}>
+            options = {{mapId: "919771f94d285faa"}}
+            center={view}>
                 {
                     locations.map(item => {
                         return(
                             <Marker 
-                            key = {item.name} position = {item.location}
-                            onClick={() => onSelect(item)}
-                            
-                            />
-                        )
-                    })
+                            class = "marker"
+                            key = {item.id} position = {item.location}
+                            onClick={() => 
+                                onSelect(item)
+                            }
+                        
+                            />    
+                        ) 
+                    }
+                    )
                 }
                 {
                     selected.location &&
@@ -64,9 +81,10 @@ export const MapContainer = () => {
                         <InfoWindow
                         position={selected.location}
                         clickable={true}
-                        onCloseClick={()=>setSelected({})}
+                        onCloseClick={()=>
+                            setSelected({})}
                         >
-                            <p>selected.name</p>
+                            <p>{`${selected.name} is a ${selected.type} property located at ${selected.addressStreet}`}</p>
                             </InfoWindow>
                     )
                     
