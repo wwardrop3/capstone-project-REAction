@@ -1,14 +1,5 @@
-import { ApplicationViews } from "./ApplicationViews"
-import { Nav } from "./Nav/Nav"
+//the purpose of this page is to serve as the base application page 
 
-export const Render = () => {
-    return (
-        <>
-            <Nav/>
-            <ApplicationViews/>
-
-        </>
-
-    )
-    
+export const REaction = () => {
+    return "REaction"
 }
