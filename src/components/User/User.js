@@ -10,25 +10,25 @@
     //import deleteUser function from APImanager to delete the user object of the id that is stored in local storage
 
 
-    return (
+    // return (
 
-        <h2>User Information</h2>
-        <fieldset>
-            <label>User First Name</label>
-            <input>User First Name</input>
-        </fieldset>
+    //     <h2>User Information</h2>
+    //     <fieldset>
+    //         <label>User First Name</label>
+    //         <input>User First Name</input>
+    //     </fieldset>
 
-        <fieldset>
-            <label>User Last Name</label>
-            <input>User Last Name</input>
-        </fieldset>
+    //     <fieldset>
+    //         <label>User Last Name</label>
+    //         <input>User Last Name</input>
+    //     </fieldset>
 
-        <fieldset>
-            <label>User Email Address</label>
-            <input>User Email Address</input>
-        </fieldset>
+    //     <fieldset>
+    //         <label>User Email Address</label>
+    //         <input>User Email Address</input>
+    //     </fieldset>
 
-        //button will use onClick to invoke delete user function above and useHistory to redirect to the Login Page
-        <button>Delete Account</button>
+    //     //button will use onClick to invoke delete user function above and useHistory to redirect to the Login Page
+    //     <button>Delete Account</button>
    
-    )
+    // )

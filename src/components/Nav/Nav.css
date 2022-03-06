@@ -1,0 +1,19 @@
+.navContainer{
+    display: flex;
+}
+
+.navButton{
+    height: 100%;
+    width: 20%;
+}
+
+.navTopBar{
+    width: 100%;
+}
+
+/* .navLogo{
+    display: flex;
+    justify-content: left;
+    width:10px;
+    height: 10%;
+} */

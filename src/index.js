@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { REaction } from './components/REaction';
+import { REaction } from './components/REAction';
+
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
@@ -10,7 +11,6 @@ ReactDOM.render(
     <BrowserRouter>
       <REaction />
     </BrowserRouter>
-    
   </React.StrictMode>,
   document.getElementById('root')
 );

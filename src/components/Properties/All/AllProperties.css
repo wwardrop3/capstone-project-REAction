@@ -1,0 +1,47 @@
+.contentContainer{
+    width:100%
+}
+
+.propertiesHeader{
+    width: 100%;
+    height:100px;
+    display: flex;
+    flex-direction: row;
+    border: 2px solid gray;
+}
+
+
+.buttonsContainer{
+    width: 20%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+
+.propertyTypeContainer{
+    height: 100%;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+}
+
+.propertyTypeTable{
+    width: 100%;
+}
+
+.optionButton{
+    width:33%;
+}
+
+.propertyContainer{
+    display: flex;
+    flex-direction: row;
+    border: 2px solid gray;
+    margin: 1em;
+    border-radius: 10px;
+}
+
+.propertyThumbnail{
+    width: 20%
+}
