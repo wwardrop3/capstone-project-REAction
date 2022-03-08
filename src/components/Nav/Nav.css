@@ -1,5 +1,7 @@
 .navContainer{
     display: flex;
+    width: 80%;
+    justify-content: center;
 }
 
 .navButton{
@@ -17,3 +19,5 @@
     width:10px;
     height: 10%;
 } */
+
+

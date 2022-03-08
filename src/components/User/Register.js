@@ -1,3 +1,6 @@
+//Purpose of this component is to register user after being redirected from the Login component.  Component will create user object that will include and id, name, and email address that will be used to login
+
+
 import React, { useRef, useState } from "react"
 import { useHistory } from "react-router-dom"
 import "./Login.css"

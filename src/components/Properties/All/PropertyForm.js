@@ -1,50 +1,35 @@
-//purpose of this module is to produce a form to add a new property
-
-import { useState } from "react"
-import { PlacesAutoFill } from "../../APIManager"
-
-
-
+import { useEffect, useState } from "react"
+import { Redirect } from "react-router-dom"
+import { Route } from "react-router-dom"
+import { useHistory } from "react-router-dom"
+import { useParams } from "react-router-dom"
+import { getPropertyTypes, retrieveProperty } from "../../APIManager"
+import { IndustrialProperty } from "../Industrial/IndustrialProperty"
+import { MultifamilyProperty } from "../Multifamily/MultifamilyProperty"
+import { OfficeProperty } from "../Office/OfficeProperty"
 
 
 export const PropertyForm = () => {
-    const [property, setProperty] = useState([])
 
+    const { propertyTypeId } = useParams()
+    
+    const id = propertyTypeId
+    
+    console.log(id)
 
+    const choiceObject = {
+        "1":<MultifamilyProperty/>,
+        "2":<OfficeProperty/>,
+        "3":<IndustrialProperty/>
+    }
 
+    
     return (
-        <>
-            <section className="contentContainer">
-                <div className="contentHeader">
-                    <p>Add Property Type Property</p>
-                </div>
+        <Route
+            render={() => {
+                return choiceObject.id
+            }}
+                />
                 
-                <div className="addImageContainer">
-                    <label></label>
-                    <input></input>
-                </div>
-
-                <div className="addAddressContainer">
-                    <label></label>
-                    <div className="addressInfoContainer">
-
-                    
-                    
-                    </div>
-                
-                </div>    
-                <div className="addInfoContainer">
-                    
-                </div>
-
-                <button className="submitProperty">
-                
-                </button>
-
-
-            </section>
-        </>
-    )
-
-
-}
+    )}
+    

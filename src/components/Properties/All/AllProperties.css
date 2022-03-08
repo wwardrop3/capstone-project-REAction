@@ -1,5 +1,9 @@
+
 .contentContainer{
-    width:100%
+    width:80%;
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .propertiesHeader{
@@ -9,6 +13,15 @@
     flex-direction: row;
     border: 2px solid gray;
 }
+
+.propertyContainerInfo{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+
 
 
 .buttonsContainer{
@@ -36,12 +49,47 @@
 
 .propertyContainer{
     display: flex;
-    flex-direction: row;
     border: 2px solid gray;
     margin: 1em;
     border-radius: 10px;
 }
 
+.thumbnailContainer {
+    position: relative;
+    width: 30%;
+  }
+
 .propertyThumbnail{
-    width: 20%
+    width: 100%;
+    position: relative;
+}
+
+.thumbnailPropertyType{
+    color:white;
+    position:absolute;
+    top:3px;
+    left:3px;
+    background-color: black;
+    border-radius: 10px;
+    opacity: 75%;
+    padding: 3px;
+
+  }
+
+  .thumbnailPropertyStatus{
+    color:black;
+    background-color: white;
+    position:absolute;
+    top:3px;
+    right:3px;
+    border-radius: 10px;
+    opacity: 75%;
+    padding: 3px;
+
+  }
+
+table{
+    display: flex;
+    justify-content: center;
+    text-align: center;
 }

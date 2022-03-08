@@ -19,10 +19,52 @@ export const NavBar =() => {
                 <img src="https://sn3302files.storage.live.com/y4mqZavKEpPnQLAKtZ9_Np2dSiDMn75dWnxPXrboSkSqHqZs2H--L5aAI505wKloT2D1go2ZC6zyG2lycNHXtrZvxQZ4M27g8XiG--F6rl-B5q3WasKmQuEBrTazibNc5boT1LmOu2XCZzbkjjSVF11a78on7I70_ciluH8KxiAj7Odj57Um7yb7BQfbJ8f1zjb?width=400&height=200&cropmode=none"></img>
             </div>
             <div className="navTopBar">
-                <button className="navButton"><Link to = "/properties">All Properties</Link></button>
-                <button className="navButton"><Link to = "/properties/multifamily">Multifamily</Link></button>
-                <button className="navButton"><Link to = "/properties/office">Office</Link></button>
-                <button className="navButton"><Link to = "properties/industrial">Industrial</Link></button>
+                <button name = "allProperties" className="navButton"
+                        onClick={
+                            (evt) => {
+                                history.push(`/properties`)
+                                
+
+                            }
+                        }>All Properties
+                        </button>
+
+
+
+                <button name = "multifamily" className="navButton"
+                onClick={
+                    (evt) => {
+                        history.push(`/properties/type/1`)
+                        
+
+                    }
+                }>Multifamily</button>
+
+
+
+
+                <button name = "office" className="navButton"
+                    onClick={
+                        (evt) => {
+                            history.push(`/properties/type/2`)
+                            
+
+                        }
+                    }>Office
+                    </button>
+
+
+                <button name = "industrial" className="navButton"
+                    onClick={
+                        (evt) => {
+                            history.push(`/properties/type/3`)
+                            
+
+                        }
+                    }>Industrial
+                    </button>
+
+
                 <button className="navButton"
                 onClick={
                     (evt) => {
