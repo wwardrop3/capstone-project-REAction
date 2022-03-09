@@ -6,6 +6,10 @@ import { useParams } from "react-router-dom"
 import { Link } from "react-router-dom"
 import { GetProperties, getPropertyTypes, getPropertyType } from "../../APIManager"
 import "./AllProperties.css"
+import Modal from "./EditProperty"
+
+
+
 
 
 //a display of all properties, the navbar, and a button to add a new property
@@ -58,18 +62,25 @@ export const AllProperties = () => {
     )
 
     //use type Id from useParams to get the name of the property type to put into string
-    const typeNo = parseInt(typeId)
-   const propType = propertyTypes
-   console.log(propType, typeNo)
-    
+
+    let propertyTypeName = ""
+
+    const propertyTypeNames = () => {
+        propertyTypeName = propertyTypes.find(type => parseInt(typeId) === type.id)
+        if(typeId === undefined){
+            return "All"
+        } else {
+            return propertyTypeName?.name
+        }
+    }
+
 
 
     return (
         <>
             <div className="contentContainer">
-                <div className="propertiesHeader">
-                    <p className="propertyTypeContainer">Properties</p>    
-                    <div className="buttonsContainer">
+                <div className="properties-header">
+                    <div className="propertyTypeContainer">{`${propertyTypeNames()} Properties`}</div>   
 
                         {/* Possible sort button to use later */}
                         {/* <button className="optionButton">Sort</button> */}
@@ -103,7 +114,7 @@ export const AllProperties = () => {
                                 <div className = "propertyContainerInfo">
 
                                     <div className="tableName">
-                                    <Link to={`/properties/${userProperty.type.name}/${userProperty.id}`}>
+                                    <Link to={`/properties/${userProperty.id}`}>
                                         <table>
                                             <thead>
                                                 <tr>
@@ -142,7 +153,7 @@ export const AllProperties = () => {
                     )
                     })}
                     </div>    
-                </div>    
+                
         </>
     )
 

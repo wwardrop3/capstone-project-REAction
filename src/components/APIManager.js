@@ -95,7 +95,7 @@ export const getStatuses = () => {
 }
 
 export const retrieveProperty = (id) => {
-    return fetch(`http://localhost:8088/properties/${id}?_expand=type&_expand=neighborhood&_expand=state&_expand=city`)
+    return fetch(`http://localhost:8088/properties/${id}?_expand=type&_expand=neighborhood&_expand=state&_expand=city&_expand=status`)
     .then (res => res.json())
 }
 
@@ -110,4 +110,15 @@ export const removeProperty = (propertyId) => {
     }
     return fetch(`http://localhost:8088/properties/${propertyId}`, fetchOptions)
     .then(res => res.json())
+}
+
+export const updateProperty = (propertyObject) => {
+    const fetchOptions = {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(propertyObject)
+    }
+    return fetch(`http://localhost:8088/properties/${propertyObject.id}`, fetchOptions)
 }
