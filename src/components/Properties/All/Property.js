@@ -128,9 +128,8 @@ return (
             
                 onClose = {
                     () =>{
-                        
-                        setShow(false) 
                         setRefresh("a")
+                        setShow(false) 
                         }}
                 show = {show}/>
           

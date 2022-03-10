@@ -56,7 +56,6 @@ export const NavBar =() => {
                     }>Office
                     </button>
 
-
                 <button name = "industrial" className="nav-button"
                     onClick={
                         (evt) => {
@@ -65,7 +64,22 @@ export const NavBar =() => {
 
                         }
                     }>Industrial
-                    </button>
+                </button>
+
+
+
+                <button name = "map-all" className="nav-button"
+                    onClick={
+                        (evt) => {
+                            history.push(`/properties/map`)
+                            
+
+                        }
+                    }>Mapping
+                </button>
+
+
+                
 
 
                 <button className="nav-button"

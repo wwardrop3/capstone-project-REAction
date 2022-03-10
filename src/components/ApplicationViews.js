@@ -14,6 +14,7 @@ import { PropertyForm } from "./Properties/All/PropertyForm"
 import { Property } from "./Properties/All/Property"
 import { Modal } from "./Properties/All/EditProperty"
 import { useState } from "react"
+import { Geocoder } from "./Location/Geocoder"
 
 
 
@@ -61,6 +62,12 @@ export const ApplicationViews = () => {
             <Route exact path= "/properties/test">
                 <Modal />
             </Route>
+
+            <Route exact path= "/properties/map">
+                <Geocoder />
+            </Route>
+
+            
 
                 
             </div>
