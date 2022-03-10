@@ -20,26 +20,29 @@ export const PropertyForm = () => {
     const [statuses, setStatuses] = useState([])
     const [propertyTypes, setPropertyTypes] = useState([])
     const { propertyTypeId } = useParams()
+    const [state, setState] =useState()
+    const [city, setCity] =useState(0)
+    const [neighborhood, setNeighborhood] =useState(0)
     const [property, setProperty] = useState(
         {
             name: "Property",
             userId: parseInt(localStorage.getItem("property_user")),
-            street: "No Street Address",
+            street: "",
             stateId: 0,
             cityId:0,
             zipCode: 0,
             neighborhoodId: 0,
-            avgSF: "No Information",
-            avgRent: "No Information",
-            developer: "No Information",
-            management: "No Information",
-            totalSF: "No Information",
-            stories: "No Information",
+            avgSF: 0,
+            avgRent: 0,
+            developer: "",
+            management: "",
+            totalSF: 0,
+            stories: 0,
             imageURL: "https://cdn-icons-png.flaticon.com/512/63/63720.png",
             typeId: parseInt(propertyTypeId),
-            industry: "No Information",
+            industry: "",
             statusId:0,
-            occupancy:"No Information"
+            occupancy:0
         })
     
         const propertyTypeInt = parseInt(propertyTypeId)
@@ -63,6 +66,9 @@ export const PropertyForm = () => {
               }
         }
 
+
+
+        
 
         useEffect(
             () => {
@@ -124,7 +130,22 @@ export const PropertyForm = () => {
             []
         )
 
+        useEffect(
+            () => {
+                setFilteredCities(cities.filter(city => city.stateId === property.stateId))
+                setCity(0)
+                console.log(city)
+                setNeighborhood(0)
+            },[state]
+        )
 
+        useEffect(
+            () => {
+                setFilteredNeighborhoods(neighborhoods.filter(neighborhood => neighborhood.cityId === city))
+                setNeighborhood(0)
+            },[state, city]
+        )
+        
         
 
     
@@ -200,11 +221,12 @@ export const PropertyForm = () => {
                         className="addState" 
                         onChange= {
                             (evt) => {
-                                setFilteredCities(cities.filter(city => city.stateId === parseInt(evt.target.value)))
                                 const copy = {...property}
                                 copy.stateId = parseInt(evt.target.value)
                                 setProperty(copy)
-                                
+                                setState(parseInt(evt.target.value))
+                          
+
                             }
                         }
                         >
@@ -219,15 +241,17 @@ export const PropertyForm = () => {
                     <div>
                         <label htmlFor="addCity">City</label>
                         <select 
+                        value={city}
                         required
                         className="addCity" 
                         onChange= {
                             (evt) => {
+                                
                                 // When city is chosen, set the city Id in the property object and filter the neighborhoods with that same city Id
-                                setFilteredNeighborhoods(neighborhoods.filter(neighborhood => neighborhood.cityId === parseInt(evt.target.value)))
                                 const copy = {...property}
                                 copy.cityId = parseInt(evt.target.value)
                                 setProperty(copy)
+                                setCity(parseInt(evt.target.value))
                                 
                             }
                         }
@@ -241,11 +265,13 @@ export const PropertyForm = () => {
                     <div>
                         <label htmlFor="addNeighborhood">Neighborhood</label>
                         <select className="addNeighborhood"
+                        value = {neighborhood}
                         onChange= {
                             (evt) => {
                                 const copy = {...property}
                                 copy.neighborhoodId = parseInt(evt.target.value)
                                 setProperty(copy)
+                                setNeighborhood(parseInt(evt.target.value))
                             }
                         }
                         >

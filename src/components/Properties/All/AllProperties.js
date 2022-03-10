@@ -4,9 +4,8 @@ import { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
 import { useParams } from "react-router-dom"
 import { Link } from "react-router-dom"
-import { GetProperties, getPropertyTypes, getPropertyType } from "../../APIManager"
+import { GetProperties, getPropertyTypes } from "../../APIManager"
 import "./AllProperties.css"
-import Modal from "./EditProperty"
 
 
 

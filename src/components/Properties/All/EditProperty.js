@@ -21,7 +21,6 @@ export const Modal = (props) => {
     const [statuses, setStatuses] = useState([])
     const [propertyTypes, setPropertyTypes] = useState([])
 
-    
     const history = useHistory()
 
     useEffect(
@@ -278,7 +277,6 @@ export const Modal = (props) => {
                         onClick={
                             () => {
                                 props.onClose()
-                                props.setProperty("asdfas")
                             
                             }
                         

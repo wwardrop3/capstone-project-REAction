@@ -77,7 +77,17 @@ export const NavBar =() => {
                         }
                     }>Mapping
                 </button>
+{/* 
+                <button name = "map-all" className="nav-button"
+                    onClick={
+                        (evt) => {
+                            history.push(`/properties/geocoder`)
+                            
 
+                        }
+                    }>Geocoder
+                </button>
+ */}
 
                 
 

@@ -24,6 +24,7 @@ export const MultifamilyPropertyForm = ({property, setProperty, show}) => {
 
                     <label htmlFor="addOccupancy">Occupancy %</label>
                         <input
+                        value={property.occupancy}
                         className ="addOccupancy"
                         type="number"
                         required
@@ -40,6 +41,7 @@ export const MultifamilyPropertyForm = ({property, setProperty, show}) => {
 
                         <label htmlFor="addUnits">Units</label>
                         <input
+                        value={property.units}
                         className ="addUnits"
                         type="number"
                         required
@@ -55,6 +57,7 @@ export const MultifamilyPropertyForm = ({property, setProperty, show}) => {
 
                         <label htmlFor="addAvgSF">Avg. Square Footage</label>
                         <input
+                        value={property.avgSF}
                         className ="addAvgSF"
                         type="number"
                         required
@@ -71,6 +74,7 @@ export const MultifamilyPropertyForm = ({property, setProperty, show}) => {
                     <div>
                         <label htmlFor="addRent">Avg. Rent</label>
                             <input
+                            value={property.avgRent}
                             className ="addRent"
                             type="number"
                             required
@@ -86,6 +90,7 @@ export const MultifamilyPropertyForm = ({property, setProperty, show}) => {
                     <div>
                         <label htmlFor="addDeveloper">Property Developer</label>
                         <input
+                        value={property.developer}
                         className ="addDeveloper"
                         type="text"
                         required
@@ -101,6 +106,7 @@ export const MultifamilyPropertyForm = ({property, setProperty, show}) => {
                     <div>
                         <label htmlFor="addManagement">Management Company</label>
                         <input
+                        value={property.management}
                         className ="addManagement"
                         type="text"
                         required
@@ -116,6 +122,7 @@ export const MultifamilyPropertyForm = ({property, setProperty, show}) => {
                     <div>
                         <label htmlFor="addImage">Property Image</label>
                         <input
+                        value={property.imageURL}
                         className ="addImage"
                         type="text"
                         required
@@ -138,7 +145,7 @@ export const MultifamilyPropertyForm = ({property, setProperty, show}) => {
                                 history.push("/properties")
                                 
                             }}>Save Property</button>
-                            {console.log(property)}
+                           
                     
                     
                 

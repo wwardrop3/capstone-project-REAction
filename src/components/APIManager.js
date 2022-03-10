@@ -1,10 +1,9 @@
 //purpose of this module is to handle all fetch calls by saving the calls to exported functions
 
-import { useEffect, useState } from "react"
-import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 
 
-const key= process.env.REACT_APP_GOOGLEAPIKEY
+
+
 
 
 //create function to return fetch call for users
@@ -122,3 +121,5 @@ export const updateProperty = (propertyObject) => {
     }
     return fetch(`http://localhost:8088/properties/${propertyObject.id}`, fetchOptions)
 }
+
+

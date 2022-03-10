@@ -16,9 +16,10 @@ export const Property = () => {
     //below is for the modal, update element
     const [show, setShow] = useState(false)
     const { propertyId } = useParams()
-    const [refresh, setRefresh] = useState({})
+    const [refresh, setRefresh] = useState(true)
+    const [propertyCopy, setPropertyCopy] = useState({})
 
-    
+    //fetches the property from database with the ID that matches url param
     useEffect(
         () => {
             retrieveProperty(parseInt(propertyId))
@@ -30,6 +31,12 @@ export const Property = () => {
         },[refresh]
     )
 
+    useEffect(
+        () => {
+            setPropertyCopy({...property})
+        },[refresh]
+    )
+
     const history = useHistory()
 
 
@@ -38,13 +45,13 @@ const details = () => {
 
     switch(property.typeId) {
         case 1:
-            return <MultifamilyProperty property = {property} setProperty = {setProperty}/>
+            return <MultifamilyProperty property = {property} />
           break;
         case 2:
-            return <OfficeProperty property = {property} setProperty = {setProperty}/>
+            return <OfficeProperty property = {property} />
           break;
         case 3:
-            return<IndustrialProperty property = {property} setProperty = {setProperty}/>
+            return<IndustrialProperty property = {property} />
           break;
        
       }
@@ -128,8 +135,8 @@ return (
             
                 onClose = {
                     () =>{
-                        setRefresh("a")
                         setShow(false) 
+                        setRefresh(!refresh)
                         }}
                 show = {show}/>
           

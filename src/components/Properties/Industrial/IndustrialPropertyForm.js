@@ -1,22 +1,16 @@
 //purpose of this module is to produce a form to add a new property
 
-import { useEffect, useState } from "react"
+import { useMemo } from "react"
 import { useHistory } from "react-router-dom"
-import { getCities, getNeighborhoods, getPropertyTypes, getStates, getStatuses, sendProperty } from "../../APIManager"
+import { sendProperty } from "../../APIManager"
+import { AllProperties } from "../All/AllProperties"
 
-
+//continues to modify current property values and uses show to toggle save property button on the form
 export const IndustrialPropertyForm = ({property, setProperty, show}) => {
-    
-    const [cities, setCities] = useState([])
-    const [neighborhoods, setNeighborhoods] = useState([])
-    const [states, setStates] = useState([])
-    const [filteredCities, setFilteredCities] = useState([])
-    const [filteredNeighborhoods, setFilteredNeighborhoods] = useState([])
-    const [statuses, setStatuses] = useState([])
-    const [types, setTypes] = useState([])
 
 
     const history = useHistory()
+
 
 
 
@@ -28,20 +22,21 @@ export const IndustrialPropertyForm = ({property, setProperty, show}) => {
             <div className="infoContainer">
                 
                 <h2>Property Detail</h2>
+
                 <div className="addressInfoContainer">
                     <div>
 
                     <label htmlFor="addIndustry">Industry</label>
                         <input
+                        value = {property.industry}
                         className ="addIndustry"
-                        type="number"
+                        type="text"
                         required
-                        
-                        placeholder="Enter Occupancy Percentage"
+                        placeholder="Add Industry"
                         onChange={
                             (evt) => {
                                 const copy = {...property}
-                                copy.industryId = evt.target.value
+                                copy.industry = evt.target.value
                                 setProperty(copy)
                             }}
                         >
@@ -52,7 +47,7 @@ export const IndustrialPropertyForm = ({property, setProperty, show}) => {
                         className ="addTotalSF"
                         type="number"
                         required
-                        
+                        value = {property.totalSF}
                         placeholder="Enter Total SF"
                         onChange={
                             (evt) => {
@@ -71,7 +66,7 @@ export const IndustrialPropertyForm = ({property, setProperty, show}) => {
                         onChange={
                             (evt) => {
                                 const copy = {...property}
-                                copy.avgSF = evt.target.value
+                                copy.tenants = evt.target.value
                                 setProperty(copy)
                             }}></input>
                         
@@ -87,7 +82,7 @@ export const IndustrialPropertyForm = ({property, setProperty, show}) => {
                             onChange={
                                 (evt) => {
                                     const copy = {...property}
-                                    copy.avgRent = evt.target.value
+                                    copy.avgRentPSF = evt.target.value
                                     setProperty(copy)
                                 }}></input>
                         </div>
@@ -140,7 +135,8 @@ export const IndustrialPropertyForm = ({property, setProperty, show}) => {
 
                     <button
                     className="submitButton"
-                    show = {show}
+                    style = {show}
+          
                         onClick={
                             (evt) => {
                                 sendProperty(property)

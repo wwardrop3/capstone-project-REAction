@@ -8,7 +8,6 @@ import { deleteProperty, removeProperty, retrieveProperty } from "../../APIManag
 
 //create component function MultifamilyProperty
 export const OfficeProperty = ({property, setProperty}) => {
-    const { propertyId } = useParams()
 
 
     const history = useHistory()

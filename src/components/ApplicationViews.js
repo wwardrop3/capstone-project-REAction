@@ -3,18 +3,13 @@
 
 import { Route } from "react-router-dom"
 import { AllProperties } from "./Properties/All/AllProperties"
-import { IndustrialProperty } from "./Properties/Industrial/IndustrialProperty"
-import { IndustrialPropertyForm } from "./Properties/Industrial/IndustrialPropertyForm"
-import { MultifamilyProperty } from "./Properties/Multifamily/MultifamilyProperty"
-import { MultifamilyPropertyForm } from "./Properties/Multifamily/MultifamilyPropertyForm"
-import { OfficeProperty } from "./Properties/Office/OfficeProperty"
-import { OfficePropertyForm } from "./Properties/Office/OfficePropertyForm"
 import "./ApplicationViews.css"
 import { PropertyForm } from "./Properties/All/PropertyForm"
 import { Property } from "./Properties/All/Property"
 import { Modal } from "./Properties/All/EditProperty"
 import { useState } from "react"
-import { Geocoder } from "./Location/Geocoder"
+import { PropertyMap } from "./Location/PropertyMap"
+
 
 
 
@@ -64,8 +59,10 @@ export const ApplicationViews = () => {
             </Route>
 
             <Route exact path= "/properties/map">
-                <Geocoder />
+                <PropertyMap />
             </Route>
+
+
 
             
 
