@@ -1,0 +1,12 @@
+.imageContainer {
+    position: relative;
+  }
+  
+  /* Bottom right text */
+  .siteLogo {
+    position: absolute;
+    top: 10px;
+    left: 35%;
+    width: 30%;
+  }
+  

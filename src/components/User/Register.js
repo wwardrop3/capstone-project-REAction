@@ -32,7 +32,7 @@ export const Register = (props) => {
                         .then(createdUser => {
                             if (createdUser.hasOwnProperty("id")) {
                                 localStorage.setItem("property_user", createdUser.id)
-                                history.push("/all-properties")
+                                history.push("/properties")
                             }
                         })
                 }

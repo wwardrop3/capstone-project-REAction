@@ -71,18 +71,22 @@ fieldset {
 }
 
 
-.loginImage{
-    width: 50%;
-}
+
 
 .container {
     position: relative;
+
+
   }
   
+  .loginImage{
+    width: 80%;
+}
+
   /* Bottom right text */
   .siteLogo {
     position: absolute;
-    top: 10px;
-    left: 21%;
-    width: 40%;
+    top: 400px;
+    left: 120px;
+    width: 80%;
   }
