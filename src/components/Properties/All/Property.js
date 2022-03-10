@@ -16,8 +16,8 @@ export const Property = () => {
     //below is for the modal, update element
     const [show, setShow] = useState(false)
     const { propertyId } = useParams()
+    const [refresh, setRefresh] = useState({})
 
-    const propertyIdInt = parseInt(propertyId)
     
     useEffect(
         () => {
@@ -27,7 +27,7 @@ export const Property = () => {
                     setProperty(propResponse)
                 }
             )
-        },[]
+        },[refresh]
     )
 
     const history = useHistory()
@@ -124,7 +124,15 @@ return (
                     }>Delete Property
                 </button>
             </div>
-            <Modal property = {property} setProperty = {setProperty} onClose = {() => setShow(false)} show={show}/>
+            <Modal property = {property} setProperty = {setProperty} refresh = {refresh} setRefresh = {setRefresh} 
+            
+                onClose = {
+                    () =>{
+                        
+                        setShow(false) 
+                        setRefresh("a")
+                        }}
+                show = {show}/>
           
         </section>
 

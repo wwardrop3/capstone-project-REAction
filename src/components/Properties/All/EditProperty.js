@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { useHistory } from "react-router-dom"
 import { getCities, getNeighborhoods, getPropertyTypes, getStates, getStatuses, updateProperty } from "../../APIManager"
 import { IndustrialProperty } from "../Industrial/IndustrialProperty"
 import { IndustrialPropertyForm } from "../Industrial/IndustrialPropertyForm"
@@ -20,7 +21,8 @@ export const Modal = (props) => {
     const [statuses, setStatuses] = useState([])
     const [propertyTypes, setPropertyTypes] = useState([])
 
-
+    
+    const history = useHistory()
 
     useEffect(
         () => {
@@ -81,18 +83,17 @@ export const Modal = (props) => {
         },
         []
     )
-
     const details = () => {
 
         switch(props.property.typeId) {
             case 1:
-                return <MultifamilyPropertyForm property = {props.property} setProperty = {props.setProperty}/>
+                return <MultifamilyPropertyForm property = {props.property} setProperty = {props.setProperty} show = {{display: "none"}} />
               break;
             case 2:
-                return <OfficePropertyForm property = {props.property} setProperty = {props.setProperty}/>
+                return <OfficePropertyForm property = {props.property} setProperty = {props.setProperty} show = {{display: "none"}}/>
               break;
             case 3:
-                return<IndustrialPropertyForm property = {props.property} setProperty = {props.setProperty}/>
+                return<IndustrialPropertyForm property = {props.property} setProperty = {props.setProperty} show = {{display: "none"}}/>
               break;
            
           }
@@ -103,8 +104,8 @@ export const Modal = (props) => {
     } else {
         return (
             <>
-            <div className="modal" onClick={props.onClose}>
-                <div className="modal-content" onClick={evt => evt.stopPropagation()}>
+            <div className="modal">
+                <div className="modal-content">
                     
                     <div className="modal-header">
                         <h2 className="modal-title">Edit Property Information</h2>
@@ -263,18 +264,26 @@ export const Modal = (props) => {
                 </div>
 
                 <div className="modal-footer">
-                        <button className="close-button"
+                        <button className="update-button"
                         onClick={
                             () => {
-                                props.onClose()
                                 updateProperty(props.property)
+                                history.push("/properties")
                                 
                             }
                         }>Save Information</button>
 
 
-                        <button className="update-button"
-                        onClick={props.onClose}>Close</button>
+                        <button className="close-button"
+                        onClick={
+                            () => {
+                                props.onClose()
+                                props.setProperty("asdfas")
+                            
+                            }
+                        
+                        
+                        }>Close</button>
 
 
                         
