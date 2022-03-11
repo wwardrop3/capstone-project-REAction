@@ -105,9 +105,9 @@ export const AllProperties = () => {
                             <>
                             <div key={`${userProperty.id}`} className="propertyContainer">
                                 <div className="thumbnailContainer">
-                                    <img className="propertyThumbnail" src = {`${userProperty.imageURL}`}></img>
-                                    <div className="thumbnailPropertyType">{`${userProperty.type.name}`}</div>
-                                    <div className="thumbnailPropertyStatus">{`${userProperty.status.name}`}</div>
+                                    <img className="propertyThumbnail" src = {`${userProperty?.imageURL}`}></img>
+                                    <div className="thumbnailPropertyType">{`${userProperty.type?.name}`}</div>
+                                    <div className="thumbnailPropertyStatus">{`${userProperty.status?.name}`}</div>
                                 </div>
                                 
                                 <div className = "propertyContainerInfo">

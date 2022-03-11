@@ -127,14 +127,7 @@ export const OfficePropertyForm = ({property, setProperty, show}) => {
                     </div>
 
 
-                    <button
-                    className="submitButton"
-                    style = {show}
-                        onClick={
-                            (evt) => {
-                                sendProperty(property)
-                                history.push("/properties")
-                            }}>Save Property</button>
+                    
 
                     
                     

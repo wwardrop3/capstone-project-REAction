@@ -9,6 +9,8 @@ import { Property } from "./Properties/All/Property"
 import { Modal } from "./Properties/All/EditProperty"
 import { useState } from "react"
 import { PropertyMap } from "./Location/PropertyMap"
+import { App } from "./LocationTest/App"
+import { Geocoder, Results } from "./LocationTest/Done"
 
 
 
@@ -54,13 +56,17 @@ export const ApplicationViews = () => {
                 <Property />
             </Route>
 
-            <Route exact path= "/properties/test">
+            <Route exact path= "/properties/edit">
                 <Modal />
             </Route>
 
             <Route exact path= "/properties/map">
                 <PropertyMap />
             </Route>
+
+            {/* <Route exact path= "/properties/test">
+                <Results />
+            </Route> */}
 
 
 

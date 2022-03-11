@@ -1,8 +1,8 @@
 import React from 'react';
-import { GoogleMap, Marker, LoadScript, InfoWindow } from '@react-google-maps/api';
+import { GoogleMap, Marker, LoadScript, InfoWindow, MarkerProps} from '@react-google-maps/api';
 import { useState } from 'react';
 import { useEffect } from 'react';
-
+import { geocodeByAddress } from 'react-google-places-autocomplete';
 
 const id = ["919771f94d285faa"]
 const key= process.env.REACT_APP_GOOGLEAPIKEY
@@ -13,7 +13,7 @@ const lib = ["places"]
 
 
 export const PropertyMap = () => {
-    const [locations, setLocations] = useState([])
+    const [properties, setProperties] = useState([])
     const [selected, setSelected] =useState({})
     //view will keep the view of the map the same after closing the popup window on a property
     const [view, setView] = useState(
@@ -22,19 +22,19 @@ export const PropertyMap = () => {
             lng: -86.78448535520621
     })
 
-    const onSelect = (item) => {
-        setSelected(item)
-        setView(item.location)
+    const onSelect = (property) => {
+        setSelected(property)
+        setView(property.location)
         }
    
 
     useEffect(
         () => {
-            return fetch("http://localhost:8088/locations")
+            return fetch("http://localhost:8088/properties")
             .then(res => res.json())
             .then(
                 (response) => {
-                    setLocations(response)
+                    setProperties(response)
                 }
             )
         },[]
@@ -42,32 +42,39 @@ export const PropertyMap = () => {
     
 
     const mapStyles = {        
-    height: "100vh",
+    height: "90vh",
     width: "100%"};
     
- 
 
-    
     
 
     return (
         <LoadScript googleMapsApiKey={key} libraries = {lib} mapIds = {id}>
+        
+        
             
             
         <GoogleMap
+        
+            
             mapContainerStyle={mapStyles}
             zoom={13}
             tilt={45}
             options = {{mapId: "919771f94d285faa"}}
             center={view}>
                 {
-                    locations.map(item => {
+                    properties.map(property => {
                         return(
-                            <Marker 
+                            
+                            
+
+                            
+                            <Marker
+                            
                             class = "marker"
-                            key = {item.id} position = {item.location}
+                            key = {property.id} position = {property.location}
                             onClick={() => 
-                                onSelect(item)
+                                onSelect(property)
                             }
                         
                             />    
@@ -84,11 +91,23 @@ export const PropertyMap = () => {
                         onCloseClick={()=>
                             setSelected({})}
                         >
-                            <p>{`${selected.name} is a ${selected.type} property located at ${selected.addressStreet}`}</p>
+                            <div className='popup-window'>
+                                <h2>{selected.name}</h2>
+                                <div className='image-container'>
+                                    <img id='prop-image' src = {selected.imageURL} height="300px"></img>
+                                
+                                </div>
+                                    <div>
+                                   <p>{`${selected.name} is located at ${selected.street}`}</p>
+                                        </div>
+                                
+                                
+                                </div>
                             </InfoWindow>
                     )
                     
                 }
+            
                 </GoogleMap>
                 </LoadScript>
     )

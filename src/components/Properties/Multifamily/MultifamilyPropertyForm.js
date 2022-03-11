@@ -134,17 +134,6 @@ export const MultifamilyPropertyForm = ({property, setProperty, show}) => {
                                 setProperty(copy)
                             }}></input>
                     </div>
-
-
-                    <button
-                    style = {show}
-                    className="submitButton"
-                        onClick={
-                            (evt) => { 
-                                sendProperty(property)
-                                history.push("/properties")
-                                
-                            }}>Save Property</button>
                            
                     
                     

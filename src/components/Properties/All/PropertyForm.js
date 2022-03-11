@@ -2,9 +2,12 @@
 
 
 
+import axios from "axios"
 import { useEffect, useState } from "react"
+import { useHistory } from "react-router-dom"
 import { useParams } from "react-router-dom"
-import { getCities, getNeighborhoods, getPropertyTypes, getStates, getStatuses, retrieveProperty } from "../../APIManager"
+import { getCities, getNeighborhoods, getPropertyTypes, getStates, getStatuses, retrieveProperty, sendProperty } from "../../APIManager"
+import { GeocodeProperty } from "../../LocationTest/Done"
 import { IndustrialPropertyForm } from "../Industrial/IndustrialPropertyForm"
 import { MultifamilyPropertyForm } from "../Multifamily/MultifamilyPropertyForm"
 import { OfficePropertyForm } from "../Office/OfficePropertyForm"
@@ -23,6 +26,8 @@ export const PropertyForm = () => {
     const [state, setState] =useState()
     const [city, setCity] =useState(0)
     const [neighborhood, setNeighborhood] =useState(0)
+    const [lat, setLat] = useState("")
+    const [lng, setLng] =useState("")
     const [property, setProperty] = useState(
         {
             name: "Property",
@@ -46,7 +51,7 @@ export const PropertyForm = () => {
         })
     
         const propertyTypeInt = parseInt(propertyTypeId)
-
+        let history = useHistory()
 
         const propertyTypeObject = propertyTypes.find(type => type.id === propertyTypeInt)
 
@@ -64,6 +69,10 @@ export const PropertyForm = () => {
                   break;
                
               }
+        }
+
+        const getCoordinates = () => {
+            return <GeocodeProperty property = {property} setProperty = {setProperty}/>
         }
 
 
@@ -299,6 +308,32 @@ export const PropertyForm = () => {
                 </div>
             </div>
             {details()}
+
+            <button
+                className="submitButton"     
+                onClick={
+                    () => {
+                            const foundCity = cities.find(city => city.id === property.cityId)
+                            const foundState = states.find(state => state.id === property.stateId)
+                            const formattedString = `${property?.street}, ${foundCity.name}, ${foundState.name}`
+                            console.log(formattedString)
+
+                            
+
+                            const location = {formattedString}
+                            axios.get(`https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyA-1SdY6vkTh1FI4i_5OUH9PoHhoRCpzmE`,{
+                            params :{
+                                address: {location},
+                                key: "AIzaSyA-1SdY6vkTh1FI4i_5OUH9PoHhoRCpzmE"
+                            }})
+                            .then(response => {
+                                const copy = {...property}
+                                copy.location = response.data.results[0].geometry?.location
+                                sendProperty(copy).then(history.push("/properties")
+                                
+                                )}).catch(console.log("ERROR"))
+                            }}>
+                            Save Property</button>
         
         </section>
 
