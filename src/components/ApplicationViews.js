@@ -34,7 +34,7 @@ export const ApplicationViews = () => {
 
        
 
-        <div className="applicationViewsContainer">
+        <div className="application-views-container">
                 {/*When the user first logs in, this route will invoke the AllProperties component.  This will also invoke when the user selects "all properties" option in the nav bar*/}
             <Route exact path = {["/properties", "/"]}>
                 <AllProperties />

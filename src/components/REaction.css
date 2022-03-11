@@ -1,3 +1,19 @@
-.all-content{
-    display: inline
+#all-content{
+    display: flex
+}
+
+#nav-bar{
+    width: 20%;
+    height: 100vh;
+    object-fit: contain;
+    background-color: rgba(204, 219, 233, 0.5);
+    z-index: 4;
+}
+
+#application-views{
+    width: 80%;
+    height: 100vh;
+    z-index: 2;
+    display: flex;
+    position: relative;
 }

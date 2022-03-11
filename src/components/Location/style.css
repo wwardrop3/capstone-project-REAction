@@ -2,6 +2,12 @@
        * element that contains the map. */
 #map {
 height: 100%;
+width: 100vw;
+}
+
+#map-content{
+    position: absolute;
+    width: 100vw;
 }
 
 /* Optional: Makes the sample page fill the window. */
@@ -42,14 +48,11 @@ width: 250px;
 }
 
 .map-container{
-    width: 100%;
-    height: 90vh;
+    width: 100vw;
+    height: 100vh;
 }
 
-.map{
-    width: 80%;
-    height: 80vh;
-}
+
 
 .popup-window{
  

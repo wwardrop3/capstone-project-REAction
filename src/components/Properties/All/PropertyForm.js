@@ -163,7 +163,6 @@ export const PropertyForm = () => {
 
         <>
         
-        <section className="contentContainer">
             <div className="contentHeader">
                 <h2>Add {`${propertyTypeObject?.name}`} Property</h2>
             </div>
@@ -202,7 +201,7 @@ export const PropertyForm = () => {
                         </select>
                 </div>
 
-            <div className="addAddressContainer">
+            <div className="inputElement">
                 
                 <h2>Addresss Information</h2>
                 <div className="addressInfoContainer">
@@ -331,8 +330,6 @@ export const PropertyForm = () => {
                                 )}).catch(console.log("ERROR"))
                             }}>
                             Save Property</button>
-        
-        </section>
 
 
 </>

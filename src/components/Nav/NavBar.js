@@ -36,7 +36,6 @@ export const NavBar =() => {
 
 
 
-        <div className="content-container">
             <div className="nav-container">
 
                 <div className="logo-container">  
@@ -115,6 +114,7 @@ export const NavBar =() => {
                         </select>
 
                     <button className="nav-button"
+
                     onClick={
                         (evt) => {
                             localStorage.removeItem("property_user")
@@ -127,7 +127,6 @@ export const NavBar =() => {
                 </div>
                 
             </div>
-        </div>
     </>
 )
 }

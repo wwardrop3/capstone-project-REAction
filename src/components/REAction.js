@@ -6,6 +6,7 @@ import { ApplicationViews } from "./ApplicationViews"
 import { NavBar } from "./Nav/NavBar"
 import { Login } from "./User/Login";
 import { Register } from "./User/Register";
+import "./REAction.css"
 
 
 
@@ -13,16 +14,22 @@ export const REaction = () => {
 
     return(
     <>
-    
     <Route
             render={() => {
               if (localStorage.getItem("property_user")) { //if the customer exists
                 return (
                   <>
-                  <div className="all-content">
-                    <NavBar />
-                    <ApplicationViews />
+                  <div id="all-content">
+                    <div id="nav-bar">
+                      <NavBar /> 
+                    </div>
+                    <div id="application-views">
+                      <ApplicationViews />
+                    </div>
                   </div>
+                      
+
+                  
                   </>
                 );
               } else {
@@ -38,7 +45,7 @@ export const REaction = () => {
               <Register/>
           </Route>
 
-    
+
     
     
     

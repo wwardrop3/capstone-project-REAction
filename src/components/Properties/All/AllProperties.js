@@ -77,16 +77,16 @@ export const AllProperties = () => {
 
     return (
         <>
-            <div className="contentContainer">
-                <div className="properties-header">
+            <div id="props-content-container">
+
                     <div className="propertyTypeContainer">{`${propertyTypeNames()} Properties`}</div>   
 
                         {/* Possible sort button to use later */}
                         {/* <button className="optionButton">Sort</button> */}
 
                         
-                    </div>    
-                </div>
+              
+                
 
                 <div className="propertyDetail">
                     {userProperties.map(userProperty => {
@@ -141,7 +141,8 @@ export const AllProperties = () => {
                             </>
                     )
                     })}
-                    </div>    
+                </div>  
+            </div>  
                 
         </>
     )

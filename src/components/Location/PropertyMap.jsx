@@ -42,13 +42,15 @@ export const PropertyMap = () => {
 
     const mapStyles = {        
     height: "100vh",
-    width: "100%"};
+    width: "100vw",
+    position: "fixed"};
     
 
     
 
     return (
         <>
+        <div id = "map-content">
         <LoadScript libraries = {lib} mapIds = {id}>
         
         
@@ -112,5 +114,6 @@ export const PropertyMap = () => {
             
                 </GoogleMap>
                 </LoadScript>
+            </div>
         </>)
         }
