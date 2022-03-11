@@ -74,19 +74,26 @@ fieldset {
 
 
 .container {
+    object-fit: contain;
     position: relative;
 
 
   }
   
   .loginImage{
-    width: 80%;
+
+    object-fit: contain;
+    width: 40%;
+ 
 }
 
   /* Bottom right text */
-  .siteLogo {
+  .site-logo {
+    top: 10%;
+    object-fit: contain;
     position: absolute;
-    top: 400px;
-    left: 120px;
-    width: 80%;
+    width: 20%;
+    top: 0px;
+    height: 30%
   }
+

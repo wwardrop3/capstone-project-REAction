@@ -112,6 +112,18 @@ return (
                 {details()}
             </div>
 
+                
+            
+
+            <Modal property = {property} setProperty = {setProperty} refresh = {refresh} setRefresh = {setRefresh} 
+            
+                onClose = {
+                    () =>{
+                        setShow(false) 
+                        setRefresh(!refresh)
+                        }}
+                show = {show}/>
+
                 <div className="modify-buttons">
                     <button
                         onClick={
@@ -125,20 +137,12 @@ return (
                 <button className="deletePropertyBtn"
                     onClick={
                         (evt) => {
-                            removeProperty(propertyId)
+                            removeProperty(parseInt(propertyId))
                             history.push("/properties")
                         }
                     }>Delete Property
                 </button>
             </div>
-            <Modal property = {property} setProperty = {setProperty} refresh = {refresh} setRefresh = {setRefresh} 
-            
-                onClose = {
-                    () =>{
-                        setShow(false) 
-                        setRefresh(!refresh)
-                        }}
-                show = {show}/>
           
         </section>
 

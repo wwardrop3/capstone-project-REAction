@@ -42,12 +42,9 @@ export const OfficeProperty = ({property, setProperty}) => {
                     <p>{property.management}</p>
                 </div>
 
-
-            
             </div> 
         
         </>
     )
             
-    
 }

@@ -45,9 +45,11 @@ export const Login = () => {
             <section className="loginPage">
                 <form className="form--login" onSubmit={handleLogin}>
                 <div className="container">
+                   
                     
+                        
+                    <img className="site-logo" src = "https://sat02pap002files.storage.live.com/y4mm11WoPkT-8cLau7ZPGs85-7O3T8PMPE7ar5QlOSvuMNOXiLXj5XDdx9J2dC7m8JwhYdMrPgZaaJMtk5P16GDXzJTZ7E5cOHJoMCP203fA4Pmm-bOAfKHw7rmjLNg5l7zmL27qMP3_RQCNl4n678O9PytbTJdYRIdcSFkZ8bWxzk_W3QUqQyAETU8fMx763fP4kleOR9YKF3_gdAt4A39_pmRz6PI9vPPYFpxEU_6TpA?encodeFailures=1&width=857&height=371"></img>
                     <img className="loginImage" src = "https://www.mashvisor.com/blog/wp-content/uploads/2019/07/7-Things-You-Need-to-Know-About-Commercial-Real-Estate.jpg"></img>
-                    <img className="siteLogo" src = "https://sn3302files.storage.live.com/y4mqZavKEpPnQLAKtZ9_Np2dSiDMn75dWnxPXrboSkSqHqZs2H--L5aAI505wKloT2D1go2ZC6zyG2lycNHXtrZvxQZ4M27g8XiG--F6rl-B5q3WasKmQuEBrTazibNc5boT1LmOu2XCZzbkjjSVF11a78on7I70_ciluH8KxiAj7Odj57Um7yb7BQfbJ8f1zjb?width=1613&height=261&cropmode=none"></img>
                     
                 </div>
                 <div >

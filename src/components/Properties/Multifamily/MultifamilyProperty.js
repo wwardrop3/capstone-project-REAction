@@ -13,9 +13,7 @@ export const MultifamilyProperty = ({property}) => {
 
     const history = useHistory()
 
-    
-           
-                      
+               
     return (
 
         <>
@@ -49,9 +47,7 @@ export const MultifamilyProperty = ({property}) => {
                     <h2>Management</h2>
                     <p>{property?.management}</p>
                 </div>
-            
-           
-
+        
                 
             
         </div>

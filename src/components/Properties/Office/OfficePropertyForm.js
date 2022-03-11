@@ -127,11 +127,6 @@ export const OfficePropertyForm = ({property, setProperty, show}) => {
                     </div>
 
 
-                    
-
-                    
-                    
-                
                 </div>
             
             </div> 

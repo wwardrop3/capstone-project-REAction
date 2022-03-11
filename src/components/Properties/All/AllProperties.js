@@ -84,18 +84,7 @@ export const AllProperties = () => {
                         {/* Possible sort button to use later */}
                         {/* <button className="optionButton">Sort</button> */}
 
-                        <select className="addPropertyDropdown"
-                        onChange = {
-                            (evt) => {
-                                const foundPropertyType = propertyTypes.find(type => type.id === parseInt(evt.target.value))
-                                const typeName = foundPropertyType.name
-                                history.push(`/properties/create/${foundPropertyType.id}`)
-                            }}
-                            >
-                            <option value = "0">Add Property</option>
-                        {propertyTypes.map(type => {
-                            return <option value = {`${type.id}`}>{`${type.name}`}</option>})}   
-                        </select>
+                        
                     </div>    
                 </div>
 
@@ -103,6 +92,7 @@ export const AllProperties = () => {
                     {userProperties.map(userProperty => {
                         return(
                             <>
+                            
                             <div key={`${userProperty.id}`} className="propertyContainer">
                                 <div className="thumbnailContainer">
                                     <img className="propertyThumbnail" src = {`${userProperty?.imageURL}`}></img>

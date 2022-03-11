@@ -105,10 +105,12 @@ export const getPropertyType = (typeId) => {
 
 export const removeProperty = (propertyId) => {
     const fetchOptions={
-        method: "DELETE"
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        }
     }
     return fetch(`http://localhost:8088/properties/${propertyId}`, fetchOptions)
-    .then(res => res.json())
 }
 
 export const updateProperty = (propertyObject) => {

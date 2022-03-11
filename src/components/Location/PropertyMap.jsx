@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { geocodeByAddress } from 'react-google-places-autocomplete';
 
 const id = ["919771f94d285faa"]
-const key= process.env.REACT_APP_GOOGLEAPIKEY
+const key= process.env.REACT_APP_GOOGLEMAPS_APIKEY
 const lib = ["places"]
 
 
@@ -34,22 +34,22 @@ export const PropertyMap = () => {
             .then(res => res.json())
             .then(
                 (response) => {
-                    setProperties(response)
-                }
-            )
-        },[]
+                    setProperties(response.filter(property => property.userId === parseInt(localStorage.getItem("property_user"))
+                ))}
+            )},[]
     )
     
 
     const mapStyles = {        
-    height: "90vh",
+    height: "100vh",
     width: "100%"};
     
 
     
 
     return (
-        <LoadScript googleMapsApiKey={key} libraries = {lib} mapIds = {id}>
+        <>
+        <LoadScript libraries = {lib} mapIds = {id}>
         
         
             
@@ -59,8 +59,10 @@ export const PropertyMap = () => {
             
             mapContainerStyle={mapStyles}
             zoom={13}
+            scrollwheel={true}
             tilt={45}
-            options = {{mapId: "919771f94d285faa"}}
+            options = {{mapId: "919771f94d285faa",
+            scrollwheel:"true"}}
             center={view}>
                 {
                     properties.map(property => {
@@ -110,5 +112,5 @@ export const PropertyMap = () => {
             
                 </GoogleMap>
                 </LoadScript>
-    )
-}
+        </>)
+        }
