@@ -7,10 +7,11 @@ import { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
 import { useParams } from "react-router-dom"
 import { getCities, getNeighborhoods, getPropertyTypes, getStates, getStatuses, retrieveProperty, sendProperty } from "../../APIManager"
-import { GeocodeProperty } from "../../LocationTest/Done"
+import { GeocodeProperty } from "../../Location/GeocodeProperty"
 import { IndustrialPropertyForm } from "../Industrial/IndustrialPropertyForm"
 import { MultifamilyPropertyForm } from "../Multifamily/MultifamilyPropertyForm"
 import { OfficePropertyForm } from "../Office/OfficePropertyForm"
+import "./PropertyForm.css"
 
 
 
@@ -162,7 +163,7 @@ export const PropertyForm = () => {
         return(
 
         <>
-        
+        <div className="property-form-container">
             <div className="contentHeader">
                 <h2>Add {`${propertyTypeObject?.name}`} Property</h2>
             </div>
@@ -330,7 +331,7 @@ export const PropertyForm = () => {
                                 )}).catch(console.log("ERROR"))
                             }}>
                             Save Property</button>
-
+                        </div>
 
 </>
 )

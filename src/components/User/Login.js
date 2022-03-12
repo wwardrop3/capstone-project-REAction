@@ -49,7 +49,7 @@ export const Login = () => {
                     
                         
                     <img className="site-logo" src = "https://sat02pap002files.storage.live.com/y4mm11WoPkT-8cLau7ZPGs85-7O3T8PMPE7ar5QlOSvuMNOXiLXj5XDdx9J2dC7m8JwhYdMrPgZaaJMtk5P16GDXzJTZ7E5cOHJoMCP203fA4Pmm-bOAfKHw7rmjLNg5l7zmL27qMP3_RQCNl4n678O9PytbTJdYRIdcSFkZ8bWxzk_W3QUqQyAETU8fMx763fP4kleOR9YKF3_gdAt4A39_pmRz6PI9vPPYFpxEU_6TpA?encodeFailures=1&width=857&height=371"></img>
-                    <img className="loginImage" src = "https://www.mashvisor.com/blog/wp-content/uploads/2019/07/7-Things-You-Need-to-Know-About-Commercial-Real-Estate.jpg"></img>
+                    {/* <img className="loginImage" src = "https://www.mashvisor.com/blog/wp-content/uploads/2019/07/7-Things-You-Need-to-Know-About-Commercial-Real-Estate.jpg"></img> */}
                     
                 </div>
                 <div >

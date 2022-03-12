@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { geocodeByAddress } from 'react-google-places-autocomplete';
 import { Link } from 'react-router-dom';
-import"./style.css"
+import "./UserNotesMap.css"
 
 const id = ["919771f94d285faa"]
 const key= process.env.REACT_APP_GOOGLEMAPS_APIKEY
@@ -14,8 +14,8 @@ const lib = ["places"]
 
 
 
-export const PropertyMap = () => {
-    const [properties, setProperties] = useState([])
+export const UserNotesMap = () => {
+    const [userNotes, setUserNotes] = useState([])
     const [selected, setSelected] =useState({})
     //view will keep the view of the map the same after closing the popup window on a property
     const [view, setView] = useState(
@@ -32,34 +32,25 @@ export const PropertyMap = () => {
 
     useEffect(
         () => {
-            return fetch("http://localhost:8088/properties")
+            return fetch("http://localhost:8088/userNotes")
             .then(res => res.json())
             .then(
                 (response) => {
-                    setProperties(response.filter(property => property.userId === parseInt(localStorage.getItem("property_user"))
+                    setUserNotes(response.filter(userNote => userNote.userId === parseInt(localStorage.getItem("property_user"))
                 ))}
             )},[]
     )
     
 
     const mapStyles = {        
-    height: "100vh",
-    width: "100vw",
-    left: "-350px",
-    position: "absolute"};
-    
-    const featureIcons = {
-        1: "https://sat02pap002files.storage.live.com/y4mKRaW-VAi6aieJPWPH_dvTR04TeIJzBTqnaKCoyXX2UcgixJmJNS2BOEpaWhIRyjHZBLT-XvS3kJL9TRut2q7f4lsGkaWYG-Tyc7mEYUkxVsJulfezAl5Z8BnL2EL6GClIkPMIVaKE4wiLnSM4N9U4qD2BpOyzRfabaVABmVKqKUyWn2-FqDngGW2Yr1d_W8o?width=50&height=70&cropmode=none",
-        3: "https://sat02pap002files.storage.live.com/y4mHgpeON5pXM-ejrFSo2D2Hwl-0EKHpySiLKRLu6eXdpQ7Ywldca7CMEtMJzidX5KXDAIWeKSOgvBZNFC2mU8abf-o9zL5fAWgGg1lHfyp18LKsYiLJIKzweh8YtZH6tj4p0Pf2y2X-yyC7-1sC1g0dEeLL_kANPkBO9R-TUCe60HHR_8p3xeZ1XIxkHT6ODri?width=50&height=70&cropmode=none",
-        2: "https://sat02pap002files.storage.live.com/y4m7f_hebCjuIx4k-7-hZU8lokTqXM1ka0wKg9MvIEBFDp8_RB1jk-xHFqjy38UcMTZ0KL1epPEZcWVRNBHDZVwQsjF4uHrOhZEaT27350DK2__aFXg43sSxBkiN0Vhoje9TTUYl42IDq9R1QzEd4iGmvc4cUqR9xw95NGV2YuqTKrZAhYN1rOn9q1NHCKbggoG?width=50&height=70&cropmode=none"
-    }
-
-    
+        height: "100vh",
+        width: "100vw",
+        left: "-350px",
+        position: "absolute"};
 
     return (
         <>
-        <div id='full-map-container'>
-
+        <div id = "map-content">
         <LoadScript libraries = {lib} mapIds = {id}>
         
         
@@ -73,21 +64,22 @@ export const PropertyMap = () => {
             scrollwheel={true}
             tilt={45}
             options = {{mapId: "919771f94d285faa",
-            scrollwheel:"true",}}
+            scrollwheel:"true"}}
             center={view}>
                 {
-                    properties.map(property => {
+                    userNotes.map(userNote => {
                         return(
                             
                             
 
                             
                             <Marker
-                            icon={featureIcons[property.typeId]}
+                            
                             class = "marker"
-                            key = {property.id} position = {property.location}
+                            icon="https://sat02pap002files.storage.live.com/y4mKqHVHjqKQqRlBkuDPXZWv6vXYCKBVwrKr2FCTGF8aSxZg8cZp3HSRyF6ve49urSTUUczW6wKKjbpsWH2A_c009XS0iuEu_xVZLriHSA0tZyVywWCh3wUuVU8rNqpasLHpPsqsHpSCRE3y4red3WtSJ5Sv_18k0ZkyLlBHJDeJsFqHzIDY9QHtFLKuQFzITBv?width=50&height=50&cropmode=none"
+                            key = {userNote.id} position = {userNote.location}
                             onClick={() => 
-                                onSelect(property)
+                                onSelect(userNote)
                             }
                         
                             />    
@@ -105,13 +97,14 @@ export const PropertyMap = () => {
                             setSelected({})}
                         >
                             <div className='popup-window'>
-                            <Link to={`/properties/${selected.id}`}> <h2> {selected.name}</h2></Link>
+                            <h2> {selected.title}</h2>
                                 <div className='image-container'>
-                                    <img id='prop-image' src = {selected.imageURL} height="300px"></img>
+                                    {/* <img id='prop-image' src = {selected.imageURL} height="300px"></img> */}
                                 
                                 </div>
                                     <div>
-                                   <p>{`${selected.name} is located at ${selected.street}`}</p>
+                                    <p>{`${selected.propertyTypeId}`}</p>
+                                   <p>{`${selected.text}`}</p>
                                         </div>
                                 
                                 
@@ -123,7 +116,6 @@ export const PropertyMap = () => {
             
                 </GoogleMap>
                 </LoadScript>
-                </div>
-
+            </div>
         </>)
         }

@@ -1,0 +1,80 @@
+/* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+       #map {
+        height: 100%;
+        width: 100vw;
+        }
+        
+        #map-content{
+            position: absolute;
+            width: 100vw;
+        }
+        
+        /* Optional: Makes the sample page fill the window. */
+        html,
+        body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        }
+        
+        #floating-panel {
+        position: absolute;
+        top: 10px;
+        left: 25%;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+        text-align: center;
+        font-family: "Roboto", "sans-serif";
+        line-height: 30px;
+        padding-left: 10px;
+        }
+        
+        #floating-panel {
+        width: 40px;
+        }
+        
+        #place-id {
+        width: 250px;
+        }
+        
+        
+        
+        .container{
+            display: flex;
+            height: 100vh;
+        }
+        
+        .map-container{
+            width: 100vw;
+            height: 100vh;
+        }
+        
+        
+        
+        .popup-window{
+            max-width: 300px;
+            height: fit-content;
+            object-fit: contain;
+            position: relative;
+        }
+        
+        .image-container{
+            width: 100%;
+            object-fit: contain;
+        }
+        
+        #prop-image{
+            top: 10%;
+            object-fit: contain;
+            width: 100%;
+            top: 0px;
+            height: 100%
+        
+        
+        }
+        
+        
+        

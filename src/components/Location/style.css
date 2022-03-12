@@ -1,13 +1,21 @@
+#full-map-container{
+    position: absolute;
+    width: 10%;
+}
+
+
+
 /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
 #map {
+position: absolute;
 height: 100%;
-width: 100vw;
+width: 100%;
 }
 
 #map-content{
     position: absolute;
-    width: 100vw;
+    width: 100%;
 }
 
 /* Optional: Makes the sample page fill the window. */
@@ -44,7 +52,7 @@ width: 250px;
 
 .container{
     display: flex;
-    height: 90vh
+    height: 100vh;
 }
 
 .map-container{
@@ -55,6 +63,25 @@ width: 250px;
 
 
 .popup-window{
- 
-    height: 30px;
+    max-width: 300px;
+    height: fit-content;
+    object-fit: contain;
+    position: relative;
 }
+
+.image-container{
+    width: 100%;
+    object-fit: contain;
+}
+
+#prop-image{
+    top: 10%;
+    object-fit: contain;
+    width: 100%;
+    top: 0px;
+    height: 100%
+
+
+}
+
+

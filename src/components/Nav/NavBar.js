@@ -45,46 +45,32 @@ export const NavBar =() => {
                 </div>  
 
                 <div className="nav-buttons">
+
+                    <div className="view-filter">
                     
-                    <button name = "allProperties" className="nav-button"
-                            onClick={
-                                (evt) => {
-                                    history.push(`/properties`)
+                    <h5>Filter by Type</h5>
+                    <select 
+                    name="view-select"
+                    className="nav-button"
+                        onChange = {
+                            (evt) => {
+                                if(evt.target.value === "All"){
+                                    history.push("/properties")
+                                } else{
+                                    const foundPropertyType = propertyTypes.find(type => type.id === parseInt(evt.target.value))
+                                    history.push(`/properties/type/${foundPropertyType.id}`)
                                 }
-                            }>All Properties
-                            </button>
-
-                    <button name = "multifamily" className="nav-button"
-                    onClick={
-                        (evt) => {
-                            history.push(`/properties/type/1`)
-                        }
-                    }>Multifamily</button>
-
-                    <button name = "office" className="nav-button"
-                        onClick={
-                            (evt) => {
-                                history.push(`/properties/type/2`)
-                            }
-                        }>Office
-                    </button>
-
-                    <button name = "industrial" className="nav-button"
-                        onClick={
-                            (evt) => {
-                                history.push(`/properties/type/3`)
-                            }
-                        }>Industrial
-                    </button>
-                    <button name = "map-all" className="nav-button"
-                        onClick={
-                            (evt) => {
-                                history.push(`/properties/map`)
                                 
+                            }}
+                            >
+                            <option value = "0">Select Type</option>
+                            <option value = "All">All Properties</option>
+                        {propertyTypes.map(type => {
+                            return <option value = {`${type.id}`}>{`${type.name}`}</option>})}   
+                    </select>
+                </div>
 
-                            }
-                        }>Mapping
-                    </button>
+               
     {/* 
                     <button name = "map-all" className="nav-button"
                         onClick={
@@ -98,7 +84,8 @@ export const NavBar =() => {
 
                 
     */}
-                    
+                <div className="view-filter">
+                    <h5>Add by Property Type</h5>
                     <select className="nav-button"
                         onChange = {
                             (evt) => {
@@ -108,11 +95,50 @@ export const NavBar =() => {
                                 history.push(`/properties/create/${foundPropertyType.id}`)
                             }}
                             >
-                            <option value = "0">Add Property</option>
+                            <option value = "0">Select Type</option>
                         {propertyTypes.map(type => {
                             return <option value = {`${type.id}`}>{`${type.name}`}</option>})}   
                         </select>
+                </div>
 
+                <div className="view-filter">
+                    <button name = "map-all" className="nav-button"
+                        onClick={
+                            (evt) => {
+                                history.push(`/properties/map`)
+                                
+
+                            }
+                        }>Property Map
+                    </button>
+                </div>
+               
+
+                <div className="view-filter">
+
+                    <button className="nav-button"
+
+                    onClick={
+                        (evt) => {
+                            history.push("/create-user-note")
+
+                        }
+                    }>Create Note</button>
+                </div>
+                
+                <div className="view-filter">
+                    
+                    <button className="nav-button"
+
+                    onClick={
+                        (evt) => {
+                            history.push("/user-notes/map")
+
+                        }
+                    }>View Notes</button>
+                </div>
+
+                <div className="view-filter">
                     <button className="nav-button"
 
                     onClick={
@@ -122,9 +148,15 @@ export const NavBar =() => {
 
                         }
                     }>Log Out</button>
-                        
-                        
                 </div>
+            </div>
+
+
+
+
+                        
+                        
+                
                 
             </div>
     </>

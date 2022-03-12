@@ -41,6 +41,7 @@ fieldset {
     border-radius: .25rem;
     -webkit-transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    position: relative;
     
 
 }
@@ -76,24 +77,37 @@ fieldset {
 .container {
     object-fit: contain;
     position: relative;
+    justify-content: center;
+    height: 100%;
+    align-items: center;
+    top:30%;
 
 
   }
   
-  .loginImage{
-
-    object-fit: contain;
-    width: 40%;
  
-}
 
   /* Bottom right text */
   .site-logo {
     top: 10%;
     object-fit: contain;
-    position: absolute;
-    width: 20%;
-    top: 0px;
-    height: 30%
+    position: relative;
+    width: 75%;
+    top:-50px;
+    height: 50%
   }
 
+.loginPage{
+    display: flex;
+    position: relative;
+    height: 100%;
+}
+
+.link--register{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    top: 230px;
+    object-fit: contain;
+    min-width: 750px;
+}

@@ -124,4 +124,21 @@ export const updateProperty = (propertyObject) => {
     return fetch(`http://localhost:8088/properties/${propertyObject.id}`, fetchOptions)
 }
 
+export const getPropertyClasses = () => {
+    return fetch("http://localhost:8088/propertyClasses")
+    .then(res => res.json())
+}
+
+export const sendUserNote = (object) => {
+    const fetchOptions = {
+        method:"POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body:JSON.stringify(object)
+    }
+
+    return fetch("http://localhost:8088/userNotes", fetchOptions)
+}
+
 

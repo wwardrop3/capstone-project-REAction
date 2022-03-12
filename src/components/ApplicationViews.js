@@ -9,8 +9,10 @@ import { Property } from "./Properties/All/Property"
 import { Modal } from "./Properties/All/EditProperty"
 import { useState } from "react"
 import { PropertyMap } from "./Location/PropertyMap"
-import { App } from "./LocationTest/App"
-import { Geocoder, Results } from "./LocationTest/Done"
+import { UserLocation } from "./LocationTest/UserLocation"
+import { UserNoteForm } from "./LocationTest/UserNoteForm"
+import { UserNotesMap } from "./LocationTest/UserNotesMap"
+
 
 
 
@@ -27,6 +29,7 @@ import { Geocoder, Results } from "./LocationTest/Done"
 //component will use Route functions to listen for changes in URLs and trigger components in response
 
 export const ApplicationViews = () => {
+    
 
 
     return (
@@ -64,9 +67,19 @@ export const ApplicationViews = () => {
                 <PropertyMap />
             </Route>
 
-            {/* <Route exact path= "/properties/test">
-                <Results />
-            </Route> */}
+            <Route exact path= "/create-user-note">
+                <UserNoteForm />
+            </Route>
+
+            
+
+            <Route exact path= "/properties/map">
+                <PropertyMap />
+            </Route>
+
+            <Route exact path= "/user-notes/map">
+                <UserNotesMap />
+            </Route>
 
 
 
