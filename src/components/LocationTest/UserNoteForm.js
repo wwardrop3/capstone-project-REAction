@@ -147,7 +147,7 @@ export const UserNoteForm = () => {
                 onChange={
                     (evt) => {
                         const copy = {...note}
-                        copy.noteText = evt.target.value
+                        copy.text = evt.target.value
                         setNote(copy)
                     }}></input>
             </div>
@@ -158,6 +158,7 @@ export const UserNoteForm = () => {
             (evt) => {
                 console.log(note)
                 sendUserNote(note)
+                history.push("user-notes/map")
                 
         }}
         >Save Note</button>

@@ -33,10 +33,10 @@ export const PropertyForm = () => {
             name: "Property",
             userId: parseInt(localStorage.getItem("property_user")),
             street: "",
-            stateId: 0,
-            cityId:0,
-            zipCode: 0,
-            neighborhoodId: 0,
+            stateId: 1,
+            cityId:1,
+            zipCode: 1,
+            neighborhoodId: 1,
             avgSF: 0,
             avgRent: 0,
             developer: "",
@@ -46,7 +46,7 @@ export const PropertyForm = () => {
             imageURL: "https://cdn-icons-png.flaticon.com/512/63/63720.png",
             typeId: parseInt(propertyTypeId),
             industry: "",
-            statusId:0,
+            statusId:1,
             occupancy:0
         })
     
@@ -273,6 +273,7 @@ export const PropertyForm = () => {
                     <div>
                         <label htmlFor="addNeighborhood">Neighborhood</label>
                         <select className="addNeighborhood"
+                        required
                         value = {neighborhood}
                         onChange= {
                             (evt) => {

@@ -40,7 +40,7 @@ export const NavBar =() => {
 
                 <div className="logo-container">  
                     <div className="site-logo-container">
-                        <img className="nav-logo" src="https://sat02pap002files.storage.live.com/y4mm11WoPkT-8cLau7ZPGs85-7O3T8PMPE7ar5QlOSvuMNOXiLXj5XDdx9J2dC7m8JwhYdMrPgZaaJMtk5P16GDXzJTZ7E5cOHJoMCP203fA4Pmm-bOAfKHw7rmjLNg5l7zmL27qMP3_RQCNl4n678O9PytbTJdYRIdcSFkZ8bWxzk_W3QUqQyAETU8fMx763fP4kleOR9YKF3_gdAt4A39_pmRz6PI9vPPYFpxEU_6TpA?encodeFailures=1&width=857&height=371"/>
+                        <Link to = "/properties"><img className="nav-logo" src="https://sat02pap002files.storage.live.com/y4mYSlaorKyWp_j-ICkpT94JlxvflsTtk8qsWVycKiQBoEWHmUg4rGkC1IKO-bX4p3clO9Y8LM1YT5n34d6K44uZDb0vgGOLu1-2-427WSxPTB66Zwhuy-nO0kW5jvg3K1NeMLCamVE_q4w7KOO_8AO3R6eWpprmoqV8ltuc6pjupDD6d8pAHyV0ug42LRVFF8M?width=857&height=371&cropmode=none"/></Link>
                     </div>
                 </div>  
 
@@ -48,7 +48,7 @@ export const NavBar =() => {
 
                     <div className="view-filter">
                     
-                    <h5>Filter by Type</h5>
+                    <h5>View Properties by Type</h5>
                     <select 
                     name="view-select"
                     className="nav-button"
@@ -85,7 +85,7 @@ export const NavBar =() => {
                 
     */}
                 <div className="view-filter">
-                    <h5>Add by Property Type</h5>
+                    <h5>Add Property by Type</h5>
                     <select className="nav-button"
                         onChange = {
                             (evt) => {
@@ -137,6 +137,20 @@ export const NavBar =() => {
                         }
                     }>View Notes</button>
                 </div>
+
+
+                <div className="view-filter">
+                    <button className="nav-button"
+
+                    onClick={
+                        (evt) => {
+                            history.push("/webscraper-test")
+
+                        }
+                    }>Scrape web</button>
+                </div>
+
+
 
                 <div className="view-filter">
                     <button className="nav-button"

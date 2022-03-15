@@ -1,0 +1,4 @@
+.property-task-table{
+    display: flex;
+    flex-direction: column;
+}

@@ -1,7 +1,9 @@
 //purpose of this module is to handle all fetch calls by saving the calls to exported functions
 
 
+export const dataSource = "http://localhost:8088"
 
+// "https://capstone-reaction-api-zy532.ondigitalocean.app"
 
 
 
@@ -9,7 +11,7 @@
 //create function to return fetch call for users
 
 export const retrieveUsers = () => {
-    return fetch("http://localhost:8088/users")
+    return fetch(`${dataSource}/users`)
     .then(res => res.json())
 }
 
@@ -25,18 +27,18 @@ export const sendUser = (userObject) => {
         },
         body:JSON.stringify(userObject)
     }
-    return fetch("http://localhost:8088/users", fetchOptions)
+    return fetch(`${dataSource}/users`, fetchOptions)
 }
 
 //create getUser function to return a single user using a passed-in id
 export const retriveUser = (id) => {
-    return fetch("http://localhost:8088/users")
+    return fetch(`${dataSource}/users`)
     .then(res => res.json())
 }
 
 //create deleteUser function that will remove a user object of the id that is passed in
 export const deleteUser = (id) => {
-    return fetch(`http://localhost:8088/users/${id}`, {method:"DELETE"})
+    return fetch(`${dataSource}/users/${id}`, {method:"DELETE"})
     .then(res => res.json())
 }
 
@@ -45,61 +47,84 @@ export const deleteUser = (id) => {
     //below filters the the fetch call to only the objects of the user that is signed in and then passes it into the set user state
     // setServiceTickets(userTickets.filter(serviceTicket => serviceTicket.customerId === parseInt(localStorage.getItem("honey_customer"))))
 export const GetProperties = () => {
-    return fetch(`http://localhost:8088/properties?_expand=type&_expand=neighborhood&_expand=state&_expand=city&_expand=status`)
+    return fetch(`${dataSource}/properties?_expand=type&_expand=neighborhood&_expand=state&_expand=city&_expand=status`)
     .then(res => res.json())
             
 }
 
 
 export const retrieveRandomImages = () => {
-    return fetch("http://localhost:8088/randomSiteImages")
+    return fetch(`${dataSource}/randomSiteImages`)
     .then(res => res.json())
 }
 
 export const getNeighborhoods = () => {
-    return fetch(`http://localhost:8088/neighborhoods`)
+    return fetch(`${dataSource}/neighborhoods`)
     .then(res => res.json())
     }
 
 export const getStates = () => {
-    return fetch("http://localhost:8088/states")
+    return fetch(`${dataSource}/states`)
         .then(res => res.json())
 }
 
 export const getCities = () => {
-    return fetch(`http://localhost:8088/cities`)
+    return fetch(`${dataSource}/cities`)
         .then(res => res.json())
 }
 
 export const sendProperty = (propertyObject) => {
+    const newProperty = 
+
+    {
+        name: propertyObject.name,
+        userId: propertyObject.userId,
+        street: propertyObject.street,
+        stateId: propertyObject.stateId,
+        cityId:propertyObject.cityId,
+        zipCode: propertyObject.zipCode,
+        neighborhoodId: propertyObject.neighborhoodId,
+        avgSF: propertyObject.avgSF,
+        avgRent: propertyObject.avgRent,
+        developer: propertyObject.developer,
+        management: propertyObject.management,
+        totalSF: propertyObject.totalSF,
+        stories: propertyObject.stories,
+        imageURL: propertyObject.imageURL,
+        typeId: propertyObject.typeId,
+        industry: propertyObject.industry,
+        statusId: propertyObject.statusId,
+        occupancy: propertyObject.occupancy,
+        location: propertyObject.location
+    }
 
     const fetchOptions = {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(propertyObject)
+        body: JSON.stringify(newProperty)
     }
-    return fetch("http://localhost:8088/properties", fetchOptions)
+    return fetch("${dataSource}/properties", fetchOptions)
 } 
 
 export const getPropertyTypes = () => {
-    return fetch("http://localhost:8088/types")
+    return fetch(`${dataSource}/types`)
         .then(res => res.json())
 }
 
 export const getStatuses = () => {
-    return fetch("http://localhost:8088/statuses")
+    return fetch(`${dataSource}/statuses`)
         .then(res => res.json())
 }
 
 export const retrieveProperty = (id) => {
-    return fetch(`http://localhost:8088/properties/${id}?_expand=type&_expand=neighborhood&_expand=state&_expand=city&_expand=status`)
+    return fetch(`${dataSource}/properties/${id}?_expand=type&_expand=neighborhood&_expand=state&_expand=city&_expand=status`)
     .then (res => res.json())
 }
 
 export const getPropertyType = (typeId) => {
-    return fetch(`http://localhost:8088/types/${typeId}`)
+    return fetch(`${dataSource}/types/${typeId}`)
         .then(res => res.json())
 }
 
@@ -110,7 +135,7 @@ export const removeProperty = (propertyId) => {
             "Content-Type": "application/json"
         }
     }
-    return fetch(`http://localhost:8088/properties/${propertyId}`, fetchOptions)
+    return fetch(`${dataSource}/properties/${propertyId}`, fetchOptions)
 }
 
 export const updateProperty = (propertyObject) => {
@@ -121,11 +146,11 @@ export const updateProperty = (propertyObject) => {
         },
         body: JSON.stringify(propertyObject)
     }
-    return fetch(`http://localhost:8088/properties/${propertyObject.id}`, fetchOptions)
+    return fetch(`${dataSource}/properties/${propertyObject.id}`, fetchOptions)
 }
 
 export const getPropertyClasses = () => {
-    return fetch("http://localhost:8088/propertyClasses")
+    return fetch(`${dataSource}/propertyClasses`)
     .then(res => res.json())
 }
 
@@ -138,7 +163,63 @@ export const sendUserNote = (object) => {
         body:JSON.stringify(object)
     }
 
-    return fetch("http://localhost:8088/userNotes", fetchOptions)
+    return fetch(`${dataSource}/userNotes`, fetchOptions)
+}
+
+export const deleteUserNote = (userNoteId) => {
+    const fetchOptions={
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }
+    return fetch(`${dataSource}/userNotes/${userNoteId}`, fetchOptions)
 }
 
 
+
+
+
+
+export const sendPropertyTask = (object) => {
+    const fetchOptions = {
+        method:"POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body:JSON.stringify(object)
+    }
+
+    return fetch(`${dataSource}/propertyTasks`, fetchOptions)
+}
+
+export const getPropertyTasks = () => {
+    return fetch(`${dataSource}/propertyTasks`)
+    .then(res => res.json())
+}
+
+export const deleteTask = (taskId) => {
+    const fetchOptions = {
+        method:"DELETE",
+    }
+    return fetch(`${dataSource}/propertyTasks/${taskId}`, fetchOptions)
+}
+
+export const updateTask = (taskObject) => {
+    const fetchOptions={
+        method:"PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body:JSON.stringify(taskObject)
+    }
+
+    return fetch(`${dataSource}/propertyTasks/${taskObject.id}`, fetchOptions)
+}
+
+
+
+export const getArticles = () => {
+    return fetch("drudgereport.com")
+    .then(html => html.text())
+}

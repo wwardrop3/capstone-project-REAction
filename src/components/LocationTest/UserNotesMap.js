@@ -3,7 +3,8 @@ import { GoogleMap, Marker, LoadScript, InfoWindow, MarkerProps} from '@react-go
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { geocodeByAddress } from 'react-google-places-autocomplete';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { dataSource, deleteUserNote } from '../APIManager';
 import "./UserNotesMap.css"
 
 const id = ["919771f94d285faa"]
@@ -14,9 +15,14 @@ const lib = ["places"]
 
 
 
+
+
 export const UserNotesMap = () => {
     const [userNotes, setUserNotes] = useState([])
     const [selected, setSelected] =useState({})
+    const [refresh, setRefresh] = useState(true)
+    const history = useHistory()
+    
     //view will keep the view of the map the same after closing the popup window on a property
     const [view, setView] = useState(
         {
@@ -32,25 +38,32 @@ export const UserNotesMap = () => {
 
     useEffect(
         () => {
-            return fetch("http://localhost:8088/userNotes")
+            return fetch(`${dataSource}/userNotes`)
             .then(res => res.json())
             .then(
                 (response) => {
                     setUserNotes(response.filter(userNote => userNote.userId === parseInt(localStorage.getItem("property_user"))
                 ))}
-            )},[]
+            )},[refresh]
     )
     
 
     const mapStyles = {        
         height: "100vh",
         width: "100vw",
-        left: "-350px",
         position: "absolute"};
 
     return (
         <>
         <div id = "map-content">
+            <div class = "create-user-note">
+                <button
+                onClick={
+                    () => {
+                        history.push("/create-user-note")
+                    }
+                }>Create Note</button>
+            </div>
         <LoadScript libraries = {lib} mapIds = {id}>
         
         
@@ -97,18 +110,26 @@ export const UserNotesMap = () => {
                             setSelected({})}
                         >
                             <div className='popup-window'>
-                            <h2> {selected.title}</h2>
+                                <h2> {selected.title}</h2>
                                 <div className='image-container'>
+                                    {/* Put user image here? */}
                                     {/* <img id='prop-image' src = {selected.imageURL} height="300px"></img> */}
                                 
                                 </div>
-                                    <div>
+                                <div>
                                     <p>{`${selected.propertyTypeId}`}</p>
-                                   <p>{`${selected.text}`}</p>
-                                        </div>
-                                
-                                
+                                    <p>{`${selected.text}`}</p>
+                                    <button
+                                    onClick={
+                                        () => {
+                                            deleteUserNote(selected.id)
+                                            setSelected({})
+                                            setRefresh(!refresh)
+                                        }
+                                    }>Delete Note</button>
                                 </div>
+                                
+                            </div>
                             </InfoWindow>
                     )
                     

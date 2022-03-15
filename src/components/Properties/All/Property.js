@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
 import { useParams } from "react-router-dom"
 import { deleteProperty, removeProperty, retrieveProperty, updateProperty } from "../../APIManager"
+import { PropertyTaskList } from "../../ToDoList/PropertyTaskList"
 import { IndustrialProperty } from "../Industrial/IndustrialProperty"
 import { MultifamilyProperty } from "../Multifamily/MultifamilyProperty"
 import { OfficeProperty } from "../Office/OfficeProperty"
@@ -112,8 +113,13 @@ return (
                 {details()}
             </div>
 
-                
-            
+
+
+            <div className="property-task-container">
+                <PropertyTaskList property = {property} />
+            </div>
+
+         
 
             <Modal property = {property} setProperty = {setProperty} refresh = {refresh} setRefresh = {setRefresh} 
             

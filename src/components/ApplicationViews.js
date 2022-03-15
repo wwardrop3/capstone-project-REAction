@@ -12,6 +12,7 @@ import { PropertyMap } from "./Location/PropertyMap"
 import { UserLocation } from "./LocationTest/UserLocation"
 import { UserNoteForm } from "./LocationTest/UserNoteForm"
 import { UserNotesMap } from "./LocationTest/UserNotesMap"
+import { WebScrape, WebScraper } from "./WebScrapper/WebScraper"
 
 
 
@@ -79,6 +80,10 @@ export const ApplicationViews = () => {
 
             <Route exact path= "/user-notes/map">
                 <UserNotesMap />
+            </Route>
+
+            <Route exact path= "/webscraper-test">
+                <WebScraper />
             </Route>
 
 

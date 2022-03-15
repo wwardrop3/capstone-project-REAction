@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { geocodeByAddress } from 'react-google-places-autocomplete';
 import { Link } from 'react-router-dom';
+import { dataSource } from '../APIManager';
 import"./style.css"
 
 const id = ["919771f94d285faa"]
@@ -32,7 +33,7 @@ export const PropertyMap = () => {
 
     useEffect(
         () => {
-            return fetch("http://localhost:8088/properties")
+            return fetch(`${dataSource}/properties`)
             .then(res => res.json())
             .then(
                 (response) => {
@@ -45,7 +46,6 @@ export const PropertyMap = () => {
     const mapStyles = {        
     height: "100vh",
     width: "100vw",
-    left: "-350px",
     position: "absolute"};
     
     const featureIcons = {

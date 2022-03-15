@@ -32,9 +32,6 @@
         padding-left: 10px;
         }
         
-        #floating-panel {
-        width: 40px;
-        }
         
         #place-id {
         width: 250px;
@@ -74,6 +71,12 @@
             height: 100%
         
         
+        }
+
+        .create-user-note{
+            float: center;
+            right:0px;
+            z-index: 6;
         }
         
         

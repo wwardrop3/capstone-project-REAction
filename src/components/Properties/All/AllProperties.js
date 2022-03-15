@@ -1,6 +1,7 @@
 //purpose of this component is to produce a specific user's home page that will include
 
 import { useEffect, useState } from "react"
+import { CSVLink } from "react-csv"
 import { useHistory } from "react-router-dom"
 import { useParams } from "react-router-dom"
 import { Link } from "react-router-dom"
@@ -19,6 +20,7 @@ export const AllProperties = () => {
     //create useState variables "properties" and "setProperties"
     const[propertyTypes, setPropertyTypes] = useState([])
     const[userProperties, setUserProperties] = useState([])
+    const [data, setData] = useState([])
     const {typeId} =useParams()
     
     const history = useHistory()
@@ -79,7 +81,12 @@ export const AllProperties = () => {
         <>
             <div id="props-content-container">
 
-                    <div className="propertyTypeContainer">{`${propertyTypeNames()} Properties`}</div>   
+                    <div className="propertyTypeContainer">{`${propertyTypeNames()} Properties`}</div>
+                    <div className="data-download">
+                    <CSVLink data = {userProperties}>
+                        Download {propertyTypeNames()} Data
+                    </CSVLink>
+                    </div>   
 
                         {/* Possible sort button to use later */}
                         {/* <button className="optionButton">Sort</button> */}
