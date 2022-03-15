@@ -1,21 +1,54 @@
-#props-content-container{
+
+#all-properties-container{
     display: flex;
-    width: 70vw;
-    align-items: right;
+    position: relative;
     flex-direction: column;
-}
-
-.properties-header{
-    margin-top: 7em;
-    display: flex;
     width: 100%;
-    height:100px;
+    align-items: center;
+    height: 100vh;
+}
+
+#all-properties-header{
+    position: absolute;
+    z-index: 8;
+    background-color: rgb(193, 174, 174, .5);
+    font-size: 4em;
+    border-radius: 10%;
+    padding: .1em;
+    margin: .1em;
+    left: 1%;
+}
+
+.data-download{
+    font-size: 1em;
+}
+
+.properties-map{
+    position: relative;
+    width: 95%;
+    height: 50%;
+    align-items: center;
+}
+
+.properties-container{
+    width: 95%;
     display: flex;
-    flex-direction: row;
-    align-content: center;
-    top: 100px;
+    flex-direction: column;
+    overflow: scroll;
+    max-height: 50%;
 
 }
+
+.propertyContainer{
+    display: flex;
+    border: 2px solid gray;
+    margin: 1em;
+    border-radius: 10px;
+    width: 100%;
+}
+
+
+
 
 .propertyContainerInfo{
     display:flex;
@@ -25,6 +58,10 @@
 }
 
 
+.propertyThumbnail{
+    width: 100%;
+    height:100%;
+}
 
 
 .buttonsContainer{
@@ -34,40 +71,13 @@
     justify-content: space-around;
 }
 
-
-.propertyTypeContainer{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
-.propertyTypeTable{
-    width: 100%;
-}
-
-.optionButton{
-    width:33%;
-}
-
-.propertyContainer{
-    display: flex;
-    border: 2px solid gray;
-    margin: 1em;
-    border-radius: 10px;
-    max-height: 170px;
-    width: 100%;
-}
-
 .thumbnailContainer {
     position: relative;
     width: 30%;
     max-width: 200px;
   }
 
-.propertyThumbnail{
-    width: 100%;
-    height:100%;
-}
+
 
 .thumbnailPropertyType{
     color:white;

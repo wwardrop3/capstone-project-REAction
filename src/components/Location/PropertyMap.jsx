@@ -15,8 +15,7 @@ const lib = ["places"]
 
 
 
-export const PropertyMap = () => {
-    const [properties, setProperties] = useState([])
+export const PropertyMap = ({properties}) => {
     const [selected, setSelected] =useState({})
     //view will keep the view of the map the same after closing the popup window on a property
     const [view, setView] = useState(
@@ -31,22 +30,22 @@ export const PropertyMap = () => {
         }
    
 
-    useEffect(
-        () => {
-            return fetch(`${dataSource}/properties`)
-            .then(res => res.json())
-            .then(
-                (response) => {
-                    setProperties(response.filter(property => property.userId === parseInt(localStorage.getItem("property_user"))
-                ))}
-            )},[]
-    )
+    // useEffect(
+    //     () => {
+    //         return fetch(`${dataSource}/properties`)
+    //         .then(res => res.json())
+    //         .then(
+    //             (response) => {
+    //                 setProperties(response.filter(property => property.userId === parseInt(localStorage.getItem("property_user"))
+    //             ))}
+    //         )},[]
+    // )
     
 
     const mapStyles = {        
-    height: "100vh",
-    width: "100vw",
-    position: "absolute"};
+    height: "100%",
+    width: "100%",
+    }
     
     const featureIcons = {
         1: "https://sat02pap002files.storage.live.com/y4mKRaW-VAi6aieJPWPH_dvTR04TeIJzBTqnaKCoyXX2UcgixJmJNS2BOEpaWhIRyjHZBLT-XvS3kJL9TRut2q7f4lsGkaWYG-Tyc7mEYUkxVsJulfezAl5Z8BnL2EL6GClIkPMIVaKE4wiLnSM4N9U4qD2BpOyzRfabaVABmVKqKUyWn2-FqDngGW2Yr1d_W8o?width=50&height=70&cropmode=none",
@@ -70,10 +69,12 @@ export const PropertyMap = () => {
             
             mapContainerStyle={mapStyles}
             zoom={13}
-            scrollwheel={true}
             tilt={45}
-            options = {{mapId: "919771f94d285faa",
-            scrollwheel:"true",}}
+            options = {
+                {mapId: "919771f94d285faa",
+                 scrollwheel:"true",
+                disableDefaultUI:"true"
+                }}
             center={view}>
                 {
                     properties.map(property => {

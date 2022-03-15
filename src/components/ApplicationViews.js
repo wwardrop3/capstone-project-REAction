@@ -3,7 +3,6 @@
 
 import { Route } from "react-router-dom"
 import { AllProperties } from "./Properties/All/AllProperties"
-import "./ApplicationViews.css"
 import { PropertyForm } from "./Properties/All/PropertyForm"
 import { Property } from "./Properties/All/Property"
 import { Modal } from "./Properties/All/EditProperty"
@@ -12,7 +11,7 @@ import { PropertyMap } from "./Location/PropertyMap"
 import { UserLocation } from "./LocationTest/UserLocation"
 import { UserNoteForm } from "./LocationTest/UserNoteForm"
 import { UserNotesMap } from "./LocationTest/UserNotesMap"
-import { WebScrape, WebScraper } from "./WebScrapper/WebScraper"
+import { Dashboard } from "./Dashboard/Dashboard"
 
 
 
@@ -74,17 +73,19 @@ export const ApplicationViews = () => {
 
             
 
-            <Route exact path= "/properties/map">
+            {/* <Route exact path= "/properties/map">
                 <PropertyMap />
-            </Route>
+            </Route> */}
 
             <Route exact path= "/user-notes/map">
                 <UserNotesMap />
             </Route>
 
-            <Route exact path= "/webscraper-test">
-                <WebScraper />
+
+            <Route exact path= "/dashboard">
+                <Dashboard />
             </Route>
+
 
 
 

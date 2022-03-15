@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom"
 import { useParams } from "react-router-dom"
 import { Link } from "react-router-dom"
 import { GetProperties, getPropertyTypes } from "../../APIManager"
+import { PropertyMap } from "../../Location/PropertyMap"
 import "./AllProperties.css"
 
 
@@ -25,6 +26,11 @@ export const AllProperties = () => {
     
     const history = useHistory()
 
+    const colors = {
+        1:"green",
+        2:"blue",
+        3:"orange"
+    }
     
     useEffect(
         () =>{
@@ -79,78 +85,93 @@ export const AllProperties = () => {
 
     return (
         <>
-            <div id="props-content-container">
 
-                    <div className="propertyTypeContainer">{`${propertyTypeNames()} Properties`}</div>
-                    <div className="data-download">
-                    <CSVLink data = {userProperties}>
-                        Download {propertyTypeNames()} Data
-                    </CSVLink>
-                    </div>   
+        <div id="all-properties-container">
 
-                        {/* Possible sort button to use later */}
-                        {/* <button className="optionButton">Sort</button> */}
+            <div id="all-properties-header">
 
-                        
-              
+                <div className="propertyTypeContainer">{`${propertyTypeNames()} Properties`}</div>
+                
+            </div>   
+
+    {/* Possible sort button to use later */}
+    {/* <button className="optionButton">Sort</button> */}
+
+
+            <div className="properties-map">
+                <PropertyMap properties = {userProperties} />    
+            </div> 
+
+
+            <div className="data-download">
+                <CSVLink data = {userProperties}>
+                    Download {propertyTypeNames()} Data
+                </CSVLink>
+            </div>
                 
 
-                <div className="propertyDetail">
-                    {userProperties.map(userProperty => {
-                        return(
-                            <>
-                            
-                            <div key={`${userProperty.id}`} className="propertyContainer">
-                                <div className="thumbnailContainer">
-                                    <img className="propertyThumbnail" src = {`${userProperty?.imageURL}`}></img>
-                                    <div className="thumbnailPropertyType">{`${userProperty.type?.name}`}</div>
-                                    <div className="thumbnailPropertyStatus">{`${userProperty.status?.name}`}</div>
-                                </div>
-                                
-                                <div className = "propertyContainerInfo">
-
-                                    <div className="tableName">
-                                    <Link to={`/properties/${userProperty.id}`}>
-                                        <table>
-                                            <thead>
-                                                <tr>
-                                                
-                                                    <th key= {`${userProperty.name}`}>{`${userProperty.name}`}</th>
-                                                
-                                                </tr>  
-                                            </thead>
-                                        </table>
-                                    </Link>
-                                
-                                    </div>
-                                    <p></p>
-                                    
-                                    
-                                    
-                                    
-                                    <div className="tableAddress">
-                                        <table>
-                                            <thead>
-                                                <tr>
-                                                    <th>{`${userProperty.street}`}</th>
-                                                </tr> 
-                                                <tr>
-                                                    <th>{`${userProperty.city.name}`}</th>
-                                                </tr>
-                                                <tr>
-                                                    <th></th>
-                                                </tr> 
-                                            </thead>
-                                        </table>
-                                    </div>   
-                                </div>    
+            <div className="properties-container">
+                {userProperties.map(userProperty => {
+                    return(
+                        <>
+                        
+                        <div key={`${userProperty.id}`} className="propertyContainer">
+                            <div className="thumbnailContainer">
+                                <img className="propertyThumbnail" src = {`${userProperty?.imageURL}`}></img>
+                                <div style={{backgroundColor: colors[userProperty?.type.id]}} className="thumbnailPropertyType">{`${userProperty.type?.name}`}</div>
+                                <div className="thumbnailPropertyStatus">{`${userProperty.status?.name}`}</div>
                             </div>
-                            </>
-                    )
-                    })}
-                </div>  
+                            
+                            <div className = "propertyContainerInfo">
+
+                                <div className="tableName">
+                                <Link to={`/properties/${userProperty.id}`}>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                            
+                                                <th key= {`${userProperty.name}`}>{`${userProperty.name}`}</th>
+                                            
+                                            </tr>  
+                                        </thead>
+                                    </table>
+                                </Link>
+                            
+                                </div>
+                                <p></p>
+                                
+                                
+                                
+                                
+                                <div className="tableAddress">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>{`${userProperty.street}`}</th>
+                                            </tr> 
+                                            <tr>
+                                                <th>{`${userProperty.city.name}`}</th>
+                                            </tr>
+                                            <tr>
+                                                <th></th>
+                                            </tr> 
+                                        </thead>
+                                    </table>
+                                </div>   
+                            </div>    
+                        </div>
+                        </>
+                )
+                })}
             </div>  
                 
+
+
+
+
+        </div>
+
+            
         </>
     )
 

@@ -14,7 +14,8 @@ export const CreatePropertyTask = ({refreshList, setRefreshList, property}) => {
         text: "",
         dueDate: "",
         completed: false,
-        propertyId: property.id
+        propertyId: property.id,
+        userId: property.userId
     })
 
     useEffect(

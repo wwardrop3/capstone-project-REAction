@@ -1,7 +1,7 @@
 //purpose of this module is to handle all fetch calls by saving the calls to exported functions
 
 
-export const dataSource = "https://capstone-reaction-api-zy532.ondigitalocean.app"
+export const dataSource = "http://localhost:8088"
 
 // "https://capstone-reaction-api-zy532.ondigitalocean.app"
 // "http://localhost:8088"
@@ -154,6 +154,11 @@ export const getPropertyClasses = () => {
     .then(res => res.json())
 }
 
+export const getUserNotes = () => {
+    return fetch(`${dataSource}/userNotes`)
+    .then(res => res.json())
+}
+
 export const sendUserNote = (object) => {
     const fetchOptions = {
         method:"POST",
@@ -219,7 +224,7 @@ export const updateTask = (taskObject) => {
 
 
 
-export const getArticles = () => {
-    return fetch("drudgereport.com")
+export const getArticles = (website) => {
+    return fetch(website)
     .then(html => html.text())
 }

@@ -1,6 +1,6 @@
 #all-content{
     display: flex;
-    position: relative;
+    max-height: 50px;
 }
 
 #nav-bar{
@@ -8,14 +8,11 @@
     height: 100vh;
     object-fit: contain;
     background-color: rgba(137, 165, 189, 0.404);
-    z-index: 4;
 
 }
 
 #application-views{
-    width: 80%;
+    width: 100%;
     height: 100vh;
-    z-index: 2;
-    display: flex;
 
 }

@@ -1,5 +1,7 @@
 #full-map-container{
-    position: absolute;
+    position: relative;
+    width: 100%;
+    height: 100%;
 }
 
 
@@ -18,12 +20,12 @@ width: 100%;
 }
 
 /* Optional: Makes the sample page fill the window. */
-html,
+/* html,
 body {
 height: 100%;
 margin: 0;
 padding: 0;
-}
+} */
 
 #floating-panel {
 position: absolute;
@@ -49,15 +51,15 @@ width: 250px;
 
 
 
-.container{
+/* .container{
     display: flex;
     height: 100vh;
-}
+} */
 
-.map-container{
+/* .map-container{
     width: 100vw;
     height: 100vh;
-}
+} */
 
 
 
