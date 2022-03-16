@@ -1,11 +1,9 @@
-import React from 'react';
-import { GoogleMap, Marker, LoadScript, InfoWindow, MarkerProps} from '@react-google-maps/api';
+import React, { useEffect } from 'react';
+import { GoogleMap, Marker, LoadScript, InfoWindow, MarkerProps, useGoogleMap} from '@react-google-maps/api';
 import { useState } from 'react';
-import { useEffect } from 'react';
-import { geocodeByAddress } from 'react-google-places-autocomplete';
 import { Link } from 'react-router-dom';
-import { dataSource } from '../APIManager';
 import"./style.css"
+import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 
 const id = ["919771f94d285faa"]
 const key= process.env.REACT_APP_GOOGLEMAPS_APIKEY
@@ -15,7 +13,7 @@ const lib = ["places"]
 
 
 
-export const PropertyMap = ({properties}) => {
+export const PropertyMap = ({properties, highlight, setHighlight, markerHighlight}) => {
     const [selected, setSelected] =useState({})
     //view will keep the view of the map the same after closing the popup window on a property
     const [view, setView] = useState(
@@ -29,28 +27,42 @@ export const PropertyMap = ({properties}) => {
         setView(property.location)
         }
    
+    const handleEvent = () => {
+        console.log("event handled")
+    }
 
-    // useEffect(
-    //     () => {
-    //         return fetch(`${dataSource}/properties`)
-    //         .then(res => res.json())
-    //         .then(
-    //             (response) => {
-    //                 setProperties(response.filter(property => property.userId === parseInt(localStorage.getItem("property_user"))
-    //             ))}
-    //         )},[]
-    // )
+    const isSelected = (propertyId, markerHighlight) => {
+        if(markerHighlight === propertyId){
+            return [3,"yellow", 3, 3]
+        } else {
+            return [2,"", .8, 1]
+        }
+    }
+
+  
     
 
     const mapStyles = {        
     height: "100%",
     width: "100%",
     }
+
+   
     
     const featureIcons = {
-        1: "https://sat02pap002files.storage.live.com/y4mKRaW-VAi6aieJPWPH_dvTR04TeIJzBTqnaKCoyXX2UcgixJmJNS2BOEpaWhIRyjHZBLT-XvS3kJL9TRut2q7f4lsGkaWYG-Tyc7mEYUkxVsJulfezAl5Z8BnL2EL6GClIkPMIVaKE4wiLnSM4N9U4qD2BpOyzRfabaVABmVKqKUyWn2-FqDngGW2Yr1d_W8o?width=50&height=70&cropmode=none",
-        3: "https://sat02pap002files.storage.live.com/y4mHgpeON5pXM-ejrFSo2D2Hwl-0EKHpySiLKRLu6eXdpQ7Ywldca7CMEtMJzidX5KXDAIWeKSOgvBZNFC2mU8abf-o9zL5fAWgGg1lHfyp18LKsYiLJIKzweh8YtZH6tj4p0Pf2y2X-yyC7-1sC1g0dEeLL_kANPkBO9R-TUCe60HHR_8p3xeZ1XIxkHT6ODri?width=50&height=70&cropmode=none",
-        2: "https://sat02pap002files.storage.live.com/y4m7f_hebCjuIx4k-7-hZU8lokTqXM1ka0wKg9MvIEBFDp8_RB1jk-xHFqjy38UcMTZ0KL1epPEZcWVRNBHDZVwQsjF4uHrOhZEaT27350DK2__aFXg43sSxBkiN0Vhoje9TTUYl42IDq9R1QzEd4iGmvc4cUqR9xw95NGV2YuqTKrZAhYN1rOn9q1NHCKbggoG?width=50&height=70&cropmode=none"
+        1:"https://sat02pap002files.storage.live.com/y4mu2sACHqDr5jRLN7sirMslkPKWttD3jIDV69Svn-rWxyZm_tSc5wff-K4G_G2TqzfSoTq4BecxrN1y6HhASjmFj_Tp5jPbaZ_zqdrGXNnduQ_w6PcpKCcGesNqRi7O7yfzx9kygL_xXUXt4fMJ0ov7wmYi_slhpmoo4X1MogbhyXjLF3xGdI1ZX-AE6GAXkHa?width=70&height=70&cropmode=none",
+        2:"https://sat02pap002files.storage.live.com/y4msm91Dylq9IvhSQW7SgZxHm7BzazWUUzOL9XKL_2MUPsNoau-chcOsyv05pznb_FnxbER7QquCxtx8lCmxtaeQeNx7QVZzSF1iKMCzMb4Ub_aabPoC3r8l7vMiHurXHKl0u6ywEozi1WOmMJtx1O4rzANf3RcSh3nswthCAphZoTWdAqrPPRGWCjWf85Huhc_?width=70&height=70&cropmode=none",
+        3:"https://sat02pap002files.storage.live.com/y4mSRoZjbt61CoNrmhhpOHNdGO4tnRSWySPG1Bg6HxSzWrSyQGKY_6CbAIovqRAo0PKllaqxh0l7KUtcMi1YQUOHw79wdqYPJFbC_LSli_THiGXe27m6GYLqIsSGQxBzulbA0dmcR5spg0rf7YoOQOdy10ybfy8dXVcF2nNTeB0K5kNXerjCWfF5G1245GRskfs?width=70&height=70&cropmode=none",
+        4:"https://sat02pap002files.storage.live.com/y4mvaM6LN4gRNpxTNLDP-uw0gQzkBfxWDemC8u5T5-DgcLKHftAhtUbnWV_W1TEhJPsxnCy6i2BUDBYQaGU5PbICIg8s9ryKAKrqum1RPF8bVIP1RO8NYfz3xDwUvTRt3OmLuuO8W95kLSQgtMtTI_l7gOXFP0pbkREo4gTCxExkFCSnnzbfEH9eWB7HJCjZVwV?width=70&height=70&cropmode=none",
+        5:"https://sat02pap002files.storage.live.com/y4mzjiT-UFvvImq8I0qqpFXzj37zN04xLoA7jSRUjsSg4DvmlRQ3jBXeQ4rlmWnRXo03wZw-zry3I2T5KkWIzlN5US6qKZj54ZrISZks1KAL0FFqCnAYN_5bjbUtkzxkLp8MaD8-kxXojUbSc0MHN3B3-uVLrqdxbUkWz7uPYh0VVAeuBZORTRGuPYWiYqW-asq?width=70&height=70&cropmode=none"
+    }
+
+    const colors = {
+        1:"red",
+        2:"orange",
+        3:"blue",
+        4:"green",
+        5:"lightBlue"
     }
 
     
@@ -63,10 +75,8 @@ export const PropertyMap = ({properties}) => {
         
         
             
-            
         <GoogleMap
         
-            
             mapContainerStyle={mapStyles}
             zoom={13}
             tilt={45}
@@ -81,14 +91,32 @@ export const PropertyMap = ({properties}) => {
                         return(
                             
                             
-
+                            // icon={featureIcons[property.statusId]}
                             
                             <Marker
-                            icon={featureIcons[property.typeId]}
+                        
+                            icon={{
+                                path: "M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z",
+                                fillColor: colors[property.statusId],
+                                fillOpacity: isSelected(property.id, markerHighlight)[2],
+                                strokeWeight: isSelected(property.id, markerHighlight)[3],
+                                scale: isSelected(property.id, markerHighlight)[0],
+                                strokeColor: isSelected(property.id, markerHighlight)[1],
+                                
+                                
+                                
+                                
+                            }}
                             class = "marker"
-                            key = {property.id} position = {property.location}
+                            key = {property.id} 
+                            position = {property.location}
                             onClick={() => 
                                 onSelect(property)
+                            }
+                            onMouseOver={
+                                () => {
+                                    setHighlight(property.id)
+                                }
                             }
                         
                             />    
@@ -108,7 +136,7 @@ export const PropertyMap = ({properties}) => {
                             <div className='popup-window'>
                             <Link to={`/properties/${selected.id}`}> <h2> {selected.name}</h2></Link>
                                 <div className='image-container'>
-                                    <img id='prop-image' src = {selected.imageURL} height="300px"></img>
+                                    <img id='prop-image' src = {selected.imageURL} height="150px"></img>
                                 
                                 </div>
                                     <div>

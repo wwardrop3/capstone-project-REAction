@@ -105,7 +105,7 @@ export const sendProperty = (propertyObject) => {
         },
         body: JSON.stringify(newProperty)
     }
-    return fetch("${dataSource}/properties", fetchOptions)
+    return fetch(`${dataSource}/properties`, fetchOptions)
 } 
 
 export const getPropertyTypes = () => {

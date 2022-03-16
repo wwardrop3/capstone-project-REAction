@@ -9,6 +9,8 @@ import { IndustrialProperty } from "../Industrial/IndustrialProperty"
 import { MultifamilyProperty } from "../Multifamily/MultifamilyProperty"
 import { OfficeProperty } from "../Office/OfficeProperty"
 import { Modal } from "./EditProperty"
+import "./Property.css"
+
 
 
 //create component function MultifamilyProperty
@@ -63,16 +65,15 @@ return (
     <>
   
         <section className = "content-container">
-            <div className="contentHeader">
-                <h2>{`${property.type?.name}`}</h2>
-            </div>
-            
-            <div className="addName">
-                <h2>{property.name}</h2>
-                <p>{property.statusId?.name}</p>
+            <div className="content-header">
+                <div className="content-header-text">
+                    <h2>{property.name}</h2>
+                    <p>{property.statusId?.name}</p>
+                </div>
+                
                 
                 <div>
-                    <img src = {`${property.imageURL}`}></img>
+                    <img className="prop-image" src = {`${property.imageURL}`}></img>
                 </div>
             </div>
             

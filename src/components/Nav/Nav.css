@@ -1,10 +1,16 @@
+.nav-container{
+    height: 100%;
+    display:flex;
+}
+
+
 
 
 .site-logo-container{
     position: relative;
     height: 100%;
     object-fit: contain;
-    width: 100%;
+    width: 20%;
     display: flex;
 
 }
@@ -17,18 +23,17 @@
 
 
 .nav-buttons{
-    width: 100%;
+    width: 80%;
     height: 100%;
     display: flex;
     margin-left: 1em;
-    justify-content: center;
-    flex-direction: column;
+    justify-content: bottom;
     
 }
 
 .nav-button{
     width: 100%;
-    min-height: 70px;
+    min-height: 30px;
 
 }
 

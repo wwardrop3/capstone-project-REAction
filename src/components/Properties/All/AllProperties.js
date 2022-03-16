@@ -22,16 +22,28 @@ export const AllProperties = () => {
     const[propertyTypes, setPropertyTypes] = useState([])
     const[userProperties, setUserProperties] = useState([])
     const [data, setData] = useState([])
+    const [highlight, setHighlight] = useState()
+    const [markerHighlight, setMarkerHighLight] = useState()
     const {typeId} =useParams()
     
     const history = useHistory()
 
     const colors = {
-        1:"green",
-        2:"blue",
-        3:"orange"
+        1:"red",
+        2:"orange",
+        3:"blue",
+        4:"green",
+        5:"lightBlue"
     }
-    
+
+
+    const isSelected = (propertyId, highlightId) => {
+        if(highlightId === propertyId){
+            return "lightGreen"
+        }
+    }
+
+
     useEffect(
         () =>{
             //Invoke GetProperties from the API manager to fetch all user properties
@@ -99,7 +111,7 @@ export const AllProperties = () => {
 
 
             <div className="properties-map">
-                <PropertyMap properties = {userProperties} />    
+                <PropertyMap properties = {userProperties} highlight = {highlight} setHighlight = {setHighlight} markerHighlight = {markerHighlight}/>    
             </div> 
 
 
@@ -115,11 +127,16 @@ export const AllProperties = () => {
                     return(
                         <>
                         
-                        <div key={`${userProperty.id}`} className="propertyContainer">
+                        <div key={`${userProperty.id}`} className="propertyContainer" style={{backgroundColor: isSelected(userProperty.id, highlight)}}
+                        onMouseOver={
+                            () => {
+                                setMarkerHighLight(userProperty.id)
+                            }
+                        }>
                             <div className="thumbnailContainer">
                                 <img className="propertyThumbnail" src = {`${userProperty?.imageURL}`}></img>
-                                <div style={{backgroundColor: colors[userProperty?.type.id]}} className="thumbnailPropertyType">{`${userProperty.type?.name}`}</div>
-                                <div className="thumbnailPropertyStatus">{`${userProperty.status?.name}`}</div>
+                                <div className="thumbnailPropertyType">{`${userProperty.type?.name}`}</div>
+                                <div style={{backgroundColor: colors[userProperty?.status.id]}} className="thumbnailPropertyStatus">{`${userProperty.status?.name}`}</div>
                             </div>
                             
                             <div className = "propertyContainerInfo">

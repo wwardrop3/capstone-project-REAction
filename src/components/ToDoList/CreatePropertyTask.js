@@ -14,8 +14,8 @@ export const CreatePropertyTask = ({refreshList, setRefreshList, property}) => {
         text: "",
         dueDate: "",
         completed: false,
+        userId: parseInt(localStorage.getItem("property_user")),
         propertyId: property.id,
-        userId: property.userId
     })
 
     useEffect(
