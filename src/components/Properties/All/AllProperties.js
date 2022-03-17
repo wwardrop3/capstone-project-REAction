@@ -102,9 +102,39 @@ export const AllProperties = () => {
 
             <div id="all-properties-header">
 
-                <div className="propertyTypeContainer">{`${propertyTypeNames()} Properties`}</div>
+                <div className="propertyTypeContainer"><h2>{`${propertyTypeNames()}`}</h2></div>
+
+                <div className="property-type-select">
+                    <p>Select Property Type</p>
+                    <form onChange={
+                        (evt) => {
+                            if(evt.target.value === "All"){
+                                history.push("/properties")
+                            } else{
+                                const foundPropertyType = propertyTypes.find(type => type.id === parseInt(evt.target.value))
+                                history.push(`/properties/type/${foundPropertyType.id}`)
+                            }
+                    }
+                    }>
+                    <label>All</label>
+                    <input name= "option" type="radio" value = "All"/>
+                    <p></p>
+                    {propertyTypes.map(type => {
+                        return (
+                        <>
+                        <label>{type.name}</label>
+                        <input name= "option" type="radio" value = {`${type.id}`}/>
+                        <p></p>
+                        </>
+                    )})}
+                    </form>
+                </div>
                 
-            </div>   
+            </div>  
+        
+       
+        
+            
 
     {/* Possible sort button to use later */}
     {/* <button className="optionButton">Sort</button> */}
@@ -131,6 +161,11 @@ export const AllProperties = () => {
                         onMouseOver={
                             () => {
                                 setMarkerHighLight(userProperty.id)
+                            }
+                        }
+                        onMouseOut ={
+                            () => {
+                                setMarkerHighLight("")
                             }
                         }>
                             <div className="thumbnailContainer">

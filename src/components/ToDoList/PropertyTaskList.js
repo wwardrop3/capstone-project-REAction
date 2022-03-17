@@ -37,7 +37,7 @@ export const PropertyTaskList = ({property}) => {
                                 <td>{task.text}</td>
                                 <td>{task.dueDate}</td>
                                 <td>
-                                    <input type="checkbox" value={task.completed} checked={task.completed}
+                                    <input type="checkbox" checked={task.completed}
                                     onChange = {
                                         () => {
                                             const copy = {...task}

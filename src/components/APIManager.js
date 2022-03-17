@@ -224,7 +224,60 @@ export const updateTask = (taskObject) => {
 
 
 
-export const getArticles = (website) => {
-    return fetch(website)
-    .then(html => html.text())
+// export const getArticles = (website) => {
+//     return fetch(website)
+//     .then(html => html.text())
+// }
+
+export const sendPropertyFloorplan = (floorPlanObject) => {
+    const fetchOptions = {
+        method:"POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body:JSON.stringify(floorPlanObject)
+    }
+
+    return fetch(`${dataSource}/MFPropertyFloorplans`, fetchOptions)
 }
+
+
+export const sendMFUnitRent = (rentObject) => {
+    const fetchOptions = {
+        method:"POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body:JSON.stringify(rentObject)
+    }
+
+    return fetch(`${dataSource}/MFUnitRents`, fetchOptions)
+}
+
+export const getMFPropertyFloorplans = () => {
+    return fetch(`${dataSource}/MFPropertyFloorplans`)
+    .then(res => res.json())
+}
+
+export const updatePropertyFloorplan = (floorplanObject) => {
+    console.log(floorplanObject)
+    const fetchOptions={
+        method:"PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body:JSON.stringify(floorplanObject)
+    }
+
+    return fetch(`${dataSource}/MFPropertyFloorplans/${floorplanObject.id}`, fetchOptions)
+}
+
+
+
+
+
+export const getMFUnitSizes = () => {
+    return fetch(`${dataSource}/MFUnitSizes`)
+    .then(res => res.json())
+}
+

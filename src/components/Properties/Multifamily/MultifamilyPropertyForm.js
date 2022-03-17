@@ -1,16 +1,16 @@
 //purpose of this module is to produce a form to add a new property
 
 import { useEffect, useState } from "react"
-import { useHistory } from "react-router-dom"
-import { getCities, getNeighborhoods, getPropertyTypes, getStates, getStatuses, sendProperty } from "../../APIManager"
+import { useHistory, useParams } from "react-router-dom"
+import { getCities, getMFfloorplans, getMFUnitSizes, getNeighborhoods, getPropertyTypes, getStates, getStatuses, sendProperty, sendPropertyFloorplan } from "../../APIManager"
 
 
-export const MultifamilyPropertyForm = ({property, setProperty, show}) => {
-    
-    
-    const history = useHistory()
+export const MultifamilyPropertyForm = ({property, setProperty, floorplans, setFloorplans}) => {
 
-
+        const [unitSizes, setUnitSizes] = useState([])
+        const { propertyId } = useParams()
+        const history = useHistory()
+        
 
     return (
         <>
@@ -20,72 +20,8 @@ export const MultifamilyPropertyForm = ({property, setProperty, show}) => {
                 
                 <h2>Addresss Information</h2>
                 <div className="addressInfoContainer">
-                    <div>
 
-                    <label htmlFor="addOccupancy">Occupancy %</label>
-                        <input
-                        value={property.occupancy}
-                        className ="addOccupancy"
-                        type="number"
-                        required
-                        
-                        placeholder="Enter Occupancy Percentage"
-                        onChange={
-                            (evt) => {
-                                const copy = {...property}
-                                copy.occupancy = evt.target.value
-                                setProperty(copy)
-                            }}
-                        >
-                        </input>
-
-                        <label htmlFor="addUnits">Units</label>
-                        <input
-                        value={property.units}
-                        className ="addUnits"
-                        type="number"
-                        required
-                        
-                        placeholder="Enter # of Units"
-                        onChange={
-                            (evt) => {
-                                const copy = {...property}
-                                copy.units = evt.target.value
-                                setProperty(copy)
-                            }}
-                        ></input>
-
-                        <label htmlFor="addAvgSF">Avg. Square Footage</label>
-                        <input
-                        value={property.avgSF}
-                        className ="addAvgSF"
-                        type="number"
-                        required
-                        placeholder="Enter Avg. SF"
-                        onChange={
-                            (evt) => {
-                                const copy = {...property}
-                                copy.avgSF = evt.target.value
-                                setProperty(copy)
-                            }}></input>
-                        
-                    </div>
                     
-                    <div>
-                        <label htmlFor="addRent">Avg. Rent</label>
-                            <input
-                            value={property.avgRent}
-                            className ="addRent"
-                            type="number"
-                            required
-                            placeholder="Enter Avg. Rent"
-                            onChange={
-                                (evt) => {
-                                    const copy = {...property}
-                                    copy.avgRent = evt.target.value
-                                    setProperty(copy)
-                                }}></input>
-                        </div>
                         
                     <div>
                         <label htmlFor="addDeveloper">Property Developer</label>
@@ -134,6 +70,85 @@ export const MultifamilyPropertyForm = ({property, setProperty, show}) => {
                                 setProperty(copy)
                             }}></input>
                     </div>
+
+                    <div className="check-floorplans">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>Unit Type</th>
+                                    <th>Active?</th>
+                                    <th>No. Units</th>
+                                    <th>Avg. SF</th>
+                                    
+                                </tr>
+                                {unitSizes.map(unit => {
+                                    return (
+                                        <>
+                                            <tr>
+                                            <td>{unit.name}</td>
+                                            <td><input 
+                                            type="checkbox" 
+                                           
+                                            // checked={floorplans.sizeId.active}
+                                                    onChange = {
+                                                        (evt) => {
+                                                           
+                                                            const copy = {...floorplans[unit.Id]}
+                                                            copy.active = !copy.active
+                                                            setFloorplans(copy)
+                                                        }
+                                                    }
+                                            
+                                            
+                                            /></td>
+                                            <td><input
+                                            // style={{display: floorplans[unit.id].applicable ? "":"display:none;"}}
+                                            type="number"
+                                         
+                                            onChange={
+                                                (evt) => {
+                                                    const copy = {...floorplans}
+                                                    copy[unit.id].units = evt.target.value
+                                                    setFloorplans(copy)
+                                                }
+                                            }
+                                            
+                                            /></td>
+                                            <td>
+                                            <input
+                                            // style={floorplans[unit.id].applicable ? "":"display:none;"}
+                                            type="number"
+                                            
+                                            onChange={
+                                                (evt) => {
+                                                    const copy = {...floorplans}
+                                                    copy[unit.id].AvgSF = evt.target.value
+                                                    setFloorplans(copy)
+                                                    
+                                                }
+                                            }
+                                            
+                                            />
+                                            </td>
+                                            </tr>
+                                        
+                                        </>)
+                                })} 
+
+                            
+                            </tbody>
+                            
+                        </table>
+
+                    </div>
+
+
+                    {/* <button
+                        onClick={
+                            () => {
+                                history.push(`/properties/rent-information/${property.id}`)
+                            }
+                        }>Rent Info</button> */}
                            
                     
                     

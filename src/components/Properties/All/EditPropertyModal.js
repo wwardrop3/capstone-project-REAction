@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
-import { getCities, getNeighborhoods, getPropertyTypes, getStates, getStatuses, updateProperty } from "../../APIManager"
+import { getCities, getMFPropertyFloorplans, getMFUnitSizes, getNeighborhoods, getPropertyTypes, getStates, getStatuses, sendPropertyFloorplan, updateProperty, updatePropertyFloorplan } from "../../APIManager"
 import { IndustrialProperty } from "../Industrial/IndustrialProperty"
 import { IndustrialPropertyForm } from "../Industrial/IndustrialPropertyForm"
 import { MultifamilyProperty } from "../Multifamily/MultifamilyProperty"
@@ -12,7 +12,7 @@ import { PropertyForm } from "./PropertyForm"
 
 //props includes all of the properties that were passed into the Modal in property form
 //includes onclose function, property, and setProperty
-export const Modal = (props) => {
+export const EditPropertyModal = ({property, setProperty, floorplans, setFloorplans, show, onClose}) => {
     const [cities, setCities] = useState([])
     const [neighborhoods, setNeighborhoods] = useState([])
     const [states, setStates] = useState([])
@@ -20,8 +20,12 @@ export const Modal = (props) => {
     const [filteredNeighborhoods, setFilteredNeighborhoods] = useState([])
     const [statuses, setStatuses] = useState([])
     const [propertyTypes, setPropertyTypes] = useState([])
-
+    const [unitSizes, setUnitSizes] = useState([])
     const history = useHistory()
+    
+
+    //send rent object for each propertyFloorplan
+
 
     useEffect(
         () => {
@@ -82,29 +86,45 @@ export const Modal = (props) => {
         },
         []
     )
+
+    useEffect(
+    () => {
+        getMFUnitSizes()
+        .then(
+            (sizeReponse) =>{
+                setUnitSizes(sizeReponse)
+            }
+        )
+    },[]
+)
+
+  
+
+
+    
     const details = () => {
 
-        switch(props.property.typeId) {
+        switch(property.typeId) {
             case 1:
-                return <MultifamilyPropertyForm property = {props.property} setProperty = {props.setProperty} show = {{display: "none"}} />
+                return <MultifamilyPropertyForm property = {property} setProperty = {setProperty} floorplans={floorplans} setFloorplans={setFloorplans} />
               break;
             case 2:
-                return <OfficePropertyForm property = {props.property} setProperty = {props.setProperty} show = {{display: "none"}}/>
+                return <OfficePropertyForm property = {property} setProperty = {setProperty}/>
               break;
             case 3:
-                return<IndustrialPropertyForm property = {props.property} setProperty = {props.setProperty} show = {{display: "none"}}/>
+                return<IndustrialPropertyForm property = {property} setProperty = {setProperty}/>
               break;
            
           }
     }
-//We will use the props input to control the show or not show 
-    if(props.show === false){
+//We will use the props input to control the show or not show , comes from property component
+    if(show === false){
         return null
     } else {
         return (
             <>
-            <div className="modal">
-                <div className="modal-content">
+        <div className="modal">
+            <div className="modal-content">
                     
                     <div className="modal-header">
                         <h2 className="modal-title">Edit Property Information</h2>
@@ -114,14 +134,14 @@ export const Modal = (props) => {
                     <label htmlFor="edit-fields">Property Name</label>
                     <input className="edit-fields"
                     required
-                    value={props.property.name}
+                    value={property.name}
                     type = "text"
                     placeholder="Enter Property Name"
                     onChange={
                         (evt) => {
-                            const copy = {...props.property}
+                            const copy = {...property}
                             copy.name = evt.target.value
-                            props.setProperty(copy)
+                            setProperty(copy)
                         }
                     }
                 ></input>
@@ -131,12 +151,12 @@ export const Modal = (props) => {
                     <div className="input-element">
                             <label htmlFor="addStatus">Project Status</label>
                             <select className="addStatus" 
-                            value = {props.property.statusId}
+                            value = {property.statusId}
                                 onChange= {
                                     (evt) => {
-                                        const copy = {...props.property}
+                                        const copy = {...property}
                                         copy.statusId = parseInt(evt.target.value)
-                                        props.setProperty(copy)
+                                        setProperty(copy)
                                     }
                                 }
                             >
@@ -155,14 +175,14 @@ export const Modal = (props) => {
                             <input
                             className ="addStreet"
                             type="text"
-                            value = {props.property.street}
+                            value = {property.street}
                             required
                             placeholder="Enter Street Address"
                             onChange={
                                 (evt) => {
-                                    const copy = {...props.property}
+                                    const copy = {...property}
                                     copy.street = evt.target.value
-                                    props.setProperty(copy)
+                                    setProperty(copy)
                                 }
                             }></input>
                         </div>
@@ -170,15 +190,15 @@ export const Modal = (props) => {
                         <div>
                         <label htmlFor="addState">State</label>
                             <select 
-                            value = {props.property.stateId}
+                            value = {property.stateId}
                             required
                             className="addState" 
                             onChange= {
                                 (evt) => {
                                     setFilteredCities(cities.filter(city => city.stateId === parseInt(evt.target.value)))
-                                    const copy = {...props.property}
+                                    const copy = {...property}
                                     copy.stateId = parseInt(evt.target.value)
-                                    props.setProperty(copy)
+                                    setProperty(copy)
                                     
                                     
                                 }
@@ -195,20 +215,20 @@ export const Modal = (props) => {
                         <div>
                             <label htmlFor="addCity">City</label>
                             <select 
-                            value = {props.property.cityId}
+                            value = {property.cityId}
                             required
                             className="addCity"
                             onClick = {
-                                () => {setFilteredCities(cities.filter(city => city.stateId === props.property.stateId))
+                                () => {setFilteredCities(cities.filter(city => city.stateId === property.stateId))
                                 }
                             }
                             onChange= {
                                 (evt) => {
                                     // When city is chosen, set the city Id in the property object and filter the neighborhoods with that same city I
                                     // setFilteredNeighborhoods(neighborhoods.filter(neighborhood => neighborhood.cityId === parseInt(evt.target.value)))
-                                    const copy = {...props.property}
+                                    const copy = {...property}
                                     copy.cityId = parseInt(evt.target.value)
-                                    props.setProperty(copy)
+                                    setProperty(copy)
                                     
                                 }
                             }
@@ -222,16 +242,16 @@ export const Modal = (props) => {
                         <div>
                             <label htmlFor="addNeighborhood">Neighborhood</label>
                             <select className="addNeighborhood"
-                            value = {props.property.neighborhoodId}
+                            value = {property.neighborhoodId}
                             onClick = {
-                                () => {setFilteredNeighborhoods(neighborhoods.filter(neighborhood => neighborhood.cityId === props.property.cityId))
+                                () => {setFilteredNeighborhoods(neighborhoods.filter(neighborhood => neighborhood.cityId === property.cityId))
                                 }
                             }
                             onChange= {
                                 (evt) => {
-                                    const copy = {...props.property}
+                                    const copy = {...property}
                                     copy.neighborhoodId = parseInt(evt.target.value)
-                                    props.setProperty(copy)
+                                    setProperty(copy)
                                 }
                             }
                             >
@@ -244,30 +264,120 @@ export const Modal = (props) => {
                         <div>
                             <label htmlFor="addZip">Zip Code</label>
                             <input
-                            value = {props.property.zipCode}
+                            value = {property.zipCode}
                             className ="addZip"
                             type="text"
                             required
                             placeholder="Enter Zip Code"
                             onChange={
                                 (evt) => {
-                                    const copy = {...props.property}
+                                    const copy = {...property}
                                     copy.zipCode = evt.target.value
-                                    props.setProperty(copy)
+                                    setProperty(copy)
                                 }
                             }></input>
                         </div>
                     </div>
                     </div>
                     {details()}
+                
+
+                <div className="check-floorplans">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>Unit Type</th>
+                                    <th>Active?</th>
+                                    <th>No. Units</th>
+                                    <th>Avg. SF</th>
+                                    
+                                </tr>
+                                {unitSizes.map(unit => {
+                                    return (
+                                        <>
+                                            <tr>
+                                            <td>{unit.name}</td>
+                                            <td><input 
+                                            type="checkbox" 
+                                            checked={floorplans[unit.id].active}
+                                                    onChange = {
+                                                        () => {
+                                                            const copy = {...floorplans}
+                                                            console.log(copy)
+                                                            copy[unit.id].active = !copy[unit.id].active
+                                                            setFloorplans(copy)
+                                                            
+                                                        }
+                                                    }
+                                            
+                                            
+                                            /></td>
+                                            <td><input
+                                            // style={{display: floorplans[unit.id].applicable ? "":"display:none;"}}
+                                            type="number"
+                                            value={floorplans[unit.id].units}
+                                            onChange={
+                                                (evt) => {
+                                                    const copy = {...floorplans}
+                                                    copy[unit.id].units = evt.target.value
+                                                    setFloorplans(copy)
+                                                }
+                                            }
+                                            
+                                            /></td>
+                                            <td>
+                                            <input
+                                            // style={floorplans[unit.id].applicable ? "":"display:none;"}
+                                            type="number"
+                                            value={floorplans[unit.id].AvgSF}
+                                            onChange={
+                                                (evt) => {
+                                                    const copy = {...floorplans}
+                                                    copy[unit.id].AvgSF = evt.target.value
+                                                    setFloorplans(copy)
+                                                    
+                                                }
+                                            }
+                                            
+                                            />
+                                            </td>
+                                            </tr>
+                                        
+                                        </>)
+                                })} 
+
+                            
+                            </tbody>
+                            
+                        </table>
+                    </div>
                 </div>
+
 
                 <div className="modal-footer">
                         <button className="update-button"
                         onClick={
                             () => {
-                                updateProperty(props.property)
-                                history.push("/properties")
+                                if(property.floorplans === true){
+                                    unitSizes.map(unitType => {
+                                        console.log(floorplans[unitType.id])
+                                        return updatePropertyFloorplan(floorplans[unitType.id])
+                                    })
+                                    
+                                } else {
+                                    unitSizes.map(unitType => {
+                                        console.log(floorplans[unitType.id])
+                                        return sendPropertyFloorplan(floorplans[unitType.id])
+                                    })
+                                }
+                            
+                                
+                                
+                                
+                                    property.floorplans = true
+                                    updateProperty(property)
+                                    onClose()
+                                
                                 
                             }
                         }>Save Information</button>
@@ -276,7 +386,7 @@ export const Modal = (props) => {
                         <button className="close-button"
                         onClick={
                             () => {
-                                props.onClose()
+                                onClose()
                             
                             }
                         

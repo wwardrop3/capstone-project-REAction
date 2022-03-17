@@ -5,13 +5,15 @@ import { Route } from "react-router-dom"
 import { AllProperties } from "./Properties/All/AllProperties"
 import { PropertyForm } from "./Properties/All/PropertyForm"
 import { Property } from "./Properties/All/Property"
-import { Modal } from "./Properties/All/EditProperty"
+import { EditPropertyModal } from "./Properties/All/EditPropertyModal"
 import { useState } from "react"
 import { PropertyMap } from "./Location/PropertyMap"
 import { UserLocation } from "./LocationTest/UserLocation"
 import { UserNoteForm } from "./LocationTest/UserNoteForm"
 import { UserNotesMap } from "./LocationTest/UserNotesMap"
 import { Dashboard } from "./Dashboard/Dashboard"
+import { MFRent } from "./Properties/Multifamily/MFRent"
+import { MFRentForm } from "./Properties/Multifamily/MFRentForm"
 
 
 
@@ -59,8 +61,12 @@ export const ApplicationViews = () => {
                 <Property />
             </Route>
 
+            <Route exact path= "/properties/rent-information/:propertyId(\d+)">
+                <MFRentForm />
+            </Route>
+
             <Route exact path= "/properties/edit">
-                <Modal />
+                <EditPropertyModal />
             </Route>
 
             <Route exact path= "/properties/map">
@@ -85,6 +91,8 @@ export const ApplicationViews = () => {
             <Route exact path= "/dashboard">
                 <Dashboard />
             </Route>
+
+
 
 
 

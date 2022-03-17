@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 import { deleteTask, GetProperties, getPropertyTasks, getUserNotes, updateTask } from "../APIManager"
-
+import "./Dashboard.css"
 
 export const Dashboard = () => {
     const [tasks, setTasks] = useState([])
@@ -43,19 +44,13 @@ export const Dashboard = () => {
             },[]
     )
     
-    const foundProperty = (id) => {
-        const found = properties.find(property => {
-            return property.id === parseInt(id)
-        })
-        return found.name
-    }
-    
-    
+
     
     
     
     return (
         <>
+
             <table className="all-property-tasks">
             <tbody>
                 <tr>
@@ -66,12 +61,15 @@ export const Dashboard = () => {
                     <th>Completed?</th>
                 </tr>
                 {tasks.map(task => {
+                    const foundProperty = properties.find(property => {
+                        return property.id === task.propertyId
+                    })
                     return <tr>
-                                <td>{task.id}</td>
+                                <td><Link to = {`/properties/${foundProperty.id}`}>{foundProperty?.name}</Link></td>
                                 <td>{task.title}</td>
                                 <td>{task.text}</td>
                                 <td>{task.dueDate}</td>
-                                <td>
+                                <td style={{textAlign: "center"}}>
                                     <input type="checkbox" value={task.completed} checked={task.completed}
                                     onChange = {
                                         () => {

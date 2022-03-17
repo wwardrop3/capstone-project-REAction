@@ -59,10 +59,12 @@ export const NavBar =() => {
 
 
 
-                    <div className="view-filter">
+                   
                     
-                    <select 
+                    {/* <input
+                    type="radio" 
                     name="view-select"
+                    value={0}
                     className="nav-button"
                         onChange = {
                             (evt) => {
@@ -75,29 +77,30 @@ export const NavBar =() => {
                                 
                             }}
                             >
-                            <option value = "0">View by Type</option>
-                            <option value = "All">All Properties</option>
+
+                            <li value = "All">All Properties</li>
                         {propertyTypes.map(type => {
-                            return <option value = {`${type.id}`}>{`${type.name}`}</option>})}   
-                    </select>
-                </div>
+                            return <li type = "radio" value = {`${type.id}`}>{`${type.name}`}</li>})}   
+                    </input> */}
+              
 
                
-    {/* 
-                    <button name = "map-all" className="nav-button"
+                <div className="view-filter">
+                    <button name = "view-properties" className="nav-button"
                         onClick={
                             (evt) => {
-                                history.push(`/properties/geocoder`)
+                                history.push(`/properties`)
                                 
-
                             }
-                        }>Geocoder
+                        }>Property Map
                     </button>
+                </div>
 
                 
-    */}
+ 
                 <div className="view-filter">
                     <select className="nav-button"
+                    value={0}
                         onChange = {
                             (evt) => {
                                 setTypeId(parseInt(evt.target.value))

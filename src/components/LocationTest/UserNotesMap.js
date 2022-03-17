@@ -56,7 +56,7 @@ export const UserNotesMap = () => {
     return (
         <>
         <div id = "map-content">
-            <div class = "create-user-note">
+            <div className = "create-user-note">
                 <button
                 onClick={
                     () => {
@@ -117,8 +117,9 @@ export const UserNotesMap = () => {
                                 
                                 </div>
                                 <div>
-                                    <p>{`${selected.propertyTypeId}`}</p>
+                                    
                                     <p>{`${selected.text}`}</p>
+                                    <p>{`${Date(selected.noteDate)}`}</p>
                                     <button
                                     onClick={
                                         () => {

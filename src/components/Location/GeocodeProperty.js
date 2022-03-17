@@ -42,7 +42,7 @@ export const GeocodeProperty = ({property}, {setProperty}) =>{
     axios.get(`https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyA-1SdY6vkTh1FI4i_5OUH9PoHhoRCpzmE`,{
     params :{
         address: {location},
-        key: "AIzaSyA-1SdY6vkTh1FI4i_5OUH9PoHhoRCpzmE"
+        key: process.env.REACT_APP_GOOGLE_GEOCODE_APIKEY
     }})
     .then(response => {
                 let copy = {...property}

@@ -8,8 +8,7 @@ import { deleteProperty, removeProperty, retrieveProperty } from "../../APIManag
 
 
 //create component function MultifamilyProperty
-export const MultifamilyProperty = ({property}) => {
-
+export const MultifamilyProperty = ({property, setProperty}) =>{
 
     const history = useHistory()
 
@@ -18,6 +17,8 @@ export const MultifamilyProperty = ({property}) => {
 
         <>
         <div className="infoContainer">
+
+               
                 <div>
                     <h2>Occupancy</h2>
                     <p>{property?.occupancy}</p>
@@ -47,6 +48,8 @@ export const MultifamilyProperty = ({property}) => {
                     <h2>Management</h2>
                     <p>{property?.management}</p>
                 </div>
+
+                
         
                 
             

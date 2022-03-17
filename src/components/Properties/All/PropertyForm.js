@@ -6,7 +6,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
 import { useParams } from "react-router-dom"
-import { getCities, getNeighborhoods, getPropertyTypes, getStates, getStatuses, retrieveProperty, sendProperty } from "../../APIManager"
+import { getCities, getNeighborhoods, getPropertyTypes, getStates, getStatuses, retrieveProperty, sendProperty, sendPropertyFloorplan } from "../../APIManager"
 import { GeocodeProperty } from "../../Location/GeocodeProperty"
 import { IndustrialPropertyForm } from "../Industrial/IndustrialPropertyForm"
 import { MultifamilyPropertyForm } from "../Multifamily/MultifamilyPropertyForm"
@@ -28,6 +28,9 @@ export const PropertyForm = () => {
     const [state, setState] =useState()
     const [city, setCity] =useState(0)
     const [neighborhood, setNeighborhood] =useState(0)
+    const propertyTypeInt = parseInt(propertyTypeId)
+    let history = useHistory()
+    const propertyTypeObject = propertyTypes.find(type => type.id === propertyTypeInt)
     const [property, setProperty] = useState(
         {
             name: "Property",
@@ -47,19 +50,17 @@ export const PropertyForm = () => {
             typeId: parseInt(propertyTypeId),
             industry: "",
             statusId:1,
-            occupancy:0
+            occupancy:0,
+            floorplans:false
         })
+        
     
-        const propertyTypeInt = parseInt(propertyTypeId)
-        let history = useHistory()
-
-        const propertyTypeObject = propertyTypes.find(type => type.id === propertyTypeInt)
-
+        
         const details = () => {
 
             switch(propertyTypeId) {
                 case "1":
-                    return <MultifamilyPropertyForm property = {property} setProperty = {setProperty}/>
+                    return <MultifamilyPropertyForm property = {property} setProperty = {setProperty} />
                   break;
                 case "2":
                     return <OfficePropertyForm property = {property} setProperty = {setProperty}/>
@@ -324,12 +325,15 @@ export const PropertyForm = () => {
                                 address: {location},
                                 key: {key}
                             }})
+                           
                             .then(response => {
                                 const copy = {...property}
                                 copy.location = response.data.results[0]?.geometry?.location
                                 sendProperty(copy).then(history.push("/properties")
                                 
+                                
                                 )}).catch(console.log("ERROR"))
+                                
                             }}>
                             Save Property</button>
                         </div>

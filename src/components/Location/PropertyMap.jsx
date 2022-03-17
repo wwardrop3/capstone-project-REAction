@@ -3,7 +3,7 @@ import { GoogleMap, Marker, LoadScript, InfoWindow, MarkerProps, useGoogleMap} f
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import"./style.css"
-import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
+/*global google*/
 
 const id = ["919771f94d285faa"]
 const key= process.env.REACT_APP_GOOGLEMAPS_APIKEY
@@ -102,6 +102,7 @@ export const PropertyMap = ({properties, highlight, setHighlight, markerHighligh
                                 strokeWeight: isSelected(property.id, markerHighlight)[3],
                                 scale: isSelected(property.id, markerHighlight)[0],
                                 strokeColor: isSelected(property.id, markerHighlight)[1],
+                                // anchor: new google.maps.Point(4,15)
                                 
                                 
                                 
@@ -116,6 +117,11 @@ export const PropertyMap = ({properties, highlight, setHighlight, markerHighligh
                             onMouseOver={
                                 () => {
                                     setHighlight(property.id)
+                                }
+                            }
+                            onMouseOut={
+                                () => {
+                                    setHighlight("")
                                 }
                             }
                         
