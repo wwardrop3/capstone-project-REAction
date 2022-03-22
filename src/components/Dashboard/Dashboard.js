@@ -65,7 +65,7 @@ export const Dashboard = () => {
                         return property.id === task.propertyId
                     })
                     return <tr>
-                                <td><Link to = {`/properties/${foundProperty.id}`}>{foundProperty?.name}</Link></td>
+                                <td><Link to = {`/properties/${foundProperty?.id}`}>{foundProperty?.name}</Link></td>
                                 <td>{task.title}</td>
                                 <td>{task.text}</td>
                                 <td>{task.dueDate}</td>

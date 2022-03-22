@@ -106,7 +106,7 @@ export const EditPropertyModal = ({property, setProperty, floorplans, setFloorpl
 
         switch(property.typeId) {
             case 1:
-                return <MultifamilyPropertyForm property = {property} setProperty = {setProperty} floorplans={floorplans} setFloorplans={setFloorplans} />
+                return <MultifamilyPropertyForm property = {property} setProperty = {setProperty} floorplans={floorplans} setFloorplans={setFloorplans} viewFloorplans={""}/>
               break;
             case 2:
                 return <OfficePropertyForm property = {property} setProperty = {setProperty}/>
@@ -282,75 +282,7 @@ export const EditPropertyModal = ({property, setProperty, floorplans, setFloorpl
                     {details()}
                 
 
-                <div className="check-floorplans">
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <th>Unit Type</th>
-                                    <th>Active?</th>
-                                    <th>No. Units</th>
-                                    <th>Avg. SF</th>
-                                    
-                                </tr>
-                                {unitSizes.map(unit => {
-                                    return (
-                                        <>
-                                            <tr>
-                                            <td>{unit.name}</td>
-                                            <td><input 
-                                            type="checkbox" 
-                                            checked={floorplans[unit.id].active}
-                                                    onChange = {
-                                                        () => {
-                                                            const copy = {...floorplans}
-                                                            console.log(copy)
-                                                            copy[unit.id].active = !copy[unit.id].active
-                                                            setFloorplans(copy)
-                                                            
-                                                        }
-                                                    }
-                                            
-                                            
-                                            /></td>
-                                            <td><input
-                                            // style={{display: floorplans[unit.id].applicable ? "":"display:none;"}}
-                                            type="number"
-                                            value={floorplans[unit.id].units}
-                                            onChange={
-                                                (evt) => {
-                                                    const copy = {...floorplans}
-                                                    copy[unit.id].units = evt.target.value
-                                                    setFloorplans(copy)
-                                                }
-                                            }
-                                            
-                                            /></td>
-                                            <td>
-                                            <input
-                                            // style={floorplans[unit.id].applicable ? "":"display:none;"}
-                                            type="number"
-                                            value={floorplans[unit.id].AvgSF}
-                                            onChange={
-                                                (evt) => {
-                                                    const copy = {...floorplans}
-                                                    copy[unit.id].AvgSF = evt.target.value
-                                                    setFloorplans(copy)
-                                                    
-                                                }
-                                            }
-                                            
-                                            />
-                                            </td>
-                                            </tr>
-                                        
-                                        </>)
-                                })} 
-
-                            
-                            </tbody>
-                            
-                        </table>
-                    </div>
+                
                 </div>
 
 
@@ -360,21 +292,22 @@ export const EditPropertyModal = ({property, setProperty, floorplans, setFloorpl
                             () => {
                                 if(property.floorplans === true){
                                     unitSizes.map(unitType => {
-                                        console.log(floorplans[unitType.id])
+                                      
                                         return updatePropertyFloorplan(floorplans[unitType.id])
                                     })
                                     
                                 } else {
                                     unitSizes.map(unitType => {
-                                        console.log(floorplans[unitType.id])
+                            
                                         return sendPropertyFloorplan(floorplans[unitType.id])
                                     })
                                 }
                             
                                 
                                 
-                                
+                                    
                                     property.floorplans = true
+                                    console.log(property)
                                     updateProperty(property)
                                     onClose()
                                 

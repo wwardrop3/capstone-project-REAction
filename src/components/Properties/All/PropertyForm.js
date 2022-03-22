@@ -60,7 +60,7 @@ export const PropertyForm = () => {
 
             switch(propertyTypeId) {
                 case "1":
-                    return <MultifamilyPropertyForm property = {property} setProperty = {setProperty} />
+                    return <MultifamilyPropertyForm property = {property} setProperty = {setProperty} viewFloorplans = {"none"}/>
                   break;
                 case "2":
                     return <OfficePropertyForm property = {property} setProperty = {setProperty}/>
@@ -144,7 +144,6 @@ export const PropertyForm = () => {
             () => {
                 setFilteredCities(cities.filter(city => city.stateId === property.stateId))
                 setCity(0)
-                console.log(city)
                 setNeighborhood(0)
             },[state]
         )

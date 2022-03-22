@@ -242,18 +242,6 @@ export const sendPropertyFloorplan = (floorPlanObject) => {
 }
 
 
-export const sendMFUnitRent = (rentObject) => {
-    const fetchOptions = {
-        method:"POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body:JSON.stringify(rentObject)
-    }
-
-    return fetch(`${dataSource}/MFUnitRents`, fetchOptions)
-}
-
 export const getMFPropertyFloorplans = () => {
     return fetch(`${dataSource}/MFPropertyFloorplans`)
     .then(res => res.json())
@@ -274,10 +262,28 @@ export const updatePropertyFloorplan = (floorplanObject) => {
 
 
 
-
-
 export const getMFUnitSizes = () => {
     return fetch(`${dataSource}/MFUnitSizes`)
     .then(res => res.json())
 }
 
+
+export const getMFRents = () => {
+    return fetch(`${dataSource}/MFUnitRents`)
+    .then(res => res.json())
+}
+
+
+
+
+export const sendMFUnitRent = (rentObject) => {
+    const fetchOptions = {
+        method:"POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body:JSON.stringify(rentObject)
+    }
+
+    return fetch(`${dataSource}/MFUnitRents`, fetchOptions)
+}

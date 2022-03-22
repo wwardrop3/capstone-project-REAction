@@ -45,116 +45,116 @@ export const NavBar =() => {
                 <div className="nav-buttons">
 
 
-                <div className="view-filter">
-                    <button name = "dashboard" className="nav-button"
-                        onClick={
-                            (evt) => {
-                                history.push(`/dashboard`)
-                                
+                    <div className="view-filter">
+                        <button name = "dashboard" className="nav-button"
+                            onClick={
+                                (evt) => {
+                                    history.push(`/dashboard`)
+                                    
 
-                            }
-                        }>Dashboard
-                    </button>
-                </div>
-
-
-
-                   
-                    
-                    {/* <input
-                    type="radio" 
-                    name="view-select"
-                    value={0}
-                    className="nav-button"
-                        onChange = {
-                            (evt) => {
-                                if(evt.target.value === "All"){
-                                    history.push("/properties")
-                                } else{
-                                    const foundPropertyType = propertyTypes.find(type => type.id === parseInt(evt.target.value))
-                                    history.push(`/properties/type/${foundPropertyType.id}`)
                                 }
-                                
-                            }}
-                            >
+                            }>Dashboard
+                        </button>
+                    </div>
 
-                            <li value = "All">All Properties</li>
-                        {propertyTypes.map(type => {
-                            return <li type = "radio" value = {`${type.id}`}>{`${type.name}`}</li>})}   
-                    </input> */}
-              
 
-               
-                <div className="view-filter">
-                    <button name = "view-properties" className="nav-button"
+
+                    
+                        
+                        {/* <input
+                        type="radio" 
+                        name="view-select"
+                        value={0}
+                        className="nav-button"
+                            onChange = {
+                                (evt) => {
+                                    if(evt.target.value === "All"){
+                                        history.push("/properties")
+                                    } else{
+                                        const foundPropertyType = propertyTypes.find(type => type.id === parseInt(evt.target.value))
+                                        history.push(`/properties/type/${foundPropertyType.id}`)
+                                    }
+                                    
+                                }}
+                                >
+
+                                <li value = "All">All Properties</li>
+                            {propertyTypes.map(type => {
+                                return <li type = "radio" value = {`${type.id}`}>{`${type.name}`}</li>})}   
+                        </input> */}
+                
+
+                
+                    <div className="view-filter">
+                        <button name = "view-properties" className="nav-button"
+                            onClick={
+                                (evt) => {
+                                    history.push(`/properties`)
+                                    
+                                }
+                            }>Property Map
+                        </button>
+                    </div>
+
+                    
+    
+                    <div className="view-filter">
+                        <select className="nav-button"
+                        value={0}
+                            onChange = {
+                                (evt) => {
+                                    setTypeId(parseInt(evt.target.value))
+                                    const foundPropertyType = propertyTypes.find(type => type.id === parseInt(evt.target.value))
+                                    const typeName = foundPropertyType.name
+                                    history.push(`/properties/create/${foundPropertyType.id}`)
+                                }}
+                                >
+                                <option value = "0">Add by Type</option>
+                            {propertyTypes.map(type => {
+                                return <option value = {`${type.id}`}>{`${type.name}`}</option>})}   
+                            </select>
+                    </div>
+
+
+                
+    {/* 
+                    <div className="view-filter">
+
+                        <button className="nav-button"
+
                         onClick={
                             (evt) => {
-                                history.push(`/properties`)
-                                
+                                history.push("/create-user-note")
+
                             }
-                        }>Property Map
-                    </button>
-                </div>
-
-                
- 
-                <div className="view-filter">
-                    <select className="nav-button"
-                    value={0}
-                        onChange = {
-                            (evt) => {
-                                setTypeId(parseInt(evt.target.value))
-                                const foundPropertyType = propertyTypes.find(type => type.id === parseInt(evt.target.value))
-                                const typeName = foundPropertyType.name
-                                history.push(`/properties/create/${foundPropertyType.id}`)
-                            }}
-                            >
-                            <option value = "0">Add by Type</option>
-                        {propertyTypes.map(type => {
-                            return <option value = {`${type.id}`}>{`${type.name}`}</option>})}   
-                        </select>
-                </div>
-
-
-               
-{/* 
-                <div className="view-filter">
-
-                    <button className="nav-button"
-
-                    onClick={
-                        (evt) => {
-                            history.push("/create-user-note")
-
-                        }
-                    }>Create Note</button>
-                </div> */}
-                
-                <div className="view-filter">
+                        }>Create Note</button>
+                    </div> */}
                     
-                    <button className="nav-button"
+                    <div className="view-filter">
+                        
+                        <button className="nav-button"
 
-                    onClick={
-                        (evt) => {
-                            history.push("/user-notes/map")
+                        onClick={
+                            (evt) => {
+                                history.push("/user-notes/map")
 
-                        }
-                    }>Notes</button>
-                </div>
+                            }
+                        }>Notes</button>
+                    </div>
 
 
 
-                <div className="view-filter">
-                    <button className="nav-button"
+                    <div className="view-filter">
+                        <button className="nav-button"
 
-                    onClick={
-                        (evt) => {
-                            localStorage.removeItem("property_user")
-                            history.push("/login")
+                        onClick={
+                            (evt) => {
+                                localStorage.removeItem("property_user")
+                                history.push("/login")
 
-                        }
-                    }>Log Out</button>
-                </div>
+                            }
+                        }>Log Out</button>
+                    </div>
             </div>
 
 

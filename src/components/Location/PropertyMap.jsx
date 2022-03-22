@@ -86,6 +86,7 @@ export const PropertyMap = ({properties, highlight, setHighlight, markerHighligh
                 disableDefaultUI:"true"
                 }}
             center={view}>
+                
                 {
                     properties.map(property => {
                         return(

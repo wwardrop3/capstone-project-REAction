@@ -1,24 +1,31 @@
 .content-header{
   position: relative;
-  object-fit: contain;
+  display: flex;
+  border: 3px solid green;
+  justify-content: space-between;
 }
 
+.property-task-container{
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+}
+  
 
-.imageContainer {
-    position: relative;
-  }
-  
-  /* Bottom right text */
-  .siteLogo {
-    position: absolute;
-    top: 10px;
-    left: 35%;
-    width: 30%;
-  }
-  
-  .prop-image{
-    width: 100%;
-  }
+.prop-image-container{
+  width: 100%;
+  justify-content: left;
+}
+
+.prop-image{
+  border: 3px solid red;
+  object-fit: contain;
+  width: 100%;
+
+
+}
 
   .content-header-text{
     position: absolute;
@@ -26,9 +33,9 @@
     color:white;
     font-size: 2em;
     top: 10px;
-    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
   }
 
-  .thumbnailPropertyStatus{
-    color: white;
-  }
+.property-task-list-table{
+  width: 100%;
+}

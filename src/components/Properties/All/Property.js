@@ -3,7 +3,7 @@ import { waitForElementToBeRemoved } from "@testing-library/react"
 import { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
 import { useParams } from "react-router-dom"
-import { deleteProperty, getMFPropertyFloorplans, removeProperty, retrieveProperty, updateProperty } from "../../APIManager"
+import { deleteProperty, getMFPropertyFloorplans, getMFUnitSizes, removeProperty, retrieveProperty, updateProperty } from "../../APIManager"
 import { PropertyTaskList } from "../../ToDoList/PropertyTaskList"
 import { IndustrialProperty } from "../Industrial/IndustrialProperty"
 import { MultifamilyProperty } from "../Multifamily/MultifamilyProperty"
@@ -20,31 +20,30 @@ export const Property = () => {
     const [show, setShow] = useState(false)
     const { propertyId } = useParams()
     const [refresh, setRefresh] = useState(true)
-    const [propertyCopy, setPropertyCopy] = useState({})
     const [floorplans, setFloorplans] = useState({
             1: {
-                AvgSF:"",
+                AvgSF:0,
                 sizeId: 1,
                 propertyId: parseInt(propertyId),
                 units:0,
                 active: false
             },
             2: {
-                AvgSF:"",
+                AvgSF:0,
                 sizeId: 2,
                 propertyId: parseInt(propertyId),
                 units:0,
                 active: false
             },
             3: {
-                AvgSF:"",
+                AvgSF:0,
                 sizeId: 3,
                 propertyId: parseInt(propertyId),
                 units:0,
                 active: false
             },
             4: {
-                AvgSF:"",
+                AvgSF:0,
                 sizeId: 4,
                 propertyId: parseInt(propertyId),
                 units:0,
@@ -52,8 +51,9 @@ export const Property = () => {
             }}
             
         )
+
     
-    
+
 
     //fetches the property from database with the ID that matches url param
     useEffect(
@@ -61,51 +61,22 @@ export const Property = () => {
             retrieveProperty(parseInt(propertyId))
             .then(
                 (propResponse) => {
-                    setProperty(propResponse)}
-
-                    )
+                    setProperty(propResponse)})
                 },[refresh]
         )
-            
-                //if else state ment...if floorplans exist, set the local floorplans to existing ones, else, set local to new floorplans
-            // ).then(
-            //     () => {
-            //         //if the property has edited floorplans (if so, it will have all 4), otherwise the floorplans will be new templates
-            //         if(property.floorplans === true){
-            //             getMFPropertyFloorplans()
-            //             .then(
-            //                 (floorplanResponse) => {
-            //                     const filteredResponses = floorplanResponse.filter(plan => plan.propertyId === property.id)
-            //                     filteredResponses.map(response => {
-            //                         const copy = {...floorplans}
-            //                         copy[response.sizeId] = response
-            //                         setFloorplans(copy)
-            //                         console.log("they exist!")
-            //                 }
-            //             )
-            //         })}})
-          
- 
-
-    useEffect(
-        () => {
-            setPropertyCopy({...property})
-        },[refresh]
-    )
 
 
-
+//import the floorplans for the property if they already exist shown by the active property
     useEffect(
         () => {
             if(property.floorplans === true){
-                console.log("has floorplans")
                 getMFPropertyFloorplans()
                 .then(
                     (floorplanResponse) => {
                         const filteredResponses = floorplanResponse.filter(plan => plan.propertyId === property.id)
                         filteredResponses.map(response => {
                             floorplans[response.sizeId] = response
-                            
+                        
                         })})}},[property]
                 )
                     
@@ -117,7 +88,7 @@ const details = () => {
 
     switch(property.typeId) {
         case 1:
-            return <MultifamilyProperty property = {property} floorplans = {floorplans}/>
+            return <MultifamilyProperty property = {property} setProperty= {setProperty} floorplans = {floorplans} refresh = {refresh} />
           break;
         case 2:
             return <OfficeProperty property = {property} floorplans = {floorplans}/>
@@ -139,15 +110,17 @@ return (
             <div className="content-header">
                 <div className="content-header-text">
                     <h2>{property.name}</h2>
-                    <p>{property.statusId?.name}</p>
                 </div>
                 
-                
-                <div>
-                    <img className="prop-image" src = {`${property.imageURL}`}></img>
+                <div className="prop-image-container">
+                    <img className="prop-image" src = {property.imageURL}></img>
                 </div>
+                    
+                <div className="property-task-container">
+                    <PropertyTaskList property = {property} />
+                </div>
+
             </div>
-            
 
         
 
@@ -187,9 +160,7 @@ return (
 
 
 
-            <div className="property-task-container">
-                <PropertyTaskList property = {property} />
-            </div>
+            
 
          
 

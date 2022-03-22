@@ -12,16 +12,6 @@ import { UserLocation } from "./LocationTest/UserLocation"
 import { UserNoteForm } from "./LocationTest/UserNoteForm"
 import { UserNotesMap } from "./LocationTest/UserNotesMap"
 import { Dashboard } from "./Dashboard/Dashboard"
-import { MFRent } from "./Properties/Multifamily/MFRent"
-import { MFRentForm } from "./Properties/Multifamily/MFRentForm"
-
-
-
-
-
-
-
-
 
 
 
@@ -61,9 +51,6 @@ export const ApplicationViews = () => {
                 <Property />
             </Route>
 
-            <Route exact path= "/properties/rent-information/:propertyId(\d+)">
-                <MFRentForm />
-            </Route>
 
             <Route exact path= "/properties/edit">
                 <EditPropertyModal />
@@ -77,11 +64,7 @@ export const ApplicationViews = () => {
                 <UserNoteForm />
             </Route>
 
-            
-
-            {/* <Route exact path= "/properties/map">
-                <PropertyMap />
-            </Route> */}
+        
 
             <Route exact path= "/user-notes/map">
                 <UserNotesMap />
@@ -91,6 +74,8 @@ export const ApplicationViews = () => {
             <Route exact path= "/dashboard">
                 <Dashboard />
             </Route>
+
+
 
 
 
