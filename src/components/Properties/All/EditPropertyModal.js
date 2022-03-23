@@ -12,7 +12,7 @@ import { PropertyForm } from "./PropertyForm"
 
 //props includes all of the properties that were passed into the Modal in property form
 //includes onclose function, property, and setProperty
-export const EditPropertyModal = ({property, setProperty, floorplans, setFloorplans, show, onClose}) => {
+export const EditPropertyModal = ({property, setProperty, floorplans, setFloorplans, show, onClose, unitSizes, refresh, setRefresh}) => {
     const [cities, setCities] = useState([])
     const [neighborhoods, setNeighborhoods] = useState([])
     const [states, setStates] = useState([])
@@ -20,7 +20,7 @@ export const EditPropertyModal = ({property, setProperty, floorplans, setFloorpl
     const [filteredNeighborhoods, setFilteredNeighborhoods] = useState([])
     const [statuses, setStatuses] = useState([])
     const [propertyTypes, setPropertyTypes] = useState([])
-    const [unitSizes, setUnitSizes] = useState([])
+    
     const history = useHistory()
     
 
@@ -87,16 +87,7 @@ export const EditPropertyModal = ({property, setProperty, floorplans, setFloorpl
         []
     )
 
-    useEffect(
-    () => {
-        getMFUnitSizes()
-        .then(
-            (sizeReponse) =>{
-                setUnitSizes(sizeReponse)
-            }
-        )
-    },[]
-)
+    
 
   
 
@@ -106,7 +97,8 @@ export const EditPropertyModal = ({property, setProperty, floorplans, setFloorpl
 
         switch(property.typeId) {
             case 1:
-                return <MultifamilyPropertyForm property = {property} setProperty = {setProperty} floorplans={floorplans} setFloorplans={setFloorplans} viewFloorplans={""}/>
+                //view floorplans === true because it is multifamily, can view floorplan options on all multifamily properties
+                return <MultifamilyPropertyForm property = {property} setProperty = {setProperty} floorplans={floorplans} setFloorplans={setFloorplans} viewFloorplans={true} unitSizes = {unitSizes} refresh = {refresh} setRefresh={setRefresh}/>
               break;
             case 2:
                 return <OfficePropertyForm property = {property} setProperty = {setProperty}/>
@@ -117,7 +109,7 @@ export const EditPropertyModal = ({property, setProperty, floorplans, setFloorpl
            
           }
     }
-//We will use the props input to control the show or not show , comes from property component
+//We will use the props input to control the show or not show the modal, comes from property component
     if(show === false){
         return null
     } else {
@@ -291,15 +283,15 @@ export const EditPropertyModal = ({property, setProperty, floorplans, setFloorpl
                         onClick={
                             () => {
                                 if(property.floorplans === true){
-                                    unitSizes.map(unitType => {
+                                    floorplans.map(plan => {
                                       
-                                        return updatePropertyFloorplan(floorplans[unitType.id])
+                                        return updatePropertyFloorplan(plan)
                                     })
                                     
                                 } else {
-                                    unitSizes.map(unitType => {
+                                    floorplans.map(plan => {
                             
-                                        return sendPropertyFloorplan(floorplans[unitType.id])
+                                        return sendPropertyFloorplan(plan)
                                     })
                                 }
                             
@@ -307,9 +299,10 @@ export const EditPropertyModal = ({property, setProperty, floorplans, setFloorpl
                                 
                                     
                                     property.floorplans = true
-                                    console.log(property)
                                     updateProperty(property)
+                                    setRefresh(!refresh) 
                                     onClose()
+                                    
                                 
                                 
                             }

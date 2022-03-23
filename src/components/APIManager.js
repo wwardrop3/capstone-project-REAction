@@ -287,3 +287,11 @@ export const sendMFUnitRent = (rentObject) => {
 
     return fetch(`${dataSource}/MFUnitRents`, fetchOptions)
 }
+
+
+export const deleteMFUnitRent = (MFRentId) => {
+    const fetchOptions = {
+        method:"DELETE",
+    }
+    return fetch(`${dataSource}/MFUnitRents/${MFRentId}`, fetchOptions)
+}

@@ -6,6 +6,7 @@
 #nav-bar{
     width: 100vw;
     height: 10vh;
+    max-height: 100px;
     object-fit: contain;
     background-color: rgba(137, 165, 189, 0.404);
 

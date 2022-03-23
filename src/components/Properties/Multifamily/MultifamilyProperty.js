@@ -2,32 +2,49 @@
 
 import { waitForElementToBeRemoved } from "@testing-library/react"
 import { ca } from "date-fns/locale"
+import { indexOf } from "lodash"
 import { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
 import { useParams } from "react-router-dom"
-import { deleteProperty, getMFPropertyFloorplans, getMFRents, getMFUnitSizes, removeProperty, retrieveProperty } from "../../APIManager"
+import { deleteProperty, getMFPropertyFloorplans, getMFRents, getMFUnitSizes, removeProperty, retrieveProperty} from "../../APIManager"
+import { RRHistory } from "./RRHistory"
 
 
 //create component function MultifamilyProperty
-export const MultifamilyProperty = ({property, setProperty, floorplans, refresh}) =>{
-    const [propUnits, setPropUnits] = useState()
+export const MultifamilyProperty = ({property, setProperty, floorplans, refresh, setRefresh, unitSizes}) =>{
+    const [propUnits, setPropUnits] = useState(0)
+    const [propOccupancy, setPropOccupancy] = useState()
     const [propAvgRent, setPropAvgRent] = useState()
-    const [propAvgSF, setPropAvgSF] = useState()
+    const [propAvgSF, setPropAvgSF] = useState(0)
     const [propertyRents, setPropertyRents] = useState([])
 
 
     useEffect(
         () => {
-            let j = 0
-            for(let i = 1; i<5; i++){
-                if(floorplans[i]?.active === true){
-                    j+=floorplans[i]?.units
+            let copy = propUnits
+            copy = 0
+            for(const plan of floorplans){
+                if(plan.active === true){
+                    copy+=plan.units
                     
 
-                }
-                setPropUnits(j)
-            }
-        },[refresh, property, floorplans]
+                }    
+            }setPropUnits(copy)
+        },[floorplans]
+    )
+
+    useEffect(
+        () => {
+            let copy = propAvgSF
+            copy=0
+            for(const plan of floorplans){
+                if(plan.active === true){
+                    copy+=plan.units * plan.avgSF
+                    
+                }    
+            }setPropAvgSF(copy/propUnits)
+           
+        },[propUnits, refresh]
     )
 
     useEffect(
@@ -35,24 +52,59 @@ export const MultifamilyProperty = ({property, setProperty, floorplans, refresh}
             getMFRents()
             .then(
                 (rentResponse) => {
-                    for(const key in floorplans){
-                        console.log(floorplans)
-                        // setPropertyRents(rentResponse.filter(floorplans[key].id === rentResponse.floorplanId))
-                    }
+                    let copy = [...propertyRents]
+                    let filteredRents = []
+                    //find all rents associated with each floorplan of the property (2 iterations)
+                    floorplans.map(plan => {
+                        const rentFilter = rentResponse.filter(rent => rent.propertyFloorplanId === plan.id)
+                        rentFilter.forEach(rentFil => { filteredRents.push(rentFil)
+                            
+                        });
+                    })
                     
-                },[floorplans, refresh]
+                    copy = filteredRents.sort((a,b) => Date.parse(a.date) - Date.parse(b.date))
+                    setPropertyRents(copy)
+                }
             )
-        }
+        },[floorplans, refresh]
+    )
+
+    useEffect(
+        () => {
+            let occ = 0
+            const copy = [...propertyRents]
+            const recentList = copy.slice(-4)
+            for(const rent of recentList){
+                if(floorplans[recentList.indexOf(rent)]?.active === true){
+                    occ+= (floorplans[recentList.indexOf(rent)]?.units * rent.occupancy)
+                }    
+            }
+            setPropOccupancy(occ/propUnits)
+        },[propertyRents, refresh]
+    )
+
+
+    useEffect(
+        () => {
+            let pRent = 0
+            const copy = [...propertyRents]
+            const recentList = copy.slice(-4)
+            for(const rent of recentList){
+                if(floorplans[recentList.indexOf(rent)]?.active === true){
+                    pRent+= (floorplans[recentList.indexOf(rent)]?.units * rent.rent)
+                }    
+            }
+            setPropAvgRent(pRent/propUnits)
+        },[propertyRents, refresh]
     )
     
+  
+
+
+
     //need to isolate the most recent 4 for the most updated rents to apply weighted average
-    const avgRent = () => {
-        console.log(propertyRents)
-        }
-    
 
 
-   
 
     const history = useHistory()
 
@@ -65,24 +117,25 @@ export const MultifamilyProperty = ({property, setProperty, floorplans, refresh}
         <>
         <div className="infoContainer">
 
-               
                 <div>
-                    <h2>Occupancy</h2>
-                    <p>{property?.occupancy}</p>
-                </div>
-
-                <div>
-                    <h2>Units</h2>
+                    <h2>Total Units</h2>
                     <p>{propUnits}</p>
-                </div>
+                </div>  
 
                 <div>
-                    <h2>Average SF</h2>
-                    <p>{avgRent()}</p>
+                    <h2>Average SF (Weighted)</h2>
+                    <p>{propAvgSF}</p>
                 </div>
+
+
+                <div>
+                    <h2>Occupancy (Weighted)</h2>
+                    <p>{propOccupancy}</p>
+                </div>
+
                     
                 <div>
-                    <h2>Rent</h2>
+                    <h2>Average Rent (Weighted)</h2>
                     <p>{propAvgRent}</p>
                 </div>
                         
@@ -95,6 +148,8 @@ export const MultifamilyProperty = ({property, setProperty, floorplans, refresh}
                     <h2>Management</h2>
                     <p>{property?.management}</p>
                 </div>
+
+            <RRHistory property = {property} floorplans = {floorplans} propertyRents={propertyRents} propUnits = {propUnits} refresh={refresh} setRefresh={setRefresh} unitSizes = {unitSizes}/>
 
                 
         

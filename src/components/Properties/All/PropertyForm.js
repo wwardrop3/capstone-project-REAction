@@ -53,6 +53,8 @@ export const PropertyForm = () => {
             occupancy:0,
             floorplans:false
         })
+
+        
         
     
         
@@ -60,7 +62,7 @@ export const PropertyForm = () => {
 
             switch(propertyTypeId) {
                 case "1":
-                    return <MultifamilyPropertyForm property = {property} setProperty = {setProperty} viewFloorplans = {"none"}/>
+                    return <MultifamilyPropertyForm property = {property} setProperty = {setProperty} viewFloorplans = {false}/>
                   break;
                 case "2":
                     return <OfficePropertyForm property = {property} setProperty = {setProperty}/>
@@ -329,6 +331,7 @@ export const PropertyForm = () => {
                                 const copy = {...property}
                                 copy.location = response.data.results[0]?.geometry?.location
                                 sendProperty(copy).then(history.push("/properties")
+                                
                                 
                                 
                                 )}).catch(console.log("ERROR"))

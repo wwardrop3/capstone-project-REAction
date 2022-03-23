@@ -7,38 +7,44 @@ import { getMFRents, getMFUnitSizes, sendMFUnitRent } from "../../APIManager"
 import { MFRentForm } from "./MFRentForm"
 
 //view floorplans is false if this is invoked from the add new property section, and true if being invoked from editing existing property
-export const MultifamilyPropertyForm = ({property, setProperty, floorplans, setFloorplans, viewFloorplans}) => {
+export const MultifamilyPropertyForm = ({property, setProperty, floorplans, setFloorplans, viewFloorplans, unitSizes, refresh, setRefresh}) => {
 
         const [viewRentRoll, setViewRentRoll] = useState(false)
         const [saveCheck, setSaveCheck] = useState(false)
-        const [newRentRoll, setNewRentRoll] = useState({
-            1: {
+        const [newRentRoll, setNewRentRoll] = useState([
+            {
                 propertyFloorplanId: 1,
                 date: "",
                 rent: "",
                 occupancy: "",
                 active: false
                 },
-            2: {propertyFloorplanId: 1,
-            date: "",
-            rent: "",
-            occupancy: "",
-            active: false
-        },
-            3: {propertyFloorplanId: 1,
-            date: "",
-            rent: "",
-            occupancy: "",
-            active: false
-        },
-        4: {propertyFloorplanId: 1,
-            date: "",
-            rent: "",
-            occupancy: "",
-            active: false
-}
-        })
-        const [unitSizes, setUnitSizes] = useState([])
+            {
+                propertyFloorplanId: 1,
+                date: "",
+                rent: "",
+                occupancy: "",
+                active: false
+            },
+            {
+                propertyFloorplanId: 1,
+                date: "",
+                rent: "",
+                occupancy: "",
+                active: false
+            },
+            {
+                propertyFloorplanId: 1,
+                date: "",
+                rent: "",
+                occupancy: "",
+                active: false
+            }
+
+        ])
+           
+        
+
         const history = useHistory()
         
         const rentSaveCheck = () => {
@@ -48,24 +54,33 @@ export const MultifamilyPropertyForm = ({property, setProperty, floorplans, setF
                 )
             }}
         
+        const floorplanCheck = () => {
+            if(property.floorplans===true){
+                return (
+                    <button
+                    onClick={
+                        () => {
+                            console.log(floorplans)
+                            setViewRentRoll(!viewRentRoll)
+                        }
+                    }
+                    >View/Hide Rents</button>
+                )
+            }
+
+           
+        }
         
         
 
 
-    useEffect(
-        () => {
-            getMFUnitSizes()
-            .then(
-                (sizeResponse) => {
-                    setUnitSizes(sizeResponse)
-                }
-            )
-        },[]
-    )
+
+    
 
     //viewfloorplans = none means that its a new property that does not yet have floorplans
     const seeFloorplans = () => {
-        if(viewFloorplans != "none"){
+       
+        if(viewFloorplans === true){
             return (
                 <>
                 <div className="check-floorplans">
@@ -79,19 +94,20 @@ export const MultifamilyPropertyForm = ({property, setProperty, floorplans, setF
                                 <th>Avg. SF</th>
                                 
                             </tr>
-                            {unitSizes.map(unit => {
+                            {floorplans.map(plan => {
+                        
                                 return (
                                     <>
                                         <tr>
-                                            <td>{unit.name}</td>
+                                            <td>{unitSizes[floorplans.indexOf(plan)]?.name}</td>
                                             <td><input 
                                             type="checkbox" 
-                                            checked={floorplans[unit.id]?.active}
+                                            checked={plan.active}
                                                     onChange = {
                                                         () => {
-                                                            const copy = {...floorplans}
-                                                            copy[unit.id].active = !copy[unit.id].active
-                                                            console.log(copy)
+                                                            const copy = [...floorplans]
+                                                            copy[floorplans.indexOf(plan)].active = !copy[floorplans.indexOf(plan)].active
+                                                        
                                                             setFloorplans(copy)
                                                             
                                                         }
@@ -100,14 +116,14 @@ export const MultifamilyPropertyForm = ({property, setProperty, floorplans, setF
                                             
                                             /></td>
                                         <td><input
-                                        disabled= {!floorplans[unit.id]?.active}
+                                        disabled= {!plan.active}
                                         // style={{display: floorplans[unit.id].applicable ? "":"display:none;"}}
                                         type="number"
-                                        value={floorplans[unit.id]?.units}
+                                        value={plan.units}
                                         onChange={
                                             (evt) => {
-                                                const copy = {...floorplans}
-                                                copy[unit.id].units = parseInt(evt.target.value)
+                                                const copy = [...floorplans]
+                                                copy[floorplans.indexOf(plan)].units = parseInt(evt.target.value)
                                             
                                                 setFloorplans(copy)
 
@@ -122,14 +138,13 @@ export const MultifamilyPropertyForm = ({property, setProperty, floorplans, setF
                                             <td>
                                             <input
                                             //When floorplans is inactive, input box will be grayed out
-                                            disabled= {!floorplans[unit.id]?.active}
-                                            // style={floorplans[unit.id].applicable ? "":"display:none;"}
+                                            disabled= {!plan.active}
                                             type="number"
-                                            value={floorplans[unit.id]?.AvgSF}
+                                            value={plan.avgSF}
                                             onChange={
                                                 (evt) => {
-                                                    const copy = {...floorplans}
-                                                    copy[unit.id].AvgSF = parseInt(evt.target.value)
+                                                    const copy = [...floorplans]
+                                                    copy[floorplans.indexOf(plan)].avgSF = parseInt(evt.target.value)
                                                     setFloorplans(copy)
 
                                                     
@@ -148,6 +163,11 @@ export const MultifamilyPropertyForm = ({property, setProperty, floorplans, setF
                         </tbody>
                         
                     </table>
+                    
+
+                {floorplanCheck()}
+                
+                {seeRentRoll()}
                 
                 </div>
                 
@@ -167,12 +187,12 @@ export const MultifamilyPropertyForm = ({property, setProperty, floorplans, setF
                     name="rent-roll-date"
                     onChange={
                         (evt) => {
-                            const copy = {...newRentRoll}
-                            for(const key in floorplans){
+                            const copy = [...newRentRoll]
+                            for(const rent of copy){
                                 
-                                copy[key].date = evt.target.value
-                                copy[key].propertyFloorplanId = floorplans[key].id
-                                copy[key].active = floorplans[key].active
+                                copy[newRentRoll.indexOf(rent)].date = evt.target.value
+                                copy[newRentRoll.indexOf(rent)].propertyFloorplanId = floorplans[newRentRoll.indexOf(rent)].id
+                                copy[newRentRoll.indexOf(rent)].active = floorplans[newRentRoll.indexOf(rent)].active
                             }
                             setNewRentRoll(copy)
                             
@@ -184,27 +204,27 @@ export const MultifamilyPropertyForm = ({property, setProperty, floorplans, setF
                         <tbody>
                             <tr>
                                 <th>Unit Type</th>
-                                <th>Rent</th>
-                                <th>Occupancy</th>
+                                <th>Average Rent</th>
+                                <th>Average Occupancy</th>
                                 <th>Rent PSF</th>
                                 
                             </tr>
-                            {unitSizes.map(unit => {
+                            {floorplans.map(plan => {
                                 return (
                                     <>
                                         <tr>
-                                            <td>{unit.name}</td>
+                                            <td>{unitSizes[floorplans.indexOf(plan)].name}</td>
                                             
                                             <td>
                                             <input
                                             //When floorplans is inactive, input box will be grayed out
-                                            disabled= {!floorplans[unit.id]?.active}
+                                            disabled= {!plan.active}
                                             // style={floorplans[unit.id].applicable ? "":"display:none;"}
                                             type="number"
                                             onChange={
                                                 (evt) => {
-                                                    const copy = {...newRentRoll}
-                                                    copy[unit.id].rent = parseInt(evt.target.value)
+                                                    const copy =[...newRentRoll]
+                                                    copy[floorplans.indexOf(plan)].rent = parseInt(evt.target.value)
                                                     setNewRentRoll(copy)
                                                     
                                                 }
@@ -216,15 +236,15 @@ export const MultifamilyPropertyForm = ({property, setProperty, floorplans, setF
                                             <td>
                                             <input
                                             //When floorplans is inactive, input box will be grayed out
-                                            disabled= {!floorplans[unit.id]?.active}
+                                            disabled= {!plan.active}
                                             // style={floorplans[unit.id].applicable ? "":"display:none;"}
                                             type="number"
                                             onChange={
                                                 (evt) => {
-                                                    const copy = {...newRentRoll}
-                                                    copy[unit.id].occupancy = parseInt(evt.target.value)
+                                                    const copy = [...newRentRoll]
+                                                    copy[floorplans.indexOf(plan)].occupancy = parseInt(evt.target.value)
                                                     setNewRentRoll(copy)
-                                                    console.log(evt.target.value)
+                                             
       
                                                 }
                                             }
@@ -233,7 +253,7 @@ export const MultifamilyPropertyForm = ({property, setProperty, floorplans, setF
                                             </td>
 
                                             <td>
-                                                {newRentRoll[unit.id]?.rent / floorplans[unit.id]?.AvgSF}
+                                                {newRentRoll[floorplans.indexOf(plan)].rent / plan.avgSF}
                                             </td>
                                         </tr>
                                     
@@ -249,10 +269,18 @@ export const MultifamilyPropertyForm = ({property, setProperty, floorplans, setF
                     <button
                     onClick={
                         () => {
-                            unitSizes.map(unit => {
-                                sendMFUnitRent(newRentRoll[unit.id])
-                            })
-                            setSaveCheck(!saveCheck)
+                            if(newRentRoll[0].date === ""){
+                                window.alert("Select a date")
+                            } else {
+                                newRentRoll.map(rent => {
+                                    sendMFUnitRent(rent)
+                                    setSaveCheck(!saveCheck)
+                                    setRefresh(!refresh)
+                                    
+                                })
+                                
+                            }
+                            
                         }
                     }>Save Rent Roll</button>
 
@@ -329,14 +357,7 @@ export const MultifamilyPropertyForm = ({property, setProperty, floorplans, setF
 
                 {seeFloorplans()}
                     
-                <button
-                onClick={
-                    () => {
-                        setViewRentRoll(!viewRentRoll)
-                    }
-                }
-                >View/Hide Rents</button>
-                {seeRentRoll()}
+                
                 
                 
                   

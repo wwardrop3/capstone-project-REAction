@@ -9,6 +9,7 @@ import { getCities, getStates, sendProperty } from "../APIManager"
 export const GeocodeProperty = ({property}, {setProperty}) =>{
     const [state, setState] = useState({})
     const [city, setCity] = useState({})
+    const key = process.env.REACT_APP_GOOGLE_GEOCODE_APIKEY
     console.log({property})
 
     const history = useHistory()
@@ -39,10 +40,10 @@ export const GeocodeProperty = ({property}, {setProperty}) =>{
 
 
     const location = {formattedString}
-    axios.get(`https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyA-1SdY6vkTh1FI4i_5OUH9PoHhoRCpzmE`,{
+    axios.get(`https://maps.googleapis.com/maps/api/geocode/json?key=${key}`,{
     params :{
         address: {location},
-        key: process.env.REACT_APP_GOOGLE_GEOCODE_APIKEY
+        key: {key}
     }})
     .then(response => {
                 let copy = {...property}

@@ -1,4 +1,4 @@
-//MASTER COMPONENT FOR ALL PROPERTY DETAILS
+//MASTER COMPONENT FOR ALL PROPERTY DETAILS---triggered when a property is clicked on
 import { waitForElementToBeRemoved } from "@testing-library/react"
 import { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
@@ -16,41 +16,43 @@ import "./Property.css"
 //create component function MultifamilyProperty
 export const Property = () => {
     const [property, setProperty] = useState({})
+
     //below is for the modal, update element
     const [show, setShow] = useState(false)
+    const [unitSizes, setUnitSizes] = useState([])
     const { propertyId } = useParams()
     const [refresh, setRefresh] = useState(true)
-    const [floorplans, setFloorplans] = useState({
-            1: {
-                AvgSF:0,
-                sizeId: 1,
-                propertyId: parseInt(propertyId),
-                units:0,
-                active: false
-            },
-            2: {
-                AvgSF:0,
-                sizeId: 2,
-                propertyId: parseInt(propertyId),
-                units:0,
-                active: false
-            },
-            3: {
-                AvgSF:0,
-                sizeId: 3,
-                propertyId: parseInt(propertyId),
-                units:0,
-                active: false
-            },
-            4: {
-                AvgSF:0,
-                sizeId: 4,
-                propertyId: parseInt(propertyId),
-                units:0,
-                active: false
-            }}
-            
-        )
+    const [floorplans, setFloorplans] = useState([
+        {
+            "propertyId": parseInt(propertyId),
+            "sizeId": 1,
+            "units": 0,
+            "avgSF": 0,
+            "active": false
+        },
+        {
+            "propertyId": parseInt(propertyId),
+            "sizeId": 2,
+            "units": 0,
+            "avgSF": 0,
+            "active": false
+        },
+        {
+            "propertyId": parseInt(propertyId),
+            "sizeId": 3,
+            "units": 0,
+            "avgSF": 0,
+            "active": false
+        },
+        {
+            "propertyId": parseInt(propertyId),
+            "sizeId": 4,
+            "units": 0,
+            "avgSF": 0,
+            "active": false
+        }
+    ])
+   
 
     
 
@@ -69,16 +71,33 @@ export const Property = () => {
 //import the floorplans for the property if they already exist shown by the active property
     useEffect(
         () => {
-            if(property.floorplans === true){
-                getMFPropertyFloorplans()
-                .then(
-                    (floorplanResponse) => {
-                        const filteredResponses = floorplanResponse.filter(plan => plan.propertyId === property.id)
-                        filteredResponses.map(response => {
-                            floorplans[response.sizeId] = response
-                        
-                        })})}},[property]
-                )
+            getMFPropertyFloorplans()
+            .then(
+                (planResponse) => {
+                    if(property.floorplans === true){
+                        setFloorplans(planResponse.filter(plan => plan.propertyId === parseInt(propertyId)))
+        
+                    }
+                    
+                }
+            )
+        },[property]
+    )
+
+    useEffect(
+        () => {
+            getMFUnitSizes()
+            .then(
+                (sizeReponse) =>{
+                    setUnitSizes(sizeReponse)
+                    
+                }
+            )
+        },[refresh]
+    )
+
+
+    
                     
 const history = useHistory()
 
@@ -88,7 +107,7 @@ const details = () => {
 
     switch(property.typeId) {
         case 1:
-            return <MultifamilyProperty property = {property} setProperty= {setProperty} floorplans = {floorplans} refresh = {refresh} />
+            return <MultifamilyProperty property = {property} setProperty= {setProperty} floorplans = {floorplans} refresh = {refresh} setRefresh= {setRefresh} unitSizes = {unitSizes}/>
           break;
         case 2:
             return <OfficeProperty property = {property} floorplans = {floorplans}/>
@@ -164,12 +183,13 @@ return (
 
          
 
-            <EditPropertyModal property = {property} setProperty = {setProperty} refresh = {refresh} setRefresh = {setRefresh} floorplans={floorplans} setFloorplans={setFloorplans}
+            <EditPropertyModal property = {property} setProperty = {setProperty} refresh = {refresh} setRefresh = {setRefresh} floorplans={floorplans} setFloorplans={setFloorplans} unitSizes={unitSizes}
             
                 onClose = {
                     () =>{
-                        setShow(false) 
+                        setShow(false)
                         setRefresh(!refresh)
+                        
                         }}
                 show = {show}
                 
