@@ -39,9 +39,10 @@ export const RRHistory = ({floorplans, propertyRents, refresh, setRefresh, unitS
                     
                         <tr>
                             <th>Unit Type</th>
+                            <th># Units</th>
                             <th>Rent</th>
                             <th>Occupancy</th>
-                            <th>Rent PSF</th>
+                            
                                     
                         </tr>
                                 
@@ -61,7 +62,7 @@ export const RRHistory = ({floorplans, propertyRents, refresh, setRefresh, unitS
                                                     <td>{foundUnitSize.name}</td>
                                                     
                                                     
-                                                    
+                                                    <td>{foundFloorplan.units}</td>
                                                     <td>{rent.rent}</td>
                                                     <td>{rent.occupancy}</td>
     

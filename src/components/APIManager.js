@@ -32,7 +32,7 @@ export const sendUser = (userObject) => {
 
 //create getUser function to return a single user using a passed-in id
 export const retriveUser = (id) => {
-    return fetch(`${dataSource}/users`)
+    return fetch(`${dataSource}/users/${id}`)
     .then(res => res.json())
 }
 
