@@ -7,6 +7,7 @@ import { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
 import { useParams } from "react-router-dom"
 import { deleteProperty, getMFPropertyFloorplans, getMFRents, getMFUnitSizes, removeProperty, retrieveProperty} from "../../APIManager"
+import { MFDataCharts } from "./MFDataCharts"
 import { RRHistory } from "./RRHistory"
 
 
@@ -16,6 +17,10 @@ export const MultifamilyProperty = ({property, setProperty, floorplans, refresh,
     const [propOccupancy, setPropOccupancy] = useState()
     const [propAvgRent, setPropAvgRent] = useState()
     const [propAvgSF, setPropAvgSF] = useState(0)
+    let formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        maximumFractionDigits:0})
     const [propertyRents, setPropertyRents] = useState([])
 
 
@@ -124,19 +129,19 @@ export const MultifamilyProperty = ({property, setProperty, floorplans, refresh,
 
                 <div>
                     <h2>Average SF (Weighted)</h2>
-                    <p>{propAvgSF}</p>
+                    <p>{propAvgSF?.toFixed(0)}</p>
                 </div>
 
 
                 <div>
                     <h2>Occupancy (Weighted)</h2>
-                    <p>{propOccupancy}</p>
+                    <p>{propOccupancy?.toFixed(0)}</p>
                 </div>
 
                     
                 <div>
                     <h2>Average Rent (Weighted)</h2>
-                    <p>{propAvgRent}</p>
+                    <p>{formatter.format(propAvgRent)}</p>
                 </div>
                         
                 <div>
@@ -150,7 +155,7 @@ export const MultifamilyProperty = ({property, setProperty, floorplans, refresh,
                 </div>
 
             <RRHistory property = {property} floorplans = {floorplans} propertyRents={propertyRents} propUnits = {propUnits} refresh={refresh} setRefresh={setRefresh} unitSizes = {unitSizes}/>
-
+            <MFDataCharts property = {property} floorplans = {floorplans} propertyRents={propertyRents} propUnits = {propUnits} refresh={refresh} setRefresh={setRefresh} unitSizes = {unitSizes}/>
                 
         
                 

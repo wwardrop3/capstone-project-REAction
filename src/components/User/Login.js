@@ -28,7 +28,7 @@ export const Login = () => {
             .then(exists => {
                 if (exists) {
                     localStorage.setItem("property_user", exists.id)
-                    history.push("/properties")
+                    history.push("/dashboard")
                 } else {
                     existDialog.current.showModal()
                 }

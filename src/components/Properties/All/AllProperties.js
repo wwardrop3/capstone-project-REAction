@@ -5,7 +5,7 @@ import { CSVLink } from "react-csv"
 import { useHistory } from "react-router-dom"
 import { useParams } from "react-router-dom"
 import { Link } from "react-router-dom"
-import { GetProperties, getPropertyTypes } from "../../APIManager"
+import { GetProperties, getPropertyTypes, getStatuses } from "../../APIManager"
 import { PropertyMap } from "../../Location/PropertyMap"
 import "./AllProperties.css"
 
@@ -21,10 +21,13 @@ export const AllProperties = () => {
     //create useState variables "properties" and "setProperties"
     const[propertyTypes, setPropertyTypes] = useState([])
     const[userProperties, setUserProperties] = useState([])
+    const [propertyStatuses, setPropertyStatuses] = useState([])
     const [data, setData] = useState([])
     const [highlight, setHighlight] = useState()
     const [markerHighlight, setMarkerHighLight] = useState()
-    const {typeId} =useParams()
+    const [typeState, setTypeState]=useState(!false)
+    const { typeId } =useParams()
+    const { statusId } =useParams()
     
     const history = useHistory()
 
@@ -36,12 +39,14 @@ export const AllProperties = () => {
         5:"lightBlue"
     }
 
+    
 
     const isSelected = (propertyId, highlightId) => {
         if(highlightId === propertyId){
             return "lightGreen"
         }
     }
+
 
 
     useEffect(
@@ -51,7 +56,7 @@ export const AllProperties = () => {
             .then(
                 (propResponse) => {
                     //create if/else statement to determine if there is a specific property type that is being requested. If there is no specific property type required, the type ID will be undefined and this should return all properties
-                    if(typeId===undefined){
+                    if(typeId==="0"){
                         //save all properties to userProperties
                         setUserProperties(propResponse.filter(prop => prop.userId === parseInt(localStorage.getItem("property_user"))))
                     } else {
@@ -66,6 +71,28 @@ export const AllProperties = () => {
             },[typeId]
     )
 
+    useEffect(
+        () =>{
+            //Invoke GetProperties from the API manager to fetch all user properties
+            GetProperties()
+            .then(
+                (propResponse) => {
+                    //create if/else statement to determine if there is a specific property type that is being requested. If there is no specific property type required, the type ID will be undefined and this should return all properties
+                    if(statusId==="0"){
+                        //save all properties to userProperties
+                        setUserProperties(propResponse.filter(prop => prop.userId === parseInt(localStorage.getItem("property_user"))))
+                    } else {
+                        //if there is a specific property type requested, filter all properties so that only properties with an ID that was received from the URL by useParams method and then save to userProperties
+                        const userFilter = propResponse.filter(prop => prop.userId === parseInt(localStorage.getItem("property_user")))
+                        setUserProperties(userFilter.filter(prop => prop.statusId === parseInt(statusId)))
+                        
+                    }
+                }
+            )
+            //rerun anytime the type id changes / user requests a different property type
+            },[statusId]
+    )
+
     //Invoke GetProperties from the API manager to fetch all propertyType objects and then save to app state
     useEffect(
         () => {
@@ -77,19 +104,49 @@ export const AllProperties = () => {
                 )
         },
         //anytime a user requests a different property type, rerun
-        [typeId]
+        []
     )
 
+    useEffect(
+        () => {
+            getStatuses()
+                .then(
+                    (statusResponse) => {
+                        setPropertyStatuses(statusResponse)
+                    }
+                )
+        },
+        //anytime a user requests a different property type, rerun
+        []
+    )
+
+    useEffect(
+        () => {
+            if(statusId===undefined){
+                setTypeState(!typeState)
+            }
+        },[]
+    )
     //use type Id from useParams to get the name of the property type to put into string
 
     let propertyTypeName = ""
 
     const propertyTypeNames = () => {
         propertyTypeName = propertyTypes.find(type => parseInt(typeId) === type.id)
-        if(typeId === undefined){
+        if(typeId === "0" || statusId!=undefined){
             return "All"
         } else {
             return propertyTypeName?.name
+        }
+    }
+
+    let propertyStatusName = ""
+    const propertyStatusNames = () => {
+        propertyStatusName = propertyStatuses.find(status => parseInt(statusId) === status.id)
+        if(statusId === "0" || typeId!=undefined){
+            return "All"
+        } else {
+            return propertyStatusName?.name
         }
     }
 
@@ -105,19 +162,23 @@ export const AllProperties = () => {
                 <div className="propertyTypeContainer"><h2>{`${propertyTypeNames()}`}</h2></div>
 
                 <div className="property-type-select">
-                    <p>Select Property Type</p>
+                    <p>Filter by Type</p>
                     <form onChange={
                         (evt) => {
-                            if(evt.target.value === "All"){
-                                history.push("/properties")
+                            setTypeState(!typeState)
+                            if(evt.target.value === "0"){
+                                history.push("/properties/type/0/status/0")
+                             
+                                
                             } else{
                                 const foundPropertyType = propertyTypes.find(type => type.id === parseInt(evt.target.value))
-                                history.push(`/properties/type/${foundPropertyType.id}`)
+                                setTypeState(!typeState)
+                                history.push(`/properties/type/${foundPropertyType.id}/status/${statusId}`)
                             }
                     }
                     }>
                     <label>All</label>
-                    <input name= "option" type="radio" value = "All"/>
+                    <input name= "option" type="radio" value = "0"/>
                     <p></p>
                     {propertyTypes.map(type => {
                         return (
@@ -130,6 +191,31 @@ export const AllProperties = () => {
                     </form>
                 </div>
                 
+                <div className="propertyTypeContainer"><h2>{`${propertyStatusNames()}`}</h2></div>
+                <div className="property-type-select">
+                    <p>Filter by Status</p>
+                    <form onChange={
+                        (evt) => {
+                            if(evt.target.value === "0"){
+                                
+                                history.push("/properties/type/0/status/0")
+                            } else{
+                                const foundPropertyStatus = propertyStatuses.find(status => status.id === parseInt(evt.target.value))
+                                history.push(`/properties/type/${typeId}/status/${foundPropertyStatus.id}`)
+                            }
+                    }
+                    }>
+                    
+                    {propertyStatuses.map(status => {
+                        return (
+                        <>
+                        <label>{status.name}</label>
+                        <input name= "option" type="radio" value = {`${status.id}`}/>
+                        <p></p>
+                        </>
+                    )})}
+                    </form>
+                </div>
             </div>  
         
        

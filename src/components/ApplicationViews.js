@@ -31,14 +31,18 @@ export const ApplicationViews = () => {
 
         <div className="application-views-container">
                 {/*When the user first logs in, this route will invoke the AllProperties component.  This will also invoke when the user selects "all properties" option in the nav bar*/}
-            <Route exact path = {["/properties", "/"]}>
+            <Route exact path = {["/properties"]}>
                 <AllProperties />
             </Route>
 
             {/*When the Navbar options multifamily, office, or industrial is clicked on, this will reInvoke the all properties component except this will include a URL that ends with the propertyTypeId*/}
-            <Route exact path = "/properties/type/:typeId(\d+)">
+            <Route exact path = "/properties/type/:typeId(\d+)/status/:statusId(\d+)">
                 <AllProperties/>
             </Route>
+
+            {/* <Route exact path = "/properties/status/:statusId(\d+)">
+                <AllProperties/>
+            </Route> */}
 
             {/* This will invoke the master property form and pass in the propertyType # to determine the form detail*/}
             <Route exact path = "/properties/create/:propertyTypeId(\d+)">

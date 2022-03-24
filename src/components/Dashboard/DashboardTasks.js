@@ -15,13 +15,21 @@ export const DashboardTasks = ({userProperties, userTasks, userNotes, refreshLis
                 copy[taskObject.id] = false
             });
             setTaskDetailShowObject(copy)
-            console.log(copy)
+        
         },[]
     )
 
     const taskViewCheck = (boolOption, taskObject) => {
         if(boolOption === true){
             return taskObject.text
+        }
+    }
+
+    const dynamicTaskButton = (boolOption,taskObject) => {
+        if(boolOption === true){
+            return "Hide Detail"
+        } else{
+            return `${taskObject?.title}`
         }
     }
     
@@ -53,7 +61,7 @@ export const DashboardTasks = ({userProperties, userTasks, userNotes, refreshLis
                                             setTaskDetailShowObject(copy)
                                             setRefreshList(!refreshList)
                                         }
-                                    }>{task.title}</button></td>
+                                    }>{dynamicTaskButton(taskDetailShowObject[task.id], task)}</button></td>
                                 
                                 
                                 

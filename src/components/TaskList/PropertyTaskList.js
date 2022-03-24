@@ -5,6 +5,7 @@ import { CreatePropertyTask } from "./CreatePropertyTask"
 
 export const PropertyTaskList = ({property}) => {
     const [taskList, setTaskList] = useState([])
+    const [toggleAddTask, setToggleAddTask] =useState(false)
     const [refreshList, setRefreshList] = useState(false)
 
 
@@ -17,6 +18,16 @@ export const PropertyTaskList = ({property}) => {
                     
         })},[refreshList, property]
     )
+
+
+    const taskDynamicButton = () => {
+        if(toggleAddTask === true){
+            return "Hide Add Task"
+        } else {
+            return "View Add Task"
+        }
+    }
+
  
     return (
         <>
@@ -68,7 +79,14 @@ export const PropertyTaskList = ({property}) => {
         </table>
 
         <div className="create-taske-container">
-        <CreatePropertyTask refreshList = {refreshList} setRefreshList = {setRefreshList} property = {property}/>
+            <button
+            onClick={
+                (evt) => {
+                    setToggleAddTask(!toggleAddTask)
+                }
+            }
+        >{taskDynamicButton()}</button>
+        <CreatePropertyTask refreshList = {refreshList} setRefreshList = {setRefreshList} property = {property} toggleAddTask = {toggleAddTask} setToggleAddTask={setToggleAddTask} />
         </div>
         </>    
         )

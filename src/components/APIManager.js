@@ -47,7 +47,7 @@ export const deleteUser = (id) => {
     //below filters the the fetch call to only the objects of the user that is signed in and then passes it into the set user state
     // setServiceTickets(userTickets.filter(serviceTicket => serviceTicket.customerId === parseInt(localStorage.getItem("honey_customer"))))
 export const GetProperties = () => {
-    return fetch(`${dataSource}/properties?_expand=type&_expand=neighborhood&_expand=state&_expand=city&_expand=status`)
+    return fetch(`${dataSource}/properties?_expand=status&_expand=type&_expand=neighborhood&_expand=state&_expand=city&_expand=status`)
     .then(res => res.json())
             
 }

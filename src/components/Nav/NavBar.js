@@ -89,7 +89,7 @@ export const NavBar =() => {
                         <button name = "view-properties" className="nav-button"
                             onClick={
                                 (evt) => {
-                                    history.push(`/properties`)
+                                    history.push(`/properties/type/0/status/0`)
                                     
                                 }
                             }>Property Map
@@ -98,23 +98,7 @@ export const NavBar =() => {
 
                     
     
-                    <div className="view-filter">
-                        <select className="nav-button"
-                        value={0}
-                            onChange = {
-                                (evt) => {
-                                    setTypeId(parseInt(evt.target.value))
-                                    const foundPropertyType = propertyTypes.find(type => type.id === parseInt(evt.target.value))
-                                    const typeName = foundPropertyType.name
-                                    history.push(`/properties/create/${foundPropertyType.id}`)
-                                }}
-                                >
-                                <option value = "0">Add by Type</option>
-                            {propertyTypes.map(type => {
-                                return <option value = {`${type.id}`}>{`${type.name}`}</option>})}   
-                            </select>
-                    </div>
-
+                    
 
                 
     {/* 
@@ -141,6 +125,24 @@ export const NavBar =() => {
                             }
                         }>Notes</button>
                     </div>
+
+                    <div className="view-filter">
+                        <select className="nav-button"
+                        value={0}
+                            onChange = {
+                                (evt) => {
+                                    setTypeId(parseInt(evt.target.value))
+                                    const foundPropertyType = propertyTypes.find(type => type.id === parseInt(evt.target.value))
+                                    const typeName = foundPropertyType.name
+                                    history.push(`/properties/create/${foundPropertyType.id}`)
+                                }}
+                                >
+                                <option value = "0">Add Property by Type</option>
+                            {propertyTypes.map(type => {
+                                return <option value = {`${type.id}`}>{`${type.name}`}</option>})}   
+                            </select>
+                    </div>
+
 
 
 
