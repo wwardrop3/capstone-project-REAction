@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
-import { GoogleMap, Marker, LoadScript, InfoWindow, MarkerProps, useGoogleMap} from '@react-google-maps/api';
+import { GoogleMap, Marker, LoadScript, InfoWindow, MarkerProps, useGoogleMap } from '@react-google-maps/api';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import"./style.css"
 /*global google*/
+const google = window.google = window.google ? window.google : {}
 
 const id = ["919771f94d285faa"]
 const key= process.env.REACT_APP_GOOGLEMAPS_APIKEY
@@ -13,7 +14,7 @@ const lib = ["places"]
 
 
 
-export const PropertyMap = ({properties, highlight, setHighlight, markerHighlight}) => {
+export const PropertyMap = ({properties, highlight, setHighlight, markerHighlight, setMarkerHighLight}) => {
     const [selected, setSelected] =useState({})
     //view will keep the view of the map the same after closing the popup window on a property
     const [view, setView] = useState(
@@ -74,7 +75,7 @@ export const PropertyMap = ({properties, highlight, setHighlight, markerHighligh
         <LoadScript libraries = {lib} mapIds = {id}>
         
         
-            
+        
         <GoogleMap
         
             mapContainerStyle={mapStyles}
@@ -92,7 +93,6 @@ export const PropertyMap = ({properties, highlight, setHighlight, markerHighligh
                         return(
                             
                             
-                            // icon={featureIcons[property.statusId]}
                             
                             <Marker
                         
@@ -103,7 +103,7 @@ export const PropertyMap = ({properties, highlight, setHighlight, markerHighligh
                                 strokeWeight: isSelected(property.id, markerHighlight)[3],
                                 scale: isSelected(property.id, markerHighlight)[0],
                                 strokeColor: isSelected(property.id, markerHighlight)[1],
-                                // anchor: new google.maps.Point(4,15)
+                                anchor: new google.maps.Point(4,15)
                                 
                                 
                                 
@@ -117,14 +117,15 @@ export const PropertyMap = ({properties, highlight, setHighlight, markerHighligh
                             }
                             onMouseOver={
                                 () => {
+                                    setMarkerHighLight(property.id)
                                     setHighlight(property.id)
                                 }
                             }
-                            onMouseOut={
+                            onMouseOut ={
                                 () => {
+                                    setMarkerHighLight("")
                                     setHighlight("")
-                                }
-                            }
+                                }}
                         
                             />    
                         ) 

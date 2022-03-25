@@ -98,8 +98,10 @@ export const DashboardCharts = ({userProperties, userTasks, userNotes, refreshLi
         }
         )
         const newArray = [...emptySet]
+        const sortedNewArray = newArray.sort((a,b) => Date.parse(a) - Date.parse(b))
 
-        return newArray
+        console.log(sortedNewArray)
+        return sortedNewArray
     
     }
     
@@ -206,7 +208,7 @@ const avgRentOptions = {
     },
     title: {
       display: true,
-      text: 'Avg Rent and occupancy over time',
+      text: 'Avg Rent by Unit Type Over Time',
     },
   },
 };
@@ -219,7 +221,7 @@ const avgOccupancyOptions = {
       },
       title: {
         display: true,
-        text: 'Avg Rent and occupancy over time',
+        text: 'Avg Occupancy by Unit Type Over Time',
       },
     },
   };

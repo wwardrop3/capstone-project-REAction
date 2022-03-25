@@ -17,11 +17,13 @@ export const Dashboard = () => {
     const [userProperties, setUserProperties] = useState([])
     const [userFloorplans, setUserFloorplans] = useState([])
     const [userMFRents, setUserMFRents] = useState([])
+    const [taskRefresh, setTaskRefresh] = useState(false)
+    const [user, setUser] = useState([])
     let formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'USD',
         maximumFractionDigits:0})
-    const [user, setUser] = useState([])
+    
 
 
     useEffect(
@@ -66,7 +68,7 @@ export const Dashboard = () => {
                     setUserTasks(((taskResponse.filter(task => task.userId === parseInt(localStorage.getItem("property_user")))).sort((a,b) => Date.parse(a.dueDate) - Date.parse(b.dueDate)).sort((a,b)=> a.completed - b.completed)))   
                     }
             )
-            },[refreshList]
+            },[taskRefresh]
     )
 
 
@@ -289,7 +291,7 @@ export const Dashboard = () => {
         <>
         <div className="dashboard-charts-container">
             <div className="dashboard-chart-sidebar">
-                <p>{`Hello, ${user.name}!`}</p>
+            <p>{`${user.name}'s Dashboard`}</p>
                 <div className="dashboard-chart-sidebar-content">
 
                 <div className="sidebar-content-item">
@@ -333,7 +335,7 @@ export const Dashboard = () => {
 
 
             <div className="dashboard-task-container">
-                <DashboardTasks userProperties= {userProperties} userTasks = {userTasks} usernNotes={userNotes} refreshList={refreshList} setRefreshList={setRefreshList}/>
+                <DashboardTasks userProperties= {userProperties} userTasks = {userTasks} usernNotes={userNotes} refreshList={refreshList} setRefreshList={setRefreshList} taskRefresh = {taskRefresh} setTaskRefresh={setTaskRefresh}/>
 
             </div>
         </div>

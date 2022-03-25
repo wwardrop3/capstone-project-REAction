@@ -29,7 +29,7 @@ fieldset {
     display: inline;
     align-self: center;
     width: 94%;
-    height: calc(1.5em + .75rem + 2px);
+    height: 100%;
     padding: .375rem .75rem;
     font-size: 1rem;
     font-weight: 400;
@@ -48,6 +48,10 @@ fieldset {
 
 .container--login {
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100vw;
 }
 
 .form--login {
@@ -70,37 +74,29 @@ fieldset {
     min-width: 15rem;
     min-height: 5rem;
 }
-
-
-
-
-.container {
-    object-fit: contain;
+.login-site-logo{
+    display:flex;
     position: relative;
     justify-content: center;
+    width: 100%;
     height: 100%;
-    align-items: center;
-    top:30%;
+}
 
 
-  }
+
+
   
  
 
   /* Bottom right text */
-  .site-logo {
-    top: 10%;
-    object-fit: contain;
-    position: relative;
-    width: 75%;
-    top:-50px;
-    height: 50%
-  }
+
 
 .loginPage{
     display: flex;
     position: relative;
     height: 100%;
+    justify-content: center;
+    align-items: center;
 }
 
 .link--register{
@@ -111,3 +107,29 @@ fieldset {
     object-fit: contain;
     min-width: 750px;
 }
+
+.login-property-images{
+    display: flex;
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-image{
+    display:flex;
+    width:20%;
+    height: 100%;
+
+}
+
+.site-logo{
+    display:flex;
+    width: 60%;
+    height: 90%;
+    justify-self: right;
+}
+
+
+

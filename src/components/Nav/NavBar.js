@@ -1,18 +1,29 @@
 //The purpose of this component is to product the nav bar that will be consistent across the entire app
 import "./Nav.css"
 import { Link } from "react-router-dom"
-import { deleteUser, getPropertyTypes } from "../APIManager"
+import { deleteUser, getPropertyTypes, retriveUser } from "../APIManager"
 import { useHistory } from "react-router-dom"
 import { appLogo } from "../REAction"
 import { useEffect, useState } from "react"
+import { userInfo } from "os"
 
 
 
 export const NavBar =() => {
     const[propertyTypes, setPropertyTypes] = useState([])
     const [typeId, setTypeId] = useState()
+    const [user, setUser] = useState([])
     
-
+    useEffect(
+        () => {
+            retriveUser(parseInt(localStorage.getItem("property_user")))
+            .then(
+                (userResponse) => {
+                    setUser(userResponse)
+                }
+            )
+        },[]
+    )
 
     //Invoke GetProperties from the API manager to fetch all propertyType objects and then save to app state
     useEffect(
@@ -126,7 +137,7 @@ export const NavBar =() => {
                         }>Notes</button>
                     </div>
 
-                    <div className="view-filter">
+                    {/* <div className="view-filter">
                         <select className="nav-button"
                         value={0}
                             onChange = {
@@ -141,6 +152,27 @@ export const NavBar =() => {
                             {propertyTypes.map(type => {
                                 return <option value = {`${type.id}`}>{`${type.name}`}</option>})}   
                             </select>
+                    </div> */}
+
+                    <div className="view-filter dropdown">
+                        <button className="dropbtn"
+                        
+                                >Add by Type</button>
+                                <div className="dropdown-content">
+                                {propertyTypes.map(type => {
+                                    return <a value = {`${type.id}`}
+                                    onClick = {
+                                        (evt) => {
+                                            setTypeId(parseInt(evt.target.value))
+                                            const foundPropertyType = propertyTypes.find(type => type.id === parseInt(evt.target.value))
+                                            const typeName = foundPropertyType?.name
+                                            history.push(`/properties/create/${type.id}`)
+                                        }}
+
+                                    >{`${type.name}`}</a>})}   
+                                </div>
+                           
+                    
                     </div>
 
 
@@ -155,7 +187,7 @@ export const NavBar =() => {
                                 history.push("/login")
 
                             }
-                        }>Log Out</button>
+                        }>Log Out {user.name}</button>
                     </div>
             </div>
 

@@ -44,12 +44,20 @@ export const Login = () => {
 
             <section className="loginPage">
                 <form className="form--login" onSubmit={handleLogin}>
-                <div className="container">
+                    
+                <div className="login-images-container">
                    
                     
+                    <div className="login-site-logo">
+                        <img className="site-logo" src = "https://sat02pap002files.storage.live.com/y4mN3_AEjAlNtDnXFUSi2Tgw-wak_ldsMKZ2ZnW5DdJbaXRPcWB9vQu966BzN8xmJ4YopyOztvVYVAJKXDUboAN1mrgKXvF5rvKSiXla3ejFg_fONPaevu-BK9BB8VdwFWZSx2C3F_Nr0PwRWsQAiaHTd8maK2FjZLT_81DP6cFiST32i63CcD6kN42ZM7wh9r_?width=852&height=371&cropmode=none"></img>
+                    </div>  
+                    
+                    <div className="login-property-images">
+                        <img className="login-image" src = "https://sat02pap002files.storage.live.com/y4mdpiCEBMXmOVfAfOQSGAU4Z_A9qTFIsEEJkd8V8R1_eLA6K_IBMomwUbA7m-HDu71Nt2kUBtVQO4yg2A49zEo5rDECfug-ZbSq9OyvARuLH2DqMkEFjQd8JzCF6IN20QjZ6xiVpDwTeFWK5tQE7rUamixeP3g4R0FWlTfkqvj-juS2cKLa5rCzVjWvqCxYh9k?width=1024&height=746&cropmode=none"></img>
+                        <img className="login-image" src = "https://sat02pap002files.storage.live.com/y4mjQma7DYGzMJUL3OS3smWKRCDGPyoklX-nuu2zmKvrlBHsc6-LRmj7AZLabhzyIBfOzWS6McCB_DvEdtLPg_NGzSJNoSfR3naTVkRUmZTXtWCKWrkDjTnrNX39ppHA_tI-9PkQmFVSvP51O13j3DDlQA3VC77X7Y53iHj0HUgmZqPA-uXG5cHuNizrbQUPSI2?width=1024&height=746&cropmode=none"></img>
+                        <img className="login-image" src = "https://sat02pap002files.storage.live.com/y4m_wNYXsc45PtlXU6p8TMWV7mkeNCLXE1PgLMdRCxBtWj_2_LMXZ78w49GU5z02_rRenI2SIa94Qv_VAiRNQYC5fIP6QqcSO7weAd_8HQ264nm5Y6FGn3PcQZ8FmRrarE6X7OqMyBq98HqvgCGrkvjHJ5pmVoseqlt0xav_wCS1B8irrSwsbEMMHByMsDDVcjY?width=1024&height=746&cropmode=none"></img>
                         
-                    <img className="site-logo" src = "https://sat02pap002files.storage.live.com/y4mN3_AEjAlNtDnXFUSi2Tgw-wak_ldsMKZ2ZnW5DdJbaXRPcWB9vQu966BzN8xmJ4YopyOztvVYVAJKXDUboAN1mrgKXvF5rvKSiXla3ejFg_fONPaevu-BK9BB8VdwFWZSx2C3F_Nr0PwRWsQAiaHTd8maK2FjZLT_81DP6cFiST32i63CcD6kN42ZM7wh9r_?width=852&height=371&cropmode=none"></img>
-                    {/* <img className="loginImage" src = "https://www.pngmart.com/files/7/Real-Estate-Transparent-PNG.png"></img> */}
+                    </div>
                     
                 </div>
                 <div >
@@ -57,6 +65,8 @@ export const Login = () => {
                     
                 </div>
                     <h2>Please sign in</h2>
+                    
+         
                     <fieldset>
                         <input type="email"
                             onChange={evt => set(evt.target.value)}
@@ -68,12 +78,13 @@ export const Login = () => {
                         <button type="submit">
                             Sign in
                         </button>
+                        
                     </fieldset>
+                    <Link to="/register">Not a member yet?</Link>
+                    
                 </form>
             </section>
-            <section className="link--register">
-                <Link to="/register">Not a member yet?</Link>
-            </section>
+            
         </main>
     )
 }

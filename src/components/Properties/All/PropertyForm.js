@@ -330,7 +330,7 @@ export const PropertyForm = () => {
                             .then(response => {
                                 const copy = {...property}
                                 copy.location = response.data.results[0]?.geometry?.location
-                                sendProperty(copy).then(history.push("/properties")
+                                sendProperty(copy).then(history.push("/properties/type/0/status/0")
                                 
                                 
                                 

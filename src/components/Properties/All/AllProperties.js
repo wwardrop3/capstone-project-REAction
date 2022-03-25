@@ -8,6 +8,7 @@ import { Link } from "react-router-dom"
 import { GetProperties, getPropertyTypes, getStatuses } from "../../APIManager"
 import { PropertyMap } from "../../Location/PropertyMap"
 import "./AllProperties.css"
+/*google*/
 
 
 
@@ -227,7 +228,7 @@ export const AllProperties = () => {
 
 
             <div className="properties-map">
-                <PropertyMap properties = {userProperties} highlight = {highlight} setHighlight = {setHighlight} markerHighlight = {markerHighlight}/>    
+                <PropertyMap properties = {userProperties} highlight = {highlight} setHighlight = {setHighlight} markerHighlight = {markerHighlight} setMarkerHighLight={setMarkerHighLight} />    
             </div> 
 
 
@@ -243,21 +244,26 @@ export const AllProperties = () => {
                     return(
                         <>
                         
-                        <div key={`${userProperty.id}`} className="propertyContainer" style={{backgroundColor: isSelected(userProperty.id, highlight)}}
+                        <div key={`${userProperty.id}`} className="property-container" style={{backgroundColor: isSelected(userProperty.id, highlight)}}
                         onMouseOver={
                             () => {
                                 setMarkerHighLight(userProperty.id)
+                                setHighlight(userProperty.id)
                             }
                         }
                         onMouseOut ={
                             () => {
                                 setMarkerHighLight("")
+                                setHighlight("")
                             }
+                            
                         }>
                             <div className="thumbnailContainer">
                                 <img className="propertyThumbnail" src = {`${userProperty?.imageURL}`}></img>
                                 <div className="thumbnailPropertyType">{`${userProperty.type?.name}`}</div>
-                                <div style={{backgroundColor: colors[userProperty?.status.id]}} className="thumbnailPropertyStatus">{`${userProperty.status?.name}`}</div>
+                                <div style={{backgroundColor: colors[userProperty?.status.id]}} className="thumbnailPropertyStatus"
+                                
+                                >{`${userProperty.status?.name}`}</div>
                             </div>
                             
                             <div className = "propertyContainerInfo">
@@ -281,21 +287,7 @@ export const AllProperties = () => {
                                 
                                 
                                 
-                                <div className="tableAddress">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th>{`${userProperty.street}`}</th>
-                                            </tr> 
-                                            <tr>
-                                                <th>{`${userProperty.city.name}`}</th>
-                                            </tr>
-                                            <tr>
-                                                <th></th>
-                                            </tr> 
-                                        </thead>
-                                    </table>
-                                </div>   
+                                
                             </div>    
                         </div>
                         </>

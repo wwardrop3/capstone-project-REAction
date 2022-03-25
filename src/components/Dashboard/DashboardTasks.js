@@ -4,9 +4,9 @@ import { deleteTask, updateTask } from "../APIManager"
 import "./Dashboard.css"
 
 
-export const DashboardTasks = ({userProperties, userTasks, userNotes, refreshList, setRefreshList}) => {
+export const DashboardTasks = ({userProperties, userTasks, userNotes, refreshList, setRefreshList, taskRefresh, setTaskRefresh}) => {
     const [taskDetailShowObject, setTaskDetailShowObject] = useState({})
-    const [taskRefresh, setTaskRefresh] = useState(false)
+    
     
     useEffect(
         () => {
@@ -33,6 +33,24 @@ export const DashboardTasks = ({userProperties, userTasks, userNotes, refreshLis
         }
     }
     
+    const completeCheck = (task) => {
+        if(task.completed === true){
+            return (
+                <button 
+                id={`${task.id}`}
+                onClick = {
+                    (evt) => {
+                        deleteTask(evt.target.id)
+                        setTaskRefresh(!taskRefresh)
+                    }
+                    
+                }>Delete Task</button>
+            )
+        }
+
+        }
+    
+
     return(
         <>
         <table className="all-property-tasks">
@@ -50,7 +68,7 @@ export const DashboardTasks = ({userProperties, userTasks, userNotes, refreshLis
                     return (
                     <>
                     <tr>
-                                <td><Link to = {`/properties/${foundProperty?.id}`}>{foundProperty?.name}</Link></td>
+                                <td>{foundProperty?.name}</td>
                                 <td><button
                                     value={task.id}
                                     onClick={
@@ -59,13 +77,13 @@ export const DashboardTasks = ({userProperties, userTasks, userNotes, refreshLis
                                             copy[evt.target.value] = !copy[evt.target.value]
                                             console.log(copy[evt.target.value])
                                             setTaskDetailShowObject(copy)
-                                            setRefreshList(!refreshList)
+                                            setTaskRefresh(!taskRefresh)
                                         }
                                     }>{dynamicTaskButton(taskDetailShowObject[task.id], task)}</button></td>
                                 
                                 
                                 
-                                <td>{task.dueDate}</td>
+                                <td>{`${new Date(task.dueDate).getMonth()}/${new Date(task.dueDate).getDay()}`}</td>
                                 <td style={{textAlign: "center"}}>
                                     <input type="checkbox" value={task.completed} checked={task.completed}
                                     onChange = {
@@ -73,22 +91,15 @@ export const DashboardTasks = ({userProperties, userTasks, userNotes, refreshLis
                                             const copy = {...task}
                                             copy.completed = !task.completed
                                             updateTask(copy)
-                                            setRefreshList(!refreshList)
+                                            setTaskRefresh(!taskRefresh)
                                         }
                                     }></input>
                                 
                                 
                                 </td>
+                                
                                 <td>
-                                    <button 
-                                        id={`${task.id}`}
-                                        onClick = {
-                                            (evt) => {
-                                                deleteTask(evt.target.id)
-                                                setRefreshList(!refreshList)
-                                            }
-                                            
-                                        }>Delete Task</button>
+                                    {completeCheck(task)}
                                 </td>
                                 
                             </tr>
