@@ -34,12 +34,23 @@ export const PropertyTaskList = ({property}) => {
 
         <h2>{property.name} Task List</h2>
 
+        <div className="create-taske-container">
+            <button
+            onClick={
+                (evt) => {
+                    setToggleAddTask(!toggleAddTask)
+                }
+            }
+        >{taskDynamicButton()}</button>
+        <CreatePropertyTask refreshList = {refreshList} setRefreshList = {setRefreshList} property = {property} toggleAddTask = {toggleAddTask} setToggleAddTask={setToggleAddTask} />
+        </div>
+
         <table className="property-task-list-table">
             <tbody>
                 <tr>
                     <th>Title</th>
                     <th>Task</th>
-                    <th>Due Date</th>
+                    <th>Due</th>
                     <th>Completed?</th>
                 </tr>
                 {taskList.map(task => {
@@ -78,16 +89,7 @@ export const PropertyTaskList = ({property}) => {
             
         </table>
 
-        <div className="create-taske-container">
-            <button
-            onClick={
-                (evt) => {
-                    setToggleAddTask(!toggleAddTask)
-                }
-            }
-        >{taskDynamicButton()}</button>
-        <CreatePropertyTask refreshList = {refreshList} setRefreshList = {setRefreshList} property = {property} toggleAddTask = {toggleAddTask} setToggleAddTask={setToggleAddTask} />
-        </div>
+
         </>    
         )
 }

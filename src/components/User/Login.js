@@ -49,15 +49,15 @@ export const Login = () => {
                    
                     
                     <div className="login-site-logo">
-                        <img className="site-logo" src = "https://sat02pap002files.storage.live.com/y4mN3_AEjAlNtDnXFUSi2Tgw-wak_ldsMKZ2ZnW5DdJbaXRPcWB9vQu966BzN8xmJ4YopyOztvVYVAJKXDUboAN1mrgKXvF5rvKSiXla3ejFg_fONPaevu-BK9BB8VdwFWZSx2C3F_Nr0PwRWsQAiaHTd8maK2FjZLT_81DP6cFiST32i63CcD6kN42ZM7wh9r_?width=852&height=371&cropmode=none"></img>
+                        <img className="site-logo" src = "https://sat02pap002files.storage.live.com/y4mYSlaorKyWp_j-ICkpT94JlxvflsTtk8qsWVycKiQBoEWHmUg4rGkC1IKO-bX4p3clO9Y8LM1YT5n34d6K44uZDb0vgGOLu1-2-427WSxPTB66Zwhuy-nO0kW5jvg3K1NeMLCamVE_q4w7KOO_8AO3R6eWpprmoqV8ltuc6pjupDD6d8pAHyV0ug42LRVFF8M?width=857&height=371&cropmode=none"></img>
                     </div>  
                     
-                    <div className="login-property-images">
+                    {/* <div className="login-property-images">
                         <img className="login-image" src = "https://sat02pap002files.storage.live.com/y4mdpiCEBMXmOVfAfOQSGAU4Z_A9qTFIsEEJkd8V8R1_eLA6K_IBMomwUbA7m-HDu71Nt2kUBtVQO4yg2A49zEo5rDECfug-ZbSq9OyvARuLH2DqMkEFjQd8JzCF6IN20QjZ6xiVpDwTeFWK5tQE7rUamixeP3g4R0FWlTfkqvj-juS2cKLa5rCzVjWvqCxYh9k?width=1024&height=746&cropmode=none"></img>
                         <img className="login-image" src = "https://sat02pap002files.storage.live.com/y4mjQma7DYGzMJUL3OS3smWKRCDGPyoklX-nuu2zmKvrlBHsc6-LRmj7AZLabhzyIBfOzWS6McCB_DvEdtLPg_NGzSJNoSfR3naTVkRUmZTXtWCKWrkDjTnrNX39ppHA_tI-9PkQmFVSvP51O13j3DDlQA3VC77X7Y53iHj0HUgmZqPA-uXG5cHuNizrbQUPSI2?width=1024&height=746&cropmode=none"></img>
                         <img className="login-image" src = "https://sat02pap002files.storage.live.com/y4m_wNYXsc45PtlXU6p8TMWV7mkeNCLXE1PgLMdRCxBtWj_2_LMXZ78w49GU5z02_rRenI2SIa94Qv_VAiRNQYC5fIP6QqcSO7weAd_8HQ264nm5Y6FGn3PcQZ8FmRrarE6X7OqMyBq98HqvgCGrkvjHJ5pmVoseqlt0xav_wCS1B8irrSwsbEMMHByMsDDVcjY?width=1024&height=746&cropmode=none"></img>
                         
-                    </div>
+                    </div> */}
                     
                 </div>
                 <div >

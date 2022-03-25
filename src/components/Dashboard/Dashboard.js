@@ -291,11 +291,11 @@ export const Dashboard = () => {
         <>
         <div className="dashboard-charts-container">
             <div className="dashboard-chart-sidebar">
-            <p>{`${user.name}'s Dashboard`}</p>
-                <div className="dashboard-chart-sidebar-content">
+                <h2>{`${user.name}'s Dashboard`}</h2>
+            <div className="dashboard-chart-sidebar-content">
 
                 <div className="sidebar-content-item">
-                        Breakdown of Properties by Type
+                        <h3>Portfolio Overview</h3>
                         <Pie data={data} />
                     </div>
 
@@ -328,6 +328,7 @@ export const Dashboard = () => {
                 </div>
             </div>
             <div className="dashboard-charts-container">
+                <div></div>
               
                 <DashboardCharts userProperties= {userProperties} userTasks = {userTasks} usernNotes={userNotes} refreshList={refreshList} setRefreshList={setRefreshList} user = {user} propertyTypes={propertyTypes} userMFRents = {userMFRents} userFloorplans ={userFloorplans} />
             </div>

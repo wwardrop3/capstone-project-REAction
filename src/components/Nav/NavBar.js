@@ -50,14 +50,14 @@ export const NavBar =() => {
             <div className="nav-container">
 
                 <div className="site-logo-container">  
-                    <Link to = "/dashboard"><img className="nav-logo" src="https://sat02pap002files.storage.live.com/y4mN3_AEjAlNtDnXFUSi2Tgw-wak_ldsMKZ2ZnW5DdJbaXRPcWB9vQu966BzN8xmJ4YopyOztvVYVAJKXDUboAN1mrgKXvF5rvKSiXla3ejFg_fONPaevu-BK9BB8VdwFWZSx2C3F_Nr0PwRWsQAiaHTd8maK2FjZLT_81DP6cFiST32i63CcD6kN42ZM7wh9r_?width=852&height=371&cropmode=none"/></Link>                        
+                    <Link to = "/dashboard"><img className="nav-logo" src="https://sat02pap002files.storage.live.com/y4mYSlaorKyWp_j-ICkpT94JlxvflsTtk8qsWVycKiQBoEWHmUg4rGkC1IKO-bX4p3clO9Y8LM1YT5n34d6K44uZDb0vgGOLu1-2-427WSxPTB66Zwhuy-nO0kW5jvg3K1NeMLCamVE_q4w7KOO_8AO3R6eWpprmoqV8ltuc6pjupDD6d8pAHyV0ug42LRVFF8M?width=857&height=371&cropmode=none"/></Link>                        
                 </div>  
 
                 <div className="nav-buttons">
 
 
                     <div className="view-filter">
-                        <button name = "dashboard" className="nav-button"
+                        <button name = "dashboard" className="dropbtn"
                             onClick={
                                 (evt) => {
                                     history.push(`/dashboard`)
@@ -97,7 +97,7 @@ export const NavBar =() => {
 
                 
                     <div className="view-filter">
-                        <button name = "view-properties" className="nav-button"
+                        <button name = "view-properties" className="dropbtn"
                             onClick={
                                 (evt) => {
                                     history.push(`/properties/type/0/status/0`)
@@ -127,7 +127,7 @@ export const NavBar =() => {
                     
                     <div className="view-filter">
                         
-                        <button className="nav-button"
+                        <button className="dropbtn"
 
                         onClick={
                             (evt) => {
@@ -179,7 +179,7 @@ export const NavBar =() => {
 
 
                     <div className="view-filter">
-                        <button className="nav-button"
+                        <button className="dropbtn"
 
                         onClick={
                             (evt) => {

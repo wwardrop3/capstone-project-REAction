@@ -58,8 +58,8 @@ export const DashboardTasks = ({userProperties, userTasks, userNotes, refreshLis
                 <tr>
                     <th>Property</th>
                     <th>Task</th>
-                    <th>Due Date</th>
-                    <th>Completed?</th>
+                    <th>Due</th>
+                    <th>Done?</th>
                 </tr>
                 {userTasks.map(task => {
                     const foundProperty = userProperties.find(property => {

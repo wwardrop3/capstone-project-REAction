@@ -339,7 +339,7 @@ const avgOccupancyData = {
         <>
             <div className="dashboard-chart-area">
                 <div className="dashboard-chart-area-header">
-                    <p>Chart Header</p>
+                    <h3>Apartment Data</h3>
                     
                 </div>
 

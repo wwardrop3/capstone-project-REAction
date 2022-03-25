@@ -122,7 +122,7 @@ const details = () => {
     
 return (
     <>
-
+        
         
   
         <section className = "content-container">
@@ -141,7 +141,25 @@ return (
 
             </div>
 
-        
+            <div className="modify-buttons">
+                    <button
+                        onClick={
+                            () =>{
+                            setShow(true)
+                           
+                            }}> Edit Property</button>
+
+                
+
+                <button className="deletePropertyBtn"
+                    onClick={
+                        (evt) => {
+                            removeProperty(parseInt(propertyId))
+                            history.push("/properties")
+                        }
+                    }>Delete Property
+                </button>
+            </div>
 
             <div className="addAddressContainer">
                 <div>
@@ -195,25 +213,7 @@ return (
                 
                 />
 
-                <div className="modify-buttons">
-                    <button
-                        onClick={
-                            () =>{
-                            setShow(true)
-                           
-                            }}> Edit Property</button>
-
                 
-
-                <button className="deletePropertyBtn"
-                    onClick={
-                        (evt) => {
-                            removeProperty(parseInt(propertyId))
-                            history.push("/properties")
-                        }
-                    }>Delete Property
-                </button>
-            </div>
           
         </section>
 
