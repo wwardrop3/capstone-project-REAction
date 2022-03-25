@@ -6,7 +6,6 @@ import { ApplicationViews } from "./ApplicationViews"
 import { NavBar } from "./Nav/NavBar"
 import { Login } from "./User/Login";
 import { Register } from "./User/Register";
-import "./Reaction.css"
 
 
 

@@ -75,7 +75,7 @@ export const ApplicationViews = () => {
             </Route>
 
 
-            <Route exact path= "/dashboard">
+            <Route exact path= {["/dashboard", "/"]}>
                 <Dashboard />
             </Route>
 
