@@ -12,12 +12,12 @@ import "./Login.css"
 
 
 export const Login = () => {
-    const [email, set] = useState("")
+    const [username, set] = useState("")
     const existDialog = useRef()
     const history = useHistory()
 
     const existingUserCheck = () => {
-        return fetch(`http://localhost:8088/users?email=${email}`)
+        return fetch(`http://localhost:8088/users?username=${username}`)
             .then(res => res.json())
             .then(user => user.length ? user[0] : false)
     }
@@ -71,7 +71,7 @@ export const Login = () => {
                         <input type="email"
                             onChange={evt => set(evt.target.value)}
                             className="form-control"
-                            placeholder="Email address"
+                            placeholder="Username"
                             required autoFocus />
                     </fieldset>
                     <fieldset>
@@ -93,7 +93,7 @@ export const Login = () => {
 
 
 
-//purpose of component is serve as user login page that displays email address
+//purpose of component is serve as user login page that displays username address
 //,sign in button and not a member sign up link that will direct to UserForm
 //this will be the first page a user will see when they access the application
 
@@ -116,8 +116,8 @@ export const Login = () => {
 //             <img>Site Cover image</img>
 //             <h1>REaction logo that will go ontop of the image</h1>
 //             <fieldset className = "login">
-//                 <label>Enter User Email Address</label>  
-//                 <input>Enter Email</input>
+//                 <label>Enter User username Address</label>  
+//                 <input>Enter username</input>
 //                 <button>Sign In</button>  
 //             </fieldset>
 
