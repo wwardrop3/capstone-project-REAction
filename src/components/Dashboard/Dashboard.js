@@ -65,7 +65,7 @@ export const Dashboard = () => {
             getPropertyTasks()
             .then(
                 (taskResponse) => {
-                    setUserTasks(((taskResponse.filter(task => task.userId === parseInt(localStorage.getItem("property_user")))).sort((a,b) => Date.parse(a.dueDate) - Date.parse(b.dueDate)).sort((a,b)=> a.completed - b.completed)))   
+                    setUserTasks(((taskResponse.filter(task => task.userId === parseInt(localStorage.getItem("property_user"))).sort((a,b) => Date.parse(a.dueDate) - Date.parse(b.dueDate)).sort((a,b)=> a.completed - b.completed))))  
                     }
             )
             },[taskRefresh]

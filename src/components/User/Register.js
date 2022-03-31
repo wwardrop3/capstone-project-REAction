@@ -1,4 +1,4 @@
-//Purpose of this component is to register user after being redirected from the Login component.  Component will create user object that will include and id, name, and username address that will be used to login
+//Purpose of this component is to register user after being redirected from the Login component.  Component will create user object that will include and id, name, and email address that will be used to login
 
 
 import React, { useRef, useState } from "react"
@@ -12,7 +12,7 @@ export const Register = (props) => {
     const history = useHistory()
 
     const existingUserCheck = () => {
-        return fetch(`http://localhost:8088/users?username=${user.username}`)
+        return fetch(`http://localhost:8088/users?email=${user.email}`)
             .then(res => res.json())
             .then(user => !!user.length)
     }
@@ -52,7 +52,7 @@ export const Register = (props) => {
     return (
         <main className="container--login">
             <dialog className="dialog dialog--password" ref={conflictDialog}>
-                <div>Account with that username already exists</div>
+                <div>Account with that email already exists</div>
                 <button className="button--close" onClick={e => conflictDialog.current.close()}>Close</button>
             </dialog>
 
@@ -69,8 +69,8 @@ export const Register = (props) => {
                     <input onChange={updateUser} type="text" id="address" className="form-control" placeholder="Street address" required />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="username"> Username </label>
-                    <input onChange={updateUser} type="username" id="username" className="form-control" placeholder="username" required />
+                    <label htmlFor="email"> email </label>
+                    <input onChange={updateUser} type="email" id="email" className="form-control" placeholder="email" required />
                 </fieldset>
                 <fieldset>
                     <button type="submit"> Register </button>
@@ -85,9 +85,9 @@ export const Register = (props) => {
 
 //purpose of component is to produce form for user sign up
 
-//create component function that display a user registration form that will accept their username, first name, and last name
+//create component function that display a user registration form that will accept their email, first name, and last name
 
-    //create useState variables "user" and "setUser" and create object that has empty firstName, lastName, and username
+    //create useState variables "user" and "setUser" and create object that has empty firstName, lastName, and email
     //create UseState variable for "siteImages" and "setSiteImages" and create empty object
 
     //import send user function from api manager
@@ -109,8 +109,8 @@ export const Register = (props) => {
     //         </fieldset>
 
     //         <fieldset>
-    //             <label>Enter User username Address</label>
-    //             <input>User username Address</input>
+    //             <label>Enter User email Address</label>
+    //             <input>User email Address</input>
     //         </fieldset>
 
     //         //button will use onClick and useHistory to change url to homepage with new userId

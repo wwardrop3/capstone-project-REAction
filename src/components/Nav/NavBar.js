@@ -157,7 +157,7 @@ export const NavBar =() => {
                     <div className="view-filter dropdown">
                         <button className="dropbtn"
                         
-                                >Add by Type</button>
+                                >Add Property</button>
                                 <div className="dropdown-content">
                                 {propertyTypes.map(type => {
                                     return <a value = {`${type.id}`}
