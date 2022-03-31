@@ -1,10 +1,8 @@
 
 import { ArcElement, Chart, Legend, Tooltip } from "chart.js"
-import { forEach } from "lodash"
 import { useEffect, useState } from "react"
 import { Pie } from "react-chartjs-2"
-import { Link } from "react-router-dom"
-import { deleteTask, getMFPropertyFloorplans, getMFRents, GetProperties, getPropertyTasks, getPropertyTypes, getUserNotes, retriveUser, updateTask } from "../APIManager"
+import { getMFPropertyFloorplans, getMFRents, GetProperties, getPropertyTasks, getPropertyTypes, getUserNotes, retriveUser, updateTask } from "../APIManager"
 import "./Dashboard.css"
 import { DashboardCharts } from "./DashboardCharts"
 import { DashboardTasks } from "./DashboardTasks"
@@ -282,7 +280,7 @@ export const Dashboard = () => {
             }
     const showCharts = () => {
         if(userMFRents.length > 0){
-            return
+            return 
         }
     }
         
@@ -330,7 +328,7 @@ export const Dashboard = () => {
             <div className="dashboard-charts-container">
                 <div></div>
               
-                {/* <DashboardCharts userProperties= {userProperties} userTasks = {userTasks} usernNotes={userNotes} refreshList={refreshList} setRefreshList={setRefreshList} user = {user} propertyTypes={propertyTypes} userMFRents = {userMFRents} userFloorplans ={userFloorplans} /> */}
+                <DashboardCharts userProperties= {userProperties} userTasks = {userTasks} usernNotes={userNotes} refreshList={refreshList} setRefreshList={setRefreshList} user = {user} propertyTypes={propertyTypes} userMFRents = {userMFRents} userFloorplans ={userFloorplans} />
             </div>
             
 
