@@ -330,7 +330,7 @@ export const Dashboard = () => {
             <div className="dashboard-charts-container">
                 <div></div>
               
-                <DashboardCharts userProperties= {userProperties} userTasks = {userTasks} usernNotes={userNotes} refreshList={refreshList} setRefreshList={setRefreshList} user = {user} propertyTypes={propertyTypes} userMFRents = {userMFRents} userFloorplans ={userFloorplans} />
+                {/* <DashboardCharts userProperties= {userProperties} userTasks = {userTasks} usernNotes={userNotes} refreshList={refreshList} setRefreshList={setRefreshList} user = {user} propertyTypes={propertyTypes} userMFRents = {userMFRents} userFloorplans ={userFloorplans} /> */}
             </div>
             
 

@@ -1,10 +1,8 @@
-# Getting Started with Create React App
+# Getting Started with reaction
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was created by Will Wardrop as a front-end capstone project at the Nashville Software School.
 
-## Available Scripts
-
-In the project directory, you can run:
+## Access
 
 ### `npm start`
 

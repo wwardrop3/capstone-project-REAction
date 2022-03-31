@@ -90,17 +90,13 @@ export const DashboardCharts = ({userProperties, userTasks, userNotes, refreshLi
       const showDynamicLabels = () => {
 
         
-        userMFRents?.forEach(rentObject => {
+        userMFRents.forEach(rentObject => {
             const d = new Date()
             emptySet.add(rentObject?.date)
-            
-        
         }
         )
         const newArray = [...emptySet]
         const sortedNewArray = newArray.sort((a,b) => Date.parse(a) - Date.parse(b))
-
-        console.log(sortedNewArray)
         return sortedNewArray
     
     }
@@ -117,7 +113,6 @@ export const DashboardCharts = ({userProperties, userTasks, userNotes, refreshLi
                 userFloorplans.forEach(planObject => {
                     
                     if(planObject.active === true && planObject.sizeId === sizeId){
-                        console.log(planObject)
                         userMFRents.forEach(rentObject => {
                             
                             //if the rent object is matched with a floorplan AND it matches the current date interation
