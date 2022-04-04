@@ -9,22 +9,37 @@
 
 #all-properties-header{
     position: absolute;
+    justify-content: space-between;
+    flex-direction: row;
     z-index: 8;
-    background-color: rgb(193, 174, 174, .5);
+    background-color: rgb(193, 174, 174);
     font-size: 1em;
-    border-radius: 10%;
-    padding: 1em;
+    padding: .1em;
     margin: .1em;
-    left: 2%;
+    left: 1%;
     top: 1%;
-    width: 15%;
+    width: 68%;
     text-align: center;
 
+}
+
+.status-type-options{
+    display: flex;
+    flex-direction: row;
+}
+
+.property-type-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-height: 4em;
 }
 
 .property-type-select{
     font-size: small;
     text-align: center;
+    display: flex;
+    justify-content: center;
     
 }
 

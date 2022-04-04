@@ -33,6 +33,7 @@
     width: 80%;
     height: 100%;
     display: flex;
+
     margin-left: 1em;
     justify-content: center;
     align-items: center;
@@ -58,8 +59,8 @@
 
 
 .dropbtn {
-    background-color: #04AA6D;
-    color: white;
+    background-color: rgba(181, 181, 181, 0.8);
+    color: black;
     padding-left: 8px;
     padding-right: 8px;
     width: 100%;

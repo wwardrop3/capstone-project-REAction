@@ -144,7 +144,7 @@ export const AllProperties = () => {
     let propertyStatusName = ""
     const propertyStatusNames = () => {
         propertyStatusName = propertyStatuses.find(status => parseInt(statusId) === status.id)
-        if(statusId === "0" || typeId!=undefined){
+        if(statusId === "0" || typeId==="0"){
             return "All"
         } else {
             return propertyStatusName?.name
@@ -160,11 +160,10 @@ export const AllProperties = () => {
 
             <div id="all-properties-header">
 
-                <div className="propertyTypeContainer"><h2>{`${propertyTypeNames()}`}</h2></div>
+                <div className="property-type-container"><h4>{"Filter By Type"}</h4>
 
                 <div className="property-type-select">
-                    <p>Filter by Type</p>
-                    <form onChange={
+                    <form class = "status-type-options" onChange={
                         (evt) => {
                             setTypeState(!typeState)
                             if(evt.target.value === "0"){
@@ -191,11 +190,11 @@ export const AllProperties = () => {
                     )})}
                     </form>
                 </div>
+                </div>
                 
-                <div className="propertyTypeContainer"><h2>{`${propertyStatusNames()}`}</h2></div>
+                <div className="property-type-container"><h4>{`Filter By Status`}</h4>
                 <div className="property-type-select">
-                    <p>Filter by Status</p>
-                    <form onChange={
+                    <form class = "status-type-options" onChange={
                         (evt) => {
                             if(evt.target.value === "0"){
                                 
@@ -217,7 +216,9 @@ export const AllProperties = () => {
                     )})}
                     </form>
                 </div>
+                </div>
             </div>  
+        
         
        
         

@@ -53,6 +53,9 @@ export const DashboardTasks = ({userProperties, userTasks, userNotes, refreshLis
 
     return(
         <>
+        <div className="dashboard-chart-area-header">
+            <h3>User Tasks</h3>        
+        </div>
         <table className="all-property-tasks">
             <tbody>
                 <tr>
@@ -63,7 +66,7 @@ export const DashboardTasks = ({userProperties, userTasks, userNotes, refreshLis
                 </tr>
                 {userTasks.map(task => {
                     const foundProperty = userProperties.find(property => {
-                        return property.id === task.propertyId
+                        return parseInt(property.id) === parseInt(task.propertyId)
                     })
                     return (
                     <>
@@ -83,7 +86,7 @@ export const DashboardTasks = ({userProperties, userTasks, userNotes, refreshLis
                                 
                                 
                                 
-                                <td>{`${new Date(task.dueDate).getMonth()}/${new Date(task.dueDate).getDay()}`}</td>
+                                <td>{`${task.dueDate}`}</td>
                                 <td style={{textAlign: "center"}}>
                                     <input type="checkbox" value={task.completed} checked={task.completed}
                                     onChange = {

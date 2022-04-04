@@ -56,7 +56,7 @@ export const NavBar =() => {
                 <div className="nav-buttons">
 
 
-                    <div className="view-filter">
+                    <div className="view-filter dropdown">
                         <button name = "dashboard" className="dropbtn"
                             onClick={
                                 (evt) => {
@@ -96,7 +96,7 @@ export const NavBar =() => {
                 
 
                 
-                    <div className="view-filter">
+                    <div className="view-filter dropdown">
                         <button name = "view-properties" className="dropbtn"
                             onClick={
                                 (evt) => {
@@ -125,7 +125,7 @@ export const NavBar =() => {
                         }>Create Note</button>
                     </div> */}
                     
-                    <div className="view-filter">
+                    <div className="view-filter dropdown">
                         
                         <button className="dropbtn"
 
@@ -178,7 +178,7 @@ export const NavBar =() => {
 
 
 
-                    <div className="view-filter">
+                    <div className="view-filter dropdown">
                         <button className="dropbtn"
 
                         onClick={

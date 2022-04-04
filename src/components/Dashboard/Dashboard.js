@@ -163,9 +163,8 @@ export const Dashboard = () => {
         } else {
             let totalUnits = 0
             userFloorplans.forEach(planObject => {
-                if(planObject.sizeId === sizeId){
-                    totalUnits+=planObject.units
-                }
+                totalUnits+=planObject.units
+                
                 
                 
             });
@@ -302,7 +301,7 @@ export const Dashboard = () => {
                         MF info box
                         <ul>
                             <li>{totalPropertiesCalc(1)} total properties</li>
-                            <li>{totalUnitsCalc(1).toLocaleString()} total units</li>
+                            <li>{totalUnitsCalc().toLocaleString()} total units</li>
                             <li>{formatter.format(avgRentCalc())} weighted Avg. Rent</li>
                         </ul>
                     </div>

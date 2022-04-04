@@ -3,7 +3,7 @@ import { waitForElementToBeRemoved } from "@testing-library/react"
 import { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
 import { useParams } from "react-router-dom"
-import { deleteProperty, getMFPropertyFloorplans, getMFUnitSizes, removeProperty, retrieveProperty, updateProperty } from "../../APIManager"
+import { deleteFloorplan, deleteProperty, getMFPropertyFloorplans, getMFUnitSizes, removeProperty, retrieveProperty, updateProperty } from "../../APIManager"
 import { PropertyTaskList } from "../../TaskList/PropertyTaskList"
 import { IndustrialProperty } from "../Industrial/IndustrialProperty"
 import { MultifamilyProperty } from "../Multifamily/MultifamilyProperty"
@@ -154,8 +154,20 @@ return (
                 <button className="deletePropertyBtn"
                     onClick={
                         (evt) => {
+
+                            getMFPropertyFloorplans().forEach(plan => {
+                                if(parseInt(plan?.propertyId) === propertyId){
+                                    deleteFloorplan(plan.id)
+                                }
+                                
+                            })
+                            
                             removeProperty(parseInt(propertyId))
-                            history.push("/properties")
+                            
+                            
+                            
+                            history.push("/properties");
+                           
                         }
                     }>Delete Property
                 </button>

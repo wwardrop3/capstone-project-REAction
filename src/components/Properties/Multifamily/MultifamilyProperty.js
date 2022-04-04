@@ -122,6 +122,7 @@ export const MultifamilyProperty = ({property, setProperty, floorplans, refresh,
         <>
         <div className="infoContainer">
 
+            <div className="MFPropertyInfo">
                 <div>
                     <h2>Total Units</h2>
                     <p>{propUnits}</p>
@@ -153,9 +154,16 @@ export const MultifamilyProperty = ({property, setProperty, floorplans, refresh,
                     <h2>Management</h2>
                     <p>{property?.management}</p>
                 </div>
+            </div>
 
+        <div className="RRHistory">
             <RRHistory property = {property} floorplans = {floorplans} propertyRents={propertyRents} propUnits = {propUnits} refresh={refresh} setRefresh={setRefresh} unitSizes = {unitSizes}/>
+        </div>
+        
+        <div className="MFDataCharts">
             <MFDataCharts property = {property} floorplans = {floorplans} propertyRents={propertyRents} propUnits = {propUnits} refresh={refresh} setRefresh={setRefresh} unitSizes = {unitSizes}/>
+        </div>
+            
                 
         
                 

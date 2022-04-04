@@ -260,6 +260,13 @@ export const updatePropertyFloorplan = (floorplanObject) => {
     return fetch(`${dataSource}/MFPropertyFloorplans/${floorplanObject.id}`, fetchOptions)
 }
 
+export const deleteFloorplan = (floorplanId) => {
+    const fetchOptions = {
+        method:"DELETE",
+    }
+    return fetch(`${dataSource}/MFPropertyFloorplans/${floorplanId}`, fetchOptions)
+}
+
 
 
 export const getMFUnitSizes = () => {
