@@ -154,14 +154,6 @@ return (
                 <button className="deletePropertyBtn"
                     onClick={
                         (evt) => {
-
-                            getMFPropertyFloorplans().forEach(plan => {
-                                if(parseInt(plan?.propertyId) === propertyId){
-                                    deleteFloorplan(plan.id)
-                                }
-                                
-                            })
-                            
                             removeProperty(parseInt(propertyId))
                             
                             

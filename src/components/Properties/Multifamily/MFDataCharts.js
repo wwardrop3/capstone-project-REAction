@@ -13,6 +13,7 @@ import {
 
   import { Line, Pie } from 'react-chartjs-2';
 import { property } from "lodash";
+import "./MultifamilyProperty.css"
 
 
 
