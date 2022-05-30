@@ -1,7 +1,7 @@
 //purpose of this module is to handle all fetch calls by saving the calls to exported functions
 
 
-export const dataSource = "http://localhost:8088"
+export const dataSource = "https://capstone-reaction-api-ii9tp.ondigitalocean.app"
 
 // "https://capstone-reaction-api-ii9tp.ondigitalocean.app"
 // "http://localhost:8088"
