@@ -3,6 +3,7 @@
 
 import React, { useRef, useState } from "react"
 import { useHistory } from "react-router-dom"
+import { dataSource } from "../APIManager"
 import "./Login.css"
 
 export const Register = (props) => {
@@ -12,7 +13,7 @@ export const Register = (props) => {
     const history = useHistory()
 
     const existingUserCheck = () => {
-        return fetch(`http://localhost:8088/users?email=${user.email}`)
+        return fetch(`${dataSource}/users?email=${user.email}`)
             .then(res => res.json())
             .then(user => !!user.length)
     }
@@ -21,7 +22,7 @@ export const Register = (props) => {
         existingUserCheck()
             .then((userExists) => {
                 if (!userExists) {
-                    fetch("http://localhost:8088/users", {
+                    fetch(`${dataSource}/users`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json"

@@ -6,6 +6,7 @@ import React, { useRef, useState } from "react"
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom"
 import "./Login.css"
+import { dataSource } from "../APIManager";
 
 
 
@@ -16,7 +17,7 @@ export const Login = () => {
     const history = useHistory()
 
     const existingUserCheck = () => {
-        return fetch(`http://localhost:8088/users?email=${email}`)
+        return fetch(`${dataSource}/users?email=${email}`)
             .then(res => res.json())
             .then(user => user.length ? user[0] : false)
     }
