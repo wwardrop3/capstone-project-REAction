@@ -7,7 +7,7 @@ import"./style.css"
 const google = window.google = window.google ? window.google : {}
 
 const id = ["919771f94d285faa"]
-const key= process.env.REACT_APP_GOOGLEMAPS_APIKEY
+const key= process.env.REACT_APP_GOOGLE_GEOCODE_APIKEY
 const lib = ["places"]
 
 
