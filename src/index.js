@@ -7,11 +7,11 @@ import reportWebVitals from './reportWebVitals';
 
 
 ReactDOM.render(
-  <React.StrictMode>
+  <React>
     <BrowserRouter>
       <REaction />
     </BrowserRouter>
-  </React.StrictMode>,
+  </React>,
   document.getElementById('root')
 );
 
